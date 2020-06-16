@@ -1,0 +1,11 @@
+{% include "pawnlisting/base.html" %}
+
+{% if pawn_list %}
+    <ul>
+    {% for pawn in pawn_list %}
+        <li>{{ pawn }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No pawns are available.</p>
+{% endif %}

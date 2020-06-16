@@ -1,0 +1,20 @@
+
+{% include "pawnlisting/base.html" %}
+
+<h1> Add a pawn </h1>
+
+
+<span> {{ form.errors }} </span>
+
+
+<form method="POST"> 
+    {% csrf_token %}
+    {% for field in form %}
+        <div>
+            <label> {{ field.label_tag }} </label>
+            <span> {{ field }} </span>
+        </div>
+    {% endfor %}
+    <button type="submit"> Submit </button>
+</form>
+

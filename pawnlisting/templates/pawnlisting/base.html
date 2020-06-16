@@ -1,0 +1,19 @@
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" >
+
+
+<ul>
+    <li> <a href="/add_pawn">Add pawn</a>
+    <li> <a href="/list">List </a> </li>
+    <li> <a href="/register"> Register </a> </li>
+    <li> <a href="/login"> Login </a> </li>
+    <li> <a href="/logout"> Logout </a> </li>
+
+    {% if user.is_authenticated %}
+    <h3> Logged in as: {{ user.username }}
+    {% else %}
+    <h3> Not logged in </h3>
+    {% endif %}
+
+</ul>
