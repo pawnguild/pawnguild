@@ -1,0 +1,9 @@
+{% include "pawnlisting/base.html" %}
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete pawn? </p>
+    <button type="submit" value="Confirm"> Yes, delete the Pawn </button>
+
+</form>

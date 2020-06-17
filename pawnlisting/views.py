@@ -1,18 +1,14 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Pawn
+
+from django.urls import reverse_lazy
     
-
-# Create your views here.
-def list_pawn(request):
-    pawn_list = Pawn.objects.all()
-    context = {"pawn_list": pawn_list}
-    return render(request, "pawnlisting/list_pawn.html", context)
-
 
 class Register(TemplateView):
     template_view = "registration/register.html"
@@ -34,13 +30,33 @@ class Register(TemplateView):
             HttpResponseRedirect(reverse("register"))
 
 
+class PawnList(ListView):
+    model = Pawn
+    template_name = "pawnlisting/pawn_list.html"
 
-class PawnForm(CreateView):
+    def get_queryset(self):
+        return Pawn.objects.all()
+
+
+class PawnDetail(DetailView):
+    model = Pawn
+    template_name = "pawnlisting/pawn_detail.html"
+
+
+class PawnCreate(LoginRequiredMixin, CreateView):
+    login_url = "/login/"
+
     model = Pawn
     fields = ["name", "level", "vocation", "gender",
         "primary_inclination", "secondary_inclination"]
 
 
-    # def save(self, **kwargs):
-    #     self.clean()
-    #     return super(Pawn, self).save(**kwargs)
+class PawnUpdate(UpdateView):
+    model = Pawn
+    fields = ["name", "level", "vocation", "gender",
+        "primary_inclination", "secondary_inclination"]
+
+
+class PawnDelete(DeleteView):
+    model = Pawn
+    success_url = reverse_lazy("list_pawn")

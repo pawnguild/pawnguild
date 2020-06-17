@@ -1,0 +1,15 @@
+{% include "pawnlisting/base.html" %}
+
+<ul>
+    {% for pawn in object_list %}
+        <li>
+            <div>
+                <span> {{ pawn }} </span>
+                <a href="pawn/{{ pawn.id }}"> Pawn Detail </a>
+                <a href="pawn/{{ pawn.id }}/delete"> Delete Pawn </a>
+                <a href="pawn/{{ pawn.id }}/update"> Update Pawn </a>
+            </div>
+        </li>
+        
+    {% endfor %}
+</ul>

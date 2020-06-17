@@ -1,10 +1,12 @@
-from django.urls import path, re_path
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    path('', views.list_pawn, name='list_pawn'),
-    path('list', views.list_pawn, name='list_pawn'),
-    path('add_pawn', views.PawnForm.as_view(), name="add_pawn"),
-    #path(pawn/12)
+    path('', views.PawnList.as_view(), name='list_pawn'),
+    path('list/', views.PawnList.as_view(), name='list_pawn'),
+    path('add_pawn/', views.PawnCreate.as_view(), name="create_pawn"),
+    path('pawn/<pk>/', views.PawnDetail.as_view(), name="view_pawn"),
+    path('pawn/<pk>/update/', views.PawnUpdate.as_view(), name="update_pawn"),
+    path('pawn/<pk>/delete/', views.PawnDelete.as_view(), name="delete_pawn")
 ]
