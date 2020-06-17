@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Pawn
 
 from django.urls import reverse_lazy
@@ -51,12 +51,20 @@ class PawnCreate(LoginRequiredMixin, CreateView):
         "primary_inclination", "secondary_inclination"]
 
 
-class PawnUpdate(UpdateView):
+class AllowIfUserOwnsPawn(UserPassesTestMixin):
+
+    def test_func(self):
+        pawn_to_delete = Pawn.objects.get(pk=self.kwargs["pk"])
+        return pawn_to_delete.created_by == self.request.user
+
+class PawnUpdate(AllowIfUserOwnsPawn, UpdateView):
     model = Pawn
     fields = ["name", "level", "vocation", "gender",
         "primary_inclination", "secondary_inclination"]
 
 
-class PawnDelete(DeleteView):
+class PawnDelete(AllowIfUserOwnsPawn, DeleteView):
     model = Pawn
     success_url = reverse_lazy("list_pawn")
+
+
