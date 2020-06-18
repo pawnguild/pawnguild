@@ -4,13 +4,13 @@
 
 
 <form method="post">
-
     {% csrf_token %}
 
     {% if form.errors %}
-    <p> There are errors in the form! </p>
+        <p> There are errors in the form! </p>
     {% endif %}
 
     {{ form }}
 
     <input type="submit" value="Register">
+</form>
