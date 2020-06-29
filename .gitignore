@@ -1,0 +1,5 @@
+htmlcov/
+pawnlisting/__pycache__/
+pawnlisting/migrations/__pycache__/
+.coverage
+
