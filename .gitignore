@@ -1,5 +1,7 @@
 htmlcov/
+pawnhall/__pycache__/
 pawnlisting/__pycache__/
 pawnlisting/migrations/__pycache__/
+pawnlisting/tests/__pycache__/
 .coverage
 

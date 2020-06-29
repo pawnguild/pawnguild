@@ -52,7 +52,8 @@ class PawnCreate(LoginRequiredMixin, CreateView):
         "primary_inclination", "secondary_inclination"]
 
 
-class AllowIfUserOwnsPawn(UserPassesTestMixin):
+class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
+    login_url = "/login/"
 
     def test_func(self):
         pawn_to_delete = Pawn.objects.get(pk=self.kwargs["pk"])
