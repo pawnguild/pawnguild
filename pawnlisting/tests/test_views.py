@@ -43,8 +43,7 @@ class PawnCreateTests(Utility, TestCase):
         pawn_data = self.generate_pawn_data(name="yoshi")
         response = self.client.post(reverse("create_pawn"), pawn_data)
         self.assertRedirects(response, "/list/")
-        pawn = Pawn.objects.get(**pawn_data)
-        self.assertTrue(pawn) # If this fails, pawn doesn't exist, which means pawn creation does not work
+        self.assertTrue(Pawn.objects.get(**pawn_data)) # If this fails, pawn doesn't exist, which means pawn creation does not work
 
 
 class UpdatePawnTests(Utility, TestCase):
@@ -73,7 +72,8 @@ class UpdatePawnTests(Utility, TestCase):
 
     def test_update_pawn(self):
         self.create_user_log_in("T3")
-        pawn_id = self.created_pawn.id
-        response = self.client.post(reverse("update_pawn", kwargs={"pk": pawn_id}), data=self.generate_pawn_data(name="new_pawn_name"))
+        pawn_data = self.generate_pawn_data(name="new_pawn_name")
+        response = self.client.post(reverse("update_pawn", kwargs={"pk": self.created_pawn.id}), pawn_data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("list_pawn"))
+        self.assertTrue(Pawn.objects.get(**pawn_data))
