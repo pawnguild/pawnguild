@@ -50,7 +50,7 @@ class Pawn(models.Model):
             raise ValidationError(errors)
 
     def get_absolute_url(self):
-        return reverse("list_pawn")
+        return reverse("view_pawn", kwargs={"pk": self.id})
     
 
     def __str__(self):

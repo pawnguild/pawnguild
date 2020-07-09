@@ -1,27 +1,11 @@
 from django.test import TestCase, Client
 from pawnlisting.models import Pawn
-from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 
 
 from crum import get_current_user, impersonate
 
-class Utility:
-
-    def setUp(self):
-        self.client = Client()
-
-    def generate_pawn_data(self, name, level=50, vocation="Mage", gender="Male", primary_inclination="Nexus", secondary_inclination="Pioneer"):
-        return {"name": name, "level": level, "vocation": vocation, "gender": gender,
-            "primary_inclination": primary_inclination, "secondary_inclination": secondary_inclination}
-
-    def create_user_log_in(self, username):
-        user, created = get_user_model().objects.get_or_create(username=username)
-        user.set_password("12345")
-        user.save()
-    
-        self.client.login(username=username, password="12345")
-        return user
+from pawnlisting.tests.utility import Utility
 
 class PawnCreateTests(Utility, TestCase):
 
@@ -42,8 +26,20 @@ class PawnCreateTests(Utility, TestCase):
         self.create_user_log_in("T2")
         pawn_data = self.generate_pawn_data(name="yoshi")
         response = self.client.post(reverse("create_pawn"), pawn_data)
-        self.assertRedirects(response, "/list/")
+        self.assertEqual(response.status_code, 302)
         self.assertTrue(Pawn.objects.get(**pawn_data)) # If this fails, pawn doesn't exist, which means pawn creation does not work
+
+
+class PawnDetailTests(Utility, TestCase):
+     
+    def setUp(self):
+         user = self.create_user_log_in("T1")
+         with impersonate(user):
+             self.created_pawn = Pawn.objects.create(**self.generate_pawn_data("pawn_T1"))
+
+    def test_detail_view(self):
+        response = self.client.get(reverse("view_pawn", kwargs={"pk": self.created_pawn.id}))
+        self.assertEqual(response.status_code, 200)
 
 
 class UpdatePawnTests(Utility, TestCase):
@@ -75,5 +71,35 @@ class UpdatePawnTests(Utility, TestCase):
         pawn_data = self.generate_pawn_data(name="new_pawn_name")
         response = self.client.post(reverse("update_pawn", kwargs={"pk": self.created_pawn.id}), pawn_data)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("list_pawn"))
+        self.assertRedirects(response, reverse("view_pawn", kwargs={"pk": self.created_pawn.id}))
         self.assertTrue(Pawn.objects.get(**pawn_data))
+
+
+class DeletePawnTests(Utility, TestCase):
+
+    def setUp(self):
+        Utility.__init__(self)
+        user = self.create_user_log_in("T1")
+        
+        with impersonate(user):
+            pawn = Pawn.objects.create(**self.generate_pawn_data("pawn_T1"))
+        
+        self.created_pawn = pawn
+
+    def test_login_redirect_not_logged_in(self):
+        self.client.logout()
+        pawn_id = self.created_pawn.id
+        pawn_delete_url = reverse("delete_pawn", kwargs={"pk": pawn_id})
+        response = self.client.get(pawn_delete_url)
+        self.assertRedirects(response, f"{reverse('login')}?next={pawn_delete_url}")
+    
+    def test_403_logged_in_not_owner(self):
+        self.create_user_log_in("T2")
+        response = self.client.post(reverse("delete_pawn", kwargs={"pk": self.created_pawn.id}))
+        self.assertEqual(response.status_code, 403)
+
+    def test_delete_pawn(self):
+        self.create_user_log_in("T1")
+        response = self.client.post(reverse("delete_pawn", kwargs={"pk": self.created_pawn.id}))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("list_pawn"))
