@@ -37,8 +37,10 @@ class Pawn(models.Model):
 
     @property
     def activity(self):
+        """ Return number of stars that should display in pawn list. No stars after 4 weeks"""
         time_since_modified = timezone.now() - self.last_modified
-        return time_since_modified.days % 7 # Weeks since modified
+        weeks_since_modified = time_since_modified.days % 7 
+        return 4 - weeks_since_modified
 
     def save(self, *args, **kwargs):
         user = get_current_user()
