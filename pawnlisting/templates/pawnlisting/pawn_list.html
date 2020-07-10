@@ -1,15 +1,30 @@
 {% include "pawnlisting/base.html" %}
 
-<ul>
-    {% for pawn in object_list %}
-        <li>
-            <div>
-                <span> {{ pawn }} </span>
-                <a href="/pawn/{{ pawn.id }}"> Pawn Detail </a>
-                <a href="/pawn/{{ pawn.id }}/delete/"> Delete Pawn </a>
-                <a href="/pawn/{{ pawn.id }}/update/"> Update Pawn </a>
-            </div>
-        </li>
-        
-    {% endfor %}
-</ul>
+<div class="container">
+    <table class="table table-dark">
+    <thead>
+        <th scope="col">Steam URL</th>
+        <th scope="col">Vocation</th>
+        <th scope="col">Pawn Name</th>
+        <th scope="col">Activity</th>
+        <th scope="col">Level</th>
+        <th scope="col">Inclinations</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Picture</th>
+    </thead>
+    <tbody>
+        {% for pawn in pawn_list %}
+            <tr>
+                <td>fake url</td>
+                <td>{{ pawn.vocation }}</td>
+                <td>{{pawn.name}}</td>
+                <td>activity</td>
+                <td>{{pawn.level}}</td>
+                <td>{{pawn.primary_inclination}}/{{pawn.secondary_inclination}}</td>
+                <td>{{pawn.gender}}</td>
+                <td>picture url></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>

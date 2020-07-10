@@ -28,7 +28,7 @@ class Pawn(models.Model):
     primary_inclination = models.CharField(max_length=30, choices=PRIMARY_INCLINATION_CHOICES)
     secondary_inclination= models.CharField(max_length=30, choices=SECONDARY_INCLINATION_CHOICES)
 
-    created_by = models.ForeignKey("auth.User", null=False, on_delete=models.CASCADE)
+    created_by = models.ForeignKey("auth.User", default=None, null=False, on_delete=models.CASCADE)
 
 
     def save(self, *args, **kwargs):
