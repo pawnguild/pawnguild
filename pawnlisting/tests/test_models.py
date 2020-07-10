@@ -30,3 +30,6 @@ class PawnTests(Utility, TestCase):
         sleep(1) # Allow time to pass so timestamps can change
         self.client.post(reverse("update_pawn", kwargs={"pk": self.created_pawn.id}), self.generate_pawn_data(name="T1", level=51))
         self.assertNotEqual(self.created_pawn.last_modified, Pawn.objects.get(name="T1").last_modified)
+
+    def test_activity(self):
+        pass # TODO

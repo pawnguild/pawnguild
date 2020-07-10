@@ -35,6 +35,7 @@ class PawnManager(View):
     def get(self, request):
         return HttpResponse("Exist")
 
+
 class PawnList(ListView):
     model = Pawn
     template_name = "pawnlisting/pawn_list.html"

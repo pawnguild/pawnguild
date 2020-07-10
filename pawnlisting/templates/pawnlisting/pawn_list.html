@@ -17,12 +17,13 @@
             <tr>
                 <td>fake url</td>
                 <td>{{ pawn.vocation }}</td>
-                <td>{{pawn.name}}</td>
-                <td>activity</td>
-                <td>{{pawn.level}}</td>
-                <td>{{pawn.primary_inclination}}/{{pawn.secondary_inclination}}</td>
-                <td>{{pawn.gender}}</td>
-                <td>picture url></td>
+                <td>{{ pawn.name }}</td>
+                How can I have activity be 0-4 (stars) based on activity... activity is 0, then 4 stars. dictionary? Need this logic in python. where does it go
+                <td>{{ pawn.activity }}</td> 
+                <td>{{ pawn.level }}</td>
+                <td>{{ pawn.primary_inclination }}/{{ pawn.secondary_inclination }}</td>
+                <td>{{ pawn.gender }}</td>
+                <td>picture url</td>
             </tr>
         {% endfor %}
     </tbody>

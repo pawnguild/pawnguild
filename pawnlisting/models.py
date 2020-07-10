@@ -6,6 +6,8 @@ from crum import get_current_user
 
 from django.utils import timezone
 
+from datetime import datetime, timedelta
+
 vocations = ["Fighter", "Warrior", "Strider", "Ranger", "Mage", "Sorcerer"]
 genders = ["Male", "Female"]
 inclinations = ["Scather", "Medicant", "Mitigator", "Challenger", "Utilitarian", "Guardian", "Nexus", "Pioneer", "Acquisitor"]
@@ -32,6 +34,11 @@ class Pawn(models.Model):
 
     created_by = models.ForeignKey("auth.User", default=None, null=False, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(default=timezone.now)
+
+    @property
+    def activity(self):
+        time_since_modified = timezone.now() - self.last_modified
+        return time_since_modified.days % 7 # Weeks since modified
 
     def save(self, *args, **kwargs):
         user = get_current_user()
