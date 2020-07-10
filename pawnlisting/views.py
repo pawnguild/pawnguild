@@ -1,7 +1,7 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -30,6 +30,10 @@ class Register(TemplateView):
         else:
             HttpResponseRedirect(reverse("register"))
 
+class PawnManager(View):
+
+    def get(self, request):
+        return HttpResponse("Exist")
 
 class PawnList(ListView):
     model = Pawn

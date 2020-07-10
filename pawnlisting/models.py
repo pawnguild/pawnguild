@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 
 from crum import get_current_user
 
+from django.utils import timezone
+
 vocations = ["Fighter", "Warrior", "Strider", "Ranger", "Mage", "Sorcerer"]
 genders = ["Male", "Female"]
 inclinations = ["Scather", "Medicant", "Mitigator", "Challenger", "Utilitarian", "Guardian", "Nexus", "Pioneer", "Acquisitor"]
@@ -29,13 +31,16 @@ class Pawn(models.Model):
     secondary_inclination= models.CharField(max_length=30, choices=SECONDARY_INCLINATION_CHOICES)
 
     created_by = models.ForeignKey("auth.User", default=None, null=False, on_delete=models.CASCADE)
-
+    last_modified = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         user = get_current_user()
         if user and not user.pk:
             raise ValidationError("User not logged in, anonymous user")
         self.created_by = user
+
+        self.last_modified = timezone.now()
+
         super(Pawn, self).save(*args, **kwargs)
 
 

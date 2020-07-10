@@ -2,34 +2,15 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-{% comment %} <link rel="stylesheet" href="{% static "pawnlisting/style.css" %}" type="text/css" media="screen"> {% endcomment %}
-
-{% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/add_pawn">Add pawn</a>
-    <a class="navbar-brand" href="/list">List </a> 
-    <a class="navbar-brand" href="/register"> Register </a> 
-    {% if user.is_authenticated %}
-        <a class="navbar-brand" href="/logout"> Logout </a> 
-        <h3 class="navbar-brand"> Hello {{ user.username }}
-    {% else %}
-        <div class="d-flex justify-content-end" width="100%%">
-        <a class="navbar-brand" href="/login"> Login </a>
-        </span>
-    {% endif %}
-</nav> {% endcomment %}
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
         <ul class="navbar-nav ml-auto text-center">
-            <a class="navbar-brand nav-item mx-5" href="/list"> View pawns </a> 
-            <a class="navbar-brand nav-item mx-5" href="/add_pawn">Add pawn</a>
-            <a class="navbar-brand nav-item mx-5" href="/add_pawn">Update pawn</a>
+            <a class="navbar-brand nav-item mx-5" href="{% url 'list_pawn' %}"> View pawns </a> 
+            <a class="navbar-brand nav-item mx-5" href="{% url 'create_pawn' %}"> Add pawn </a>
+            <a class="navbar-brand nav-item mx-5" href="{% url 'manage_pawns' %}"> Manage pawns </a>
         </ul>
     </div>
     <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ραωи нαℓℓ </h2> 
-    {% comment %} <h1 class="mx-5 my-0 text-warning">
-           ραωи нαℓℓ
-    </h1> {% endcomment %} 
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">
         <ul class="navbar-nav mr-auto text-center">
             {% if user.is_authenticated %}
@@ -39,11 +20,11 @@
                                     Logged in as {{ user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/logout"> Logout </a>
+                        <a class="dropdown-item" href="{% url 'logout' %}"> Logout </a>
                         </div>
                 </li>
             {% else %}
-                <a class="navbar-brand" href="/login"> Login </a>
+                <a class="navbar-brand" href="{% url 'login' %}"> Login </a>
             {% endif %}
             <a class="navbar-brand nav-item mx-5" href="/register"> Register </a> 
         </ul>
