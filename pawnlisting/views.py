@@ -30,11 +30,14 @@ class Register(TemplateView):
         else:
             HttpResponseRedirect(reverse("register"))
 
-class PawnManager(View):
+class PawnManager(TemplateView):
 
-    def get(self, request):
-        return HttpResponse("Exist")
+    template_name = "pawnlisting/manage_pawns.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user_pawns"] = Pawn.objects.filter(created_by=self.request.user)
+        return context
 
 class PawnList(ListView):
     model = Pawn

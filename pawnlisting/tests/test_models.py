@@ -8,6 +8,7 @@ from crum import get_current_user, impersonate
 from pawnlisting.tests.utility import Utility
 
 from time import sleep
+from datetime import datetime, timedelta
 
 class PawnTests(Utility, TestCase):
 
@@ -31,5 +32,12 @@ class PawnTests(Utility, TestCase):
         self.client.post(reverse("update_pawn", kwargs={"pk": self.created_pawn.id}), self.generate_pawn_data(name="T1", level=51))
         self.assertNotEqual(self.created_pawn.last_modified, Pawn.objects.get(name="T1").last_modified)
 
-    def test_activity(self):
-        pass # TODO
+    # def test_activity(self):
+    #     with impersonate(self.create_user_log_in("testuser")):
+    #         self.assertEqual(self.created_pawn.activity, 4)
+
+    #         pawn = Pawn.objects.get(name="T1")
+    #         pawn.last_modified = pawn.last_modified - timedelta(days=8)
+    #         pawn.save()
+    #         pawn = Pawn.objects.get(name="T1")
+    #         self.assertEqual(pawn.activity, 3)

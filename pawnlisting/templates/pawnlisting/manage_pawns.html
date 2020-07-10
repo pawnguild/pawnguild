@@ -1,0 +1,14 @@
+{% include "pawnlisting/base.html" %}
+
+{% if user_pawns %}
+    {% for pawn in user_pawns %}
+        <div>
+            {{ pawn }}
+            <a href="{% url 'update_pawn' pawn.id %}"> Update pawn </a>
+            <a href="{% url 'delete_pawn' pawn.id %}"> Delete pawn </a>
+        </div
+    {% endfor %}
+    {{ user_pawns }}
+{% else %}
+    <p> You haven't made any Pawns! You can make them <a href="{% url 'create_pawn' %}"> here </a>
+{% endif %}
