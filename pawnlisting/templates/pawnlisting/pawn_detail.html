@@ -5,6 +5,10 @@
     {{ object.level }}
     {{ object.vocation }}
     {{ object.gender }}
+    {{ object.notes }}
     {{ object.primary_inclination}}
     {{ object.secondary_inclination}}
+    {% if object.picture %}
+        <img src="{{object.picture.url}}">
+    {% endif %}
 </div>

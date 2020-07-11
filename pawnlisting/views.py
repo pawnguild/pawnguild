@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from .models import Pawn
@@ -15,7 +15,7 @@ class Register(TemplateView):
     template_view = "registration/register.html"
 
     def get(self, request):
-        context = { "form": UserCreationForm() }
+        context = { "form": UserCreationForm(), "error_message": request.session.get("error_message", "")}
         return render(request, "registration/register.html", context=context)
 
     def post(self, request):
@@ -28,7 +28,9 @@ class Register(TemplateView):
             login(request, user)
             return redirect(reverse("list_pawn"))
         else:
-            HttpResponseRedirect(reverse("register"))
+            print("Form data invalid or user already exists!")
+            request.session["error_message"] = "Form data invalid or user already exists!"
+            return redirect(reverse("register"))
 
 class PawnManager(TemplateView):
 
@@ -57,7 +59,7 @@ class PawnCreate(LoginRequiredMixin, CreateView):
 
     model = Pawn
     fields = ["name", "level", "vocation", "gender",
-        "primary_inclination", "secondary_inclination"]
+        "primary_inclination", "secondary_inclination", "notes", "picture"]
 
 
 class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
@@ -71,7 +73,7 @@ class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
 class PawnUpdate(AllowIfUserOwnsPawn, UpdateView):
     model = Pawn
     fields = ["name", "level", "vocation", "gender",
-        "primary_inclination", "secondary_inclination"]
+        "primary_inclination", "secondary_inclination", "notes", "picture"]
 
 
 class PawnDelete(AllowIfUserOwnsPawn, DeleteView):

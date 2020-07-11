@@ -1,0 +1,15 @@
+
+high priority
+- on pawn_list page - link to view pawn on listview page + manage pawn page
+- view pawn page
+
+medium priority
+- separate looking pages for add/update pawn
+- test api
+
+low priority
+- colors on vocations
+- fix finding favico
+
+consider:
+- forum thread, like the steam one so people can leave messages for each other

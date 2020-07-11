@@ -1,6 +1,5 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from pawnlisting.models import Pawn
-from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import reverse
 
 from crum import get_current_user, impersonate

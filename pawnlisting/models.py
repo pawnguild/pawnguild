@@ -32,6 +32,10 @@ class Pawn(models.Model):
     primary_inclination = models.CharField(max_length=30, choices=PRIMARY_INCLINATION_CHOICES)
     secondary_inclination= models.CharField(max_length=30, choices=SECONDARY_INCLINATION_CHOICES)
 
+
+    notes = models.TextField(max_length=1000, blank=True)
+    picture = models.ImageField(upload_to="pawn_pictures/", null=True, blank=True)
+
     created_by = models.ForeignKey("auth.User", default=None, null=False, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(default=timezone.now)
 
