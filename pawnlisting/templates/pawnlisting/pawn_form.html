@@ -1,16 +1,52 @@
 
 {% include "pawnlisting/base.html" %}
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_form.css' %}">
+
+
 <span> {{ form.errors }} </span>
 
 
-<form method="POST" enctype="multipart/form-data"> 
-    {% csrf_token %}
-    {% for field in form %}
-        <div>
-            <label> {{ field.label_tag }} </label>
-            <span> {{ field }} </span>
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="container">
+
+        {% if object %}
+            <h1> Updating Pawn: {{ object.name }} </h1>
+        {% else %}
+            <h1> Create a Pawn </h1>
+        {% endif %}
+
+        <div class="form-group">
+            <label>Pawn name</label>
+            {{ form.name }}
         </div>
-    {% endfor %}
-    <button type="submit"> Submit </button>
+        <div class="form-group">
+            <label>Level</label>
+            {{ form.level }}
+        </div>
+        <div class="form-group">
+            <label>Vocation</label>
+            {{ form.vocation }}
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            {{ form.gender }}
+        </div>
+        <div class="form-group">
+            <label> Primary inclination</label>
+                {{ form.primary_inclination }} 
+        </div>
+        <div class="form-group">
+            <label>Secondary inclination</label>
+            {{ form.secondary_inclination }}
+            <div class="small" id="secondaryInclinationHelp" class="form-text text-muted"> Select None if your pawn does not have a 2nd inclination </div>
+        </div>
+        <div class="form-group">
+            <label for="notes">Pawn Notes</label>
+            <textarea class="form-control" id="notes" value="{{ notes }}" rows="3"></textarea>
+        </div>
+        <button class="btn btn-light" type="submit"> Submit </button>
+    </div>
 </form>

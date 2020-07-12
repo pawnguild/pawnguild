@@ -1,9 +1,9 @@
 {% include "pawnlisting/base.html" %}
 
-
-<form action="" method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete pawn? </p>
-    <button type="submit" value="Confirm"> Yes, delete the Pawn </button>
-
-</form>
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete pawn? </p>
+        <button class="btn btn-danger" type="submit" value="Confirm"> <b> Yes, delete the Pawn </b </button>
+    </form>
+</div>

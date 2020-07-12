@@ -2,7 +2,7 @@
 
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'pawnlisting/pawn_list_style.css' %}">
+<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_list.css' %}">
 
 <div class="container">
     <table class="table table-dark">
@@ -14,7 +14,7 @@
         <th scope="col">Level</th>
         <th scope="col">Inclinations</th>
         <th scope="col">Gender</th>
-        <th scope="col">Picture</th>
+        <th scope="col">Detail Btn</th>
     </thead>
     <tbody>
         {% for pawn in pawn_list %}
@@ -40,7 +40,7 @@
                 <td>{{ pawn.level }}</td>
                 <td>{{ pawn.primary_inclination }}/{{ pawn.secondary_inclination }}</td>
                 <td>{{ pawn.gender }}</td>
-                <td>picture url</td>
+                <td><a href="{% url 'view_pawn' pawn.id %}" class="btn btn-info btn-sm"> Detail </a>
             </tr>
         {% endfor %}
     </tbody>

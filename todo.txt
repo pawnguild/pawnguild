@@ -1,10 +1,8 @@
 
 high priority
-- on pawn_list page - link to view pawn on listview page + manage pawn page
 - view pawn page
+- on register, require steam url, might require a profile model
 
-medium priority
-- separate looking pages for add/update pawn
 
 low priority
 - fix finding favico

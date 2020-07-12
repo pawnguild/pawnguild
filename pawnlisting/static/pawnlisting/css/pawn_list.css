@@ -10,11 +10,11 @@ td.blue-vocation {
     background-color: mediumturquoise;
 }
 
-body {
-    background-color: darkslategray
-}
-
 b {
     color: black;
 }
 
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}

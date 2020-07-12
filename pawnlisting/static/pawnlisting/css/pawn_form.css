@@ -1,0 +1,17 @@
+input,
+textarea {
+    background-color: whitesmoke;
+    color: dark;
+}
+
+h1 {
+    color: lightgreen;
+}
+
+label {
+    color: white
+}
+
+div.small {
+    color: lightgreen;
+}
