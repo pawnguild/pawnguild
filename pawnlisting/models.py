@@ -43,8 +43,18 @@ class Pawn(models.Model):
     def activity(self):
         """ Return number of stars that should display in pawn list. No stars after 4 weeks"""
         time_since_modified = timezone.now() - self.last_modified
-        weeks_since_modified = time_since_modified.days % 7 
+        weeks_since_modified = time_since_modified.days // 7 
         return 4 - weeks_since_modified
+
+    @property
+    def vocation_color(self):
+        if self.vocation == "Fighter" or self.vocation == "Warrior":
+            return "red"
+        elif self.vocation == "Strider" or self.vocation == "Ranger":
+            return "yellow"
+        else:
+            return "blue"
+
 
     def save(self, *args, **kwargs):
         user = get_current_user()

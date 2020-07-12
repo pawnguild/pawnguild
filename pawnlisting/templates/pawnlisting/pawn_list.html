@@ -1,5 +1,9 @@
 {% include "pawnlisting/base.html" %}
 
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'pawnlisting/pawn_list_style.css' %}">
+
 <div class="container">
     <table class="table table-dark">
     <thead>
@@ -16,7 +20,7 @@
         {% for pawn in pawn_list %}
             <tr>
                 <td>fake url</td>
-                <td>{{ pawn.vocation }}</td>
+                <td class="{{ pawn.vocation_color }}-vocation"> <b> {{ pawn.vocation }} </b> </td>
                 <td>{{ pawn.name }}</td>
                 <td>
                 {% if pawn.activity != 0 %}

@@ -5,10 +5,8 @@ high priority
 
 medium priority
 - separate looking pages for add/update pawn
-- test api
 
 low priority
-- colors on vocations
 - fix finding favico
 
 consider:
