@@ -1,14 +1,43 @@
 {% include "pawnlisting/base.html" %}
 
-<div>
-    {{ object.name }}
-    {{ object.level }}
-    {{ object.vocation }}
-    {{ object.gender }}
-    {{ object.notes }}
-    {{ object.primary_inclination}}
-    {{ object.secondary_inclination}}
-    {% if object.picture %}
-        <img src="{{object.picture.url}}">
-    {% endif %}
+<b>
+<div class="container">
+  <div class="row flex-nowrap">
+    <div class="col">
+        <div>
+            <label> Name: </label>
+            {{ pawn.name }}
+        </div>
+        <div>
+            <label> Level: </label>
+            {{ pawn.level }}
+        </div>
+        <div>
+            <label> Vocation: </label>
+            {{ pawn.vocation }}
+        </div>
+        <div>
+            <label> Gender: </label>
+            {{ pawn.gender }}
+        </div>
+        <div>
+            <label> Primary_inclination: </label>
+            {{ pawn.primary_inclination}}
+        </div>
+        <div>
+            <label> Secondary_inclination: </label>
+            {{ pawn.secondary_inclination}}
+        </div>
+        <div>
+            <label> Notes: </label>
+            {{ pawn.notes }}
+        </div>
+    </div>
+    <div class="col">
+        {% if pawn.picture %}
+            <img src="{{pawn.picture.url}}">
+        {% endif %}
+    </div>
+  </div>
 </div>
+</b>

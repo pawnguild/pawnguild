@@ -1,12 +1,14 @@
 {% include "pawnlisting/base.html" %}
 
-<form method="post">
-    {% csrf_token %}
+<div class="container">
+    <h1> Login </h1>
+    <form method="post">
+        {% csrf_token %}
 
-    <p> Username: {{ form.username }}  </p>
-    <p> Password:  {{ form.password}} </p>
+        <p> Username: {{ form.username }}  </p>
+        <p> Password:  {{ form.password}} </p>
 
-    <p> <input type="submit" value="login"> </p>
-    <input type="hidden" name="next" value="{{ next }}">
-
-</form>
+        <p> <input type="submit" value="login"> </p>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+</div>

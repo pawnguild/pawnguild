@@ -1,10 +1,5 @@
-
-high priority
-- view pawn page
-
 medium priority
 - test profiles
-- login update
 
 low priority
 - find a way to not rely on {{form.notes}} so i can customize the textarea how i want
