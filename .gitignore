@@ -1,3 +1,4 @@
 htmlcov/
 .coverage
 **/__pycache__
+media/
