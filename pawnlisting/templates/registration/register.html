@@ -1,17 +1,50 @@
 {% include "pawnlisting/base.html" %}
 
-<p> Register </p>
 
-{{ error_message }}
+<div class="container">
+    <h1> Register </h1>
 
-<form method="post">
-    {% csrf_token %}
+    <form method="post">
+        {% csrf_token %}
 
-    {% if form.errors %}
-        <p> There are errors in the form! </p>
-    {% endif %}
-
-    {{ form }}
-
-    <input type="submit" value="Register">
-</form>
+        <div>
+            {% if user_form.errors.username %}
+            <div class="alert alert-danger">
+                <strong>{{ user_form.errors.username |escape }}</strong>
+            </div>
+            {% endif %}
+            <label for="id_username-input"> Username: </label>
+            {{ user_form.username }}
+        </div>
+        <div>
+            {% if user_form.errors.password1 %}
+                <div class="alert alert-danger">
+                    <strong>{{ user_form.errors.password1 |escape }}</strong>
+                </div>
+            {% endif %}
+            <label for="id_password1"> Password: </label>
+            {{ user_form.password1 }}
+        </div>
+        <div>
+            {% if user_form.errors.password2 %}
+                <div class="alert alert-danger">
+                    <strong>{{ user_form.errors.password2 |escape }}</strong>
+                </div>
+            {% endif %}
+            <label for="id_password2"> Verify password: </label>
+            {{ user_form.password2 }}
+        </div>
+        <div>
+            {% if profile_form.errors.steam_profile %}
+                <div class="alert alert-danger">
+                    <strong>{{ profile_form.errors.steam_profile |escape }}</strong>
+                </div>
+            {% endif %}
+            <label for="id_steam_profile"> Steam URL: </label>
+            {{ profile_form.steam_profile }}
+        </div>
+        <div>
+            <input type="submit" value="Register">
+        </div>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+{% include "pawnlisting/base.html" %}
+
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        {% if profile_form.errors.steam_profile %}
+            <div class="alert alert-danger">
+                <strong>{{ profile_form.errors.steam_profile |escape }}</strong>
+            </div>
+            {% endif %}
+        {{ profile_form.steam_profile }}
+        <div>
+            <button class="btn btn-light" type="submit"> Submit </button>
+        </div>
+    </form>
+</div>

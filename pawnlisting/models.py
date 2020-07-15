@@ -1,10 +1,12 @@
 from django.db import models
 from django.shortcuts import reverse
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 from crum import get_current_user
 
-from django.utils import timezone
 
 from datetime import datetime, timedelta
 
@@ -16,6 +18,15 @@ def build_choices(l):
     return [(choice, choice) for choice in l]
 
 # Create your models here.
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    steam_profile = models.CharField(max_length=150, blank=False, null=False)
+
+    def __str__(self):
+        return f"{self.user.username} profile"
+
+
 
 class Pawn(models.Model):
     id = models.AutoField(primary_key=True)

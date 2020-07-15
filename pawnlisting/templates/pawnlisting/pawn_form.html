@@ -5,9 +5,6 @@
 <link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_form.css' %}">
 
 
-<span> {{ form.errors }} </span>
-
-
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
     <div class="container">
@@ -19,33 +16,70 @@
         {% endif %}
 
         <div class="form-group">
+            {% if forms.errors.name %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.errors.name |escape }}</strong>
+                </div>
+            {% endif %}
             <label>Pawn name</label>
             {{ form.name }}
         </div>
         <div class="form-group">
+            {% if form.errors.level %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.errors.level |escape }}</strong>
+                </div>
+            {% endif %}
             <label>Level</label>
             {{ form.level }}
         </div>
         <div class="form-group">
+            {% if form.errors.vocation %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.errors.vocation |escape }}</strong>
+                </div>
+            {% endif %}
             <label>Vocation</label>
             {{ form.vocation }}
         </div>
         <div class="form-group">
+            {% if form.errors.gender %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.errors.gender |escape }}</strong>
+                </div>
+            {% endif %}
             <label>Gender</label>
             {{ form.gender }}
         </div>
         <div class="form-group">
+            {% if form.errors.primary_inclination %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.errors.primary_inclination |escape }}</strong>
+                </div>
+            {% endif %}
             <label> Primary inclination</label>
                 {{ form.primary_inclination }} 
         </div>
         <div class="form-group">
+            {% if form.errors.secondary_inclination %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.errors.secondary_inclination |escape }}</strong>
+                </div>
+            {% endif %}
             <label>Secondary inclination</label>
             {{ form.secondary_inclination }}
             <div class="small" id="secondaryInclinationHelp" class="form-text text-muted"> Select None if your pawn does not have a 2nd inclination </div>
         </div>
         <div class="form-group">
-            <label for="notes">Pawn Notes</label>
-            <textarea class="form-control" id="notes" value="{{ notes }}" rows="3"></textarea>
+            {% if form.errors.notes %}
+                <div class="alert alert-danger">
+                    <strong>{{ form.errors.notes |escape }}</strong>
+                </div>
+            {% endif %}
+            <label for="id_notes">Pawn Notes</label>
+            <div>
+                {{ form.notes }}
+            </div>
         </div>
         <button class="btn btn-light" type="submit"> Submit </button>
     </div>

@@ -1,11 +1,15 @@
 
 high priority
 - view pawn page
-- on register, require steam url, might require a profile model
 
+medium priority
+- test profiles
+- login update
 
 low priority
+- find a way to not rely on {{form.notes}} so i can customize the textarea how i want
 - fix finding favico
 
-consider:
-- forum thread, like the steam one so people can leave messages for each other
+future
+- password resetting
+- 1 forum

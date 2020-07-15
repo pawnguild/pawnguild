@@ -10,5 +10,6 @@ urlpatterns = [
     path('pawn/<pk>/update/', views.PawnUpdate.as_view(), name="update_pawn"),
     path('pawn/<pk>/delete/', views.PawnDelete.as_view(), name="delete_pawn"),
     path("manage_pawns", views.PawnManager.as_view(), name="manage_pawns"),
-    path("api/pawns", api.PawnAPIList.as_view(), name="api_pawn_list")
+    path("api/pawns", api.PawnAPIList.as_view(), name="api_pawn_list"),
+    path("profile/update/", views.UpdateProfile.as_view(), name="update_profile"),
 ]

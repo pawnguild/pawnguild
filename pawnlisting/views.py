@@ -5,41 +5,74 @@ from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
-from .models import Pawn
-
+from django import forms
 from django.urls import reverse_lazy
-    
+from django.core.exceptions import ValidationError
 
-class Register(TemplateView):
-    template_view = "registration/register.html"
+from .models import Pawn, UserProfile
+
+from urllib.parse import urlparse
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ["steam_profile"]
+
+    def clean_steam_profile(self):
+        parsed = urlparse(self.cleaned_data["steam_profile"])
+        if parsed.netloc != "steamcommunity.com":
+            raise ValidationError("Steam URL must be a steamcommunity.com link")
+        return self.cleaned_data["steam_profile"]
+
+class Register(View):
 
     def get(self, request):
-        context = { "form": UserCreationForm(), "error_message": request.session.get("error_message", "")}
+        context = { "user_form": UserCreationForm(), "profile_form": UserProfileForm()}
         return render(request, "registration/register.html", context=context)
 
     def post(self, request):
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save() # Creates a user
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password1"] # verified box is pw2
-            user = authenticate(username=username, password=password)
+        user_form = UserCreationForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save() # Creates a user
+
+            profile = profile_form.save(commit = False)
+            profile.user = user
+            profile.save()
+
             login(request, user)
             return redirect(reverse("list_pawn"))
         else:
-            print("Form data invalid or user already exists!")
-            request.session["error_message"] = "Form data invalid or user already exists!"
-            return redirect(reverse("register"))
+            context = { "user_form": user_form, "profile_form": profile_form}
+            return render(request, "registration/register.html", context=context)
 
-class PawnManager(TemplateView):
 
+class UpdateProfile(LoginRequiredMixin, View):
+
+    def get(self, request):
+        context = {"profile_form": UserProfileForm() }
+        return render(request, "registration/update_profile.html", context=context)
+
+    def post(self, request):
+        profile_form = UserProfileForm(request.POST, instance=request.user.userprofile)
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect(reverse("list_pawn"))
+        else:
+            context = {"profile_form": profile_form}
+            return render(request, "registration/update_profile.html", context=context)
+
+
+class PawnManager(LoginRequiredMixin, TemplateView):
+    login_url = "/login/"
     template_name = "pawnlisting/manage_pawns.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["user_pawns"] = Pawn.objects.filter(created_by=self.request.user)
         return context
+
 
 class PawnList(ListView):
     model = Pawn
