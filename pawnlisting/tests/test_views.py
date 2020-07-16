@@ -5,9 +5,9 @@ from django.shortcuts import reverse
 
 from crum import get_current_user, impersonate
 
-from pawnlisting.tests.utility import Utility
+from pawnlisting.tests.utility import UtilityTestCase
 
-class PawnCreateTests(Utility, TestCase):
+class PawnCreateTests(UtilityTestCase):
 
     def test_pawn_add_redirects_not_logged_in(self):
         response = self.client.get(reverse("create_pawn"))
@@ -30,7 +30,7 @@ class PawnCreateTests(Utility, TestCase):
         self.assertTrue(Pawn.objects.get(**pawn_data)) # If this fails, pawn doesn't exist, which means pawn creation does not work
 
 
-class PawnDetailTests(Utility, TestCase):
+class PawnDetailTests(UtilityTestCase):
      
     def setUp(self):
          user = self.create_user_log_in("T1")
@@ -42,10 +42,10 @@ class PawnDetailTests(Utility, TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class UpdatePawnTests(Utility, TestCase):
+class UpdatePawnTests(UtilityTestCase):
 
     def setUp(self):
-        Utility.__init__(self)
+        super().__init__()
         user = self.create_user_log_in("T3")
         pawn_data = self.generate_pawn_data(name="T3_pawn")
         with impersonate(user):
@@ -75,10 +75,10 @@ class UpdatePawnTests(Utility, TestCase):
         self.assertTrue(Pawn.objects.get(**pawn_data))
 
 
-class DeletePawnTests(Utility, TestCase):
+class DeletePawnTests(UtilityTestCase):
 
     def setUp(self):
-        Utility.__init__(self)
+        super().__init__()
         user = self.create_user_log_in("T1")
         
         with impersonate(user):

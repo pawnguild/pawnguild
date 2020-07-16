@@ -7,8 +7,8 @@ from django.utils import timezone
 
 from crum import get_current_user
 
-
 from datetime import datetime, timedelta
+
 
 vocations = ["Fighter", "Warrior", "Strider", "Ranger", "Mage", "Sorcerer"]
 genders = ["Male", "Female"]
@@ -21,11 +21,10 @@ def build_choices(l):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    steam_profile = models.CharField(max_length=150, blank=False, null=False)
+    steam_url = models.CharField(max_length=150, blank=False, null=False)
 
     def __str__(self):
         return f"{self.user.username} profile"
-
 
 
 class Pawn(models.Model):
@@ -47,7 +46,7 @@ class Pawn(models.Model):
     notes = models.TextField(max_length=1000, blank=True)
     picture = models.ImageField(upload_to="pawn_pictures/", null=True, blank=True)
 
-    created_by = models.ForeignKey("auth.User", default=None, null=False, on_delete=models.CASCADE)
+    created_by = models.ForeignKey("auth.User", null=False, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(default=timezone.now)
 
     @property

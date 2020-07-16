@@ -4,9 +4,9 @@ from django.shortcuts import reverse
 
 from crum import get_current_user, impersonate
 
-from pawnlisting.tests.utility import Utility
+from pawnlisting.tests.utility import UtilityTestCase
 
-class TestPawnApi(Utility, TestCase):
+class TestPawnApi(UtilityTestCase):
 
     def setUp(self):
         user = self.create_user_log_in("testuser")

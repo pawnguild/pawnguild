@@ -19,7 +19,7 @@
     <tbody>
         {% for pawn in pawn_list %}
             <tr>
-                <td> <a href="{{ pawn.created_by.userprofile.steam_profile }}"> Friend link </a> </td>
+                <td> <a href="{{ pawn.created_by.userprofile.steam_url }}"> Friend link </a> </td>
                 <td class="{{ pawn.vocation_color }}-vocation"> <b> {{ pawn.vocation }} </b> </td>
                 <td>{{ pawn.name }}</td>
                 <td>

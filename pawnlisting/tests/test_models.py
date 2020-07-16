@@ -4,12 +4,12 @@ from django.shortcuts import reverse
 
 from crum import get_current_user, impersonate
 
-from pawnlisting.tests.utility import Utility
+from pawnlisting.tests.utility import UtilityTestCase
 
 from time import sleep
 from datetime import datetime, timedelta
 
-class PawnTests(Utility, TestCase):
+class PawnTests(UtilityTestCase):
 
     def setUp(self):
         user = self.create_user_log_in("testuser")
@@ -40,3 +40,17 @@ class PawnTests(Utility, TestCase):
     #         pawn.save()
     #         pawn = Pawn.objects.get(name="T1")
     #         self.assertEqual(pawn.activity, 3)
+
+class ProfileTests(UtilityTestCase):
+
+    def setUp(self):
+        self.user = self.register_user_log_in("testuser")
+        with impersonate(self.user):
+            self.created_pawn = Pawn.objects.create(**self.generate_pawn_data(name="T1", level=50))  
+
+    def test_profile_created_with_user(self):
+        user_profile = self.user.userprofile
+        print(user_profile)
+        print(user_profile.steam_url)
+        self.asserttrue(user_profile) # It exists
+        

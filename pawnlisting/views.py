@@ -11,19 +11,8 @@ from django.core.exceptions import ValidationError
 
 from .models import Pawn, UserProfile
 
-from urllib.parse import urlparse
 
-
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ["steam_profile"]
-
-    def clean_steam_profile(self):
-        parsed = urlparse(self.cleaned_data["steam_profile"])
-        if parsed.netloc != "steamcommunity.com":
-            raise ValidationError("Steam URL must be a steamcommunity.com link")
-        return self.cleaned_data["steam_profile"]
+from .forms import UserProfileForm
 
 class Register(View):
 

@@ -1,5 +1,14 @@
+high priority
+- register link on login page
+- FAQ page
+- new model fields, such as platform
+- email verification
+- change tests to not manually create users to call our register? or use signals for profile
+- manage pawn table and pawn_list template should be more coupled
+
 medium priority
 - test profiles
+- put friend link/created by on pawn detail
 
 low priority
 - find a way to not rely on {{form.notes}} so i can customize the textarea how i want
@@ -7,4 +16,3 @@ low priority
 
 future
 - password resetting
-- 1 forum
