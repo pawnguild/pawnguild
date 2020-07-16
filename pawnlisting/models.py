@@ -5,8 +5,6 @@ from django.core.validators import URLValidator
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-from crum import get_current_user
-
 from datetime import datetime, timedelta
 
 
@@ -65,17 +63,9 @@ class Pawn(models.Model):
         else:
             return "blue"
 
-
     def save(self, *args, **kwargs):
-        user = get_current_user()
-        if user and not user.pk:
-            raise ValidationError("User not logged in, anonymous user")
-        self.created_by = user
-
         self.last_modified = timezone.now()
-
         super(Pawn, self).save(*args, **kwargs)
-
 
     def clean(self):
         errors = {}

@@ -83,6 +83,10 @@ class PawnCreate(LoginRequiredMixin, CreateView):
     fields = ["name", "level", "vocation", "gender",
         "primary_inclination", "secondary_inclination", "notes", "picture"]
 
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super(PawnCreate, self).form_valid(form)
+
 
 class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
     login_url = "/login/"

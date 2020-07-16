@@ -3,3 +3,5 @@ htmlcov/
 **/__pycache__
 media/
 venv/
+static/
+.vscode/
