@@ -1,10 +1,12 @@
 high priority
-- register link on login page
 - FAQ page
-- new model fields, such as platform
+- model fields ### BLOCKED ###
+    - platform on Pawn
+    - account_name
+        - everything except steam
+    - pawn code
+        - only on switch
 - email verification
-- change tests to not manually create users to call our register? or use signals for profile
-- manage pawn table and pawn_list template should be more coupled
 
 medium priority
 - test profiles
@@ -12,6 +14,9 @@ medium priority
 
 low priority
 - find a way to not rely on {{form.notes}} so i can customize the textarea how i want
+- make table look nicer https://dribbble.com/shots/6902973
+
+very low priority
 - fix finding favico
 
 future

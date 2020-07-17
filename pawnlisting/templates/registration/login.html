@@ -8,7 +8,8 @@
         <p> Username: {{ form.username }}  </p>
         <p> Password:  {{ form.password}} </p>
 
-        <p> <input type="submit" value="login"> </p>
+        <p> <input type="submit" value="Login"> </p>
         <input type="hidden" name="next" value="{{ next }}">
     </form>
+    <p> Don't have an account? Register <a href="{% url 'register' %}"> here </a> </p>
 </div>

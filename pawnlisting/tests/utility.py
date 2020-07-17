@@ -14,9 +14,11 @@ class UtilityTestCase(TestCase):
         self.pawn_data = {**self.generate_pawn_data(name="TestPawn"), "created_by": self.user}
         self.pawn = Pawn.objects.create(**self.pawn_data)
 
-    def generate_pawn_data(self, name, level=50, vocation="Mage", gender="Male", primary_inclination="Nexus", secondary_inclination="Pioneer"):
+    def generate_pawn_data(self, name, level=50, vocation="Mage", gender="Male", primary_inclination="Nexus",
+                                secondary_inclination="Pioneer", tertiary_inclination="None", platform="Steam"):
         return {"name": name, "level": level, "vocation": vocation, "gender": gender,
-            "primary_inclination": primary_inclination, "secondary_inclination": secondary_inclination}
+            "primary_inclination": primary_inclination, "secondary_inclination": secondary_inclination,
+            "tertiary_inclination": tertiary_inclination, "platform": platform}
 
     def create_user_log_in(self, username):
         user, created = get_user_model().objects.get_or_create(username=username)

@@ -18,8 +18,7 @@ def build_choices(l):
 # Create your models here.
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    steam_url = models.CharField(max_length=150, blank=False, null=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)    
 
     def __str__(self):
         return f"{self.user.username} profile"
@@ -38,14 +37,16 @@ class Pawn(models.Model):
     SECONDARY_INCLINATION_CHOICES = PRIMARY_INCLINATION_CHOICES[:] + [("None", "None")]
 
     primary_inclination = models.CharField(max_length=30, choices=PRIMARY_INCLINATION_CHOICES)
-    secondary_inclination= models.CharField(max_length=30, choices=SECONDARY_INCLINATION_CHOICES)
-
+    secondary_inclination= models.CharField(max_length=30, choices=SECONDARY_INCLINATION_CHOICES, default="None")
+    tertiary_inclination= models.CharField(max_length=30, choices=SECONDARY_INCLINATION_CHOICES, default="None")
 
     notes = models.TextField(max_length=1000, blank=True)
     picture = models.ImageField(upload_to="pawn_pictures/", null=True, blank=True)
 
     created_by = models.ForeignKey("auth.User", null=False, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(default=timezone.now)
+
+    platform = models.CharField(max_length=20, null=False, blank=False, choices=build_choices(["Steam", "Switch", "XBOne", "PS4", "PS3"]))
 
     @property
     def activity(self):
@@ -62,6 +63,15 @@ class Pawn(models.Model):
             return "yellow"
         else:
             return "blue"
+
+    @property
+    def inclination_string(self):
+        ret = self.primary_inclination
+        if self.secondary_inclination != "None":
+            ret += f"/{self.secondary_inclination}"
+        if self.tertiary_inclination != "None":
+            ret += f"/{self.tertiary_inclination}"
+        return ret
 
     def save(self, *args, **kwargs):
         self.last_modified = timezone.now()
@@ -83,3 +93,14 @@ class Pawn(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SteamPawnProfile(models.Model):
+    pawn = models.OneToOneField(Pawn, on_delete=models.CASCADE)
+    steam_url = models.CharField(max_length=150, blank=False, null=False)
+
+
+class SwitchPawnProfile(models.Model):
+    pawn = models.OneToOneField(Pawn, on_delete=models.CASCADE)
+    friend_code = models.CharField(max_length=30, blank=False, null=False)
+    pawn_code = models.CharField(max_length=30, blank=False, null=False)

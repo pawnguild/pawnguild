@@ -1,5 +1,5 @@
 body {
-    background-color: darkslategray
+    background-color: #202125;
 }
 
 p {
@@ -16,4 +16,12 @@ label {
 
 div {
     color: whitesmoke;
+}
+
+a {
+    color: skyblue
+}
+
+a:hover {
+    color: pink;
 }

@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 from .models import Pawn, UserProfile
 
 
-from .forms import UserProfileForm
+from .forms import UserProfileForm, SteamPawnProfileForm
 
 class Register(View):
 
@@ -76,16 +76,23 @@ class PawnDetail(DetailView):
     template_name = "pawnlisting/pawn_detail.html"
 
 
+pawn_create_update_fields = ["name", "level", "vocation", "gender", "primary_inclination",
+    "secondary_inclination", "tertiary_inclination", "notes", "picture", "platform"]
+
 class PawnCreate(LoginRequiredMixin, CreateView):
     login_url = "/login/"
 
     model = Pawn
-    fields = ["name", "level", "vocation", "gender",
-        "primary_inclination", "secondary_inclination", "notes", "picture"]
+    fields = pawn_create_update_fields
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super(PawnCreate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({"steam_pawn_profile_form": SteamPawnProfileForm()})
+        return context
 
 
 class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
@@ -98,8 +105,7 @@ class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
 
 class PawnUpdate(AllowIfUserOwnsPawn, UpdateView):
     model = Pawn
-    fields = ["name", "level", "vocation", "gender",
-        "primary_inclination", "secondary_inclination", "notes", "picture"]
+    fields = pawn_create_update_fields
 
 
 class PawnDelete(AllowIfUserOwnsPawn, DeleteView):
