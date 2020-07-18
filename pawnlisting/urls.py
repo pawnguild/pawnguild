@@ -12,4 +12,5 @@ urlpatterns = [
     path("manage_pawns", views.PawnManager.as_view(), name="manage_pawns"),
     path("api/pawns", api.PawnAPIList.as_view(), name="api_pawn_list"),
     path("profile/update/", views.UpdateProfile.as_view(), name="update_profile"),
+    path("profile/forms", views.GetProfileForms.as_view(), name="get_profile_forms"),
 ]

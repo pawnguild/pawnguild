@@ -81,8 +81,10 @@ class Pawn(models.Model):
         errors = {}
         if self.level not in range(201):
             errors["level"] = ValidationError('Level must be within 1-200')
-        if self.primary_inclination == self.secondary_inclination:
-            errors["secondary_inclination"] = ValidationError('Primary and secondary inclinations should be different.')
+
+        inclinations = {self.primary_inclination, self.secondary_inclination, self.tertiary_inclination}
+        if len(inclinations) != 3 and not (self.secondary_inclination == "None" and self.tertiary_inclination == "None"):
+            errors["primary_inclination"] = ValidationError("Inclinations must all be different")
 
         if errors:
             raise ValidationError(errors)

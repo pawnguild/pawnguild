@@ -1,0 +1,145 @@
+
+{% include "pawnlisting/base.html" %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_form.css' %}">
+{% comment %} 
+<script>
+    var a;
+    document.getElementById("id_platform").change(function() {
+        a = document.getElementById("id_platform").value
+    })
+</script> {% endcomment %}
+<script>
+function val() {
+    selected_value = document.getElementById("id_platform").value;
+}
+</script>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="container">
+
+        {% if object %}
+            <h1> Updating Pawn: {{ object.name }} </h1>
+        {% else %}
+            <h1> Create a Pawn </h1>
+        {% endif %}
+
+        <div class="container">
+            <h2> Required Fields </h2>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {% if form.errors.name %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.errors.name |escape }}</strong>
+                            </div>
+                        {% endif %}
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                        {% if form.errors.level %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.errors.level |escape }}</strong>
+                            </div>
+                        {% endif %}
+                        {{ form.level.label_tag }}
+                        {{ form.level }}
+                    </div>
+                    <div class="form-group">
+                        {% if form.errors.vocation %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.errors.vocation |escape }}</strong>
+                            </div>
+                        {% endif %}
+                        {{ form.vocation.label_tag }}
+                        {{ form.vocation }}
+                    </div>
+                    <div class="form-group">
+                        {% if form.errors.gender %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.errors.gender |escape }}</strong>
+                            </div>
+                        {% endif %}
+                        {{ form.gender.label_tag }}
+                        {{ form.gender }}
+                    </div>
+                    <div class="form-group">
+                        {% if form.errors.primary_inclination %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.errors.primary_inclination |escape }}</strong>
+                            </div>
+                        {% endif %}
+                        {{ form.primary_inclination.label_tag }}
+                        {{ form.primary_inclination }} 
+                    </div>
+                    <div class="form-group">
+                        {% if form.errors.secondary_inclination %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.errors.secondary_inclination |escape }}</strong>
+                            </div>
+                        {% endif %}
+                        {{ form.secondary_inclination.label_tag }}
+                        {{ form.secondary_inclination }}
+                        <div class="small" id="secondaryInclinationHelp" class="form-text text-muted"> Select None if your pawn does not have a 2nd inclination </div>
+                    </div>
+                    <div class="form-group">
+                        {% if form.errors.tertiary_inclination %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.errors.tertiary_inclination |escape }}</strong>
+                            </div>
+                        {% endif %}
+                        {{ form.tertiary_inclination.label_tag }}
+                        {{ form.tertiary_inclination }}
+                        <div class="small" id="teriaryInclinationHelp" class="form-text text-muted"> Select None if your pawn does not have a 3rd inclination </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        {% if form.errors.platform %}
+                            <div class="alert alert-danger">
+                                <strong>{{ form.errors.platform |escape }}</strong>
+                            </div>
+                        {% endif %}
+                        {{ form.platform.label_tag }}
+                        
+                        <select required="" name="platform_select_post" id="id_platform" onchange="this.form.submit()">
+                            <option value="" selected="">---------</option>
+                            <option value="Steam">Steam</option>
+                            <option value="Switch">Switch</option>
+                            <option value="XBOne">XBOne</option>
+                            <option value="PS4">PS4</option>
+                            <option value="PS3">PS3</option>
+                        </select>
+
+                        {% if steam_form %}
+                            {{ steam_form }}
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2> Optional Fields </h2>
+            <div class="form-group">
+                {% if form.errors.notes %}
+                    <div class="alert alert-danger">
+                        <strong>{{ form.errors.notes |escape }}</strong>
+                    </div>
+                {% endif %}
+                <div>
+                    <label> Pawn Picture </label>
+                    {{ form.picture }}
+                </div>
+                <label for="id_notes">Pawn Notes and Requests </label>
+                <div>
+                    {{ form.notes }}
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-light" type="submit"> Submit </button>
+    </div>
+</form>
