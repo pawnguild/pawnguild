@@ -5,6 +5,10 @@ from django.core.exceptions import ValidationError
 
 class PawnForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["platform"].widget.attrs.update({"onchange": "this.form.submit()"})
+
     class Meta:
         model = Pawn
         fields = ["name", "level", "vocation", "gender", "primary_inclination",

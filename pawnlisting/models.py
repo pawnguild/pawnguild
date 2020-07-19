@@ -101,8 +101,13 @@ class SteamPawnProfile(models.Model):
     pawn = models.OneToOneField(Pawn, on_delete=models.CASCADE)
     steam_url = models.CharField(max_length=150, blank=False, null=False)
 
+    def __str__(self):
+        return f"{self.pawn.name}'s SteamProfile"
 
 class SwitchPawnProfile(models.Model):
     pawn = models.OneToOneField(Pawn, on_delete=models.CASCADE)
     friend_code = models.CharField(max_length=30, blank=False, null=False)
     pawn_code = models.CharField(max_length=30, blank=False, null=False)
+
+    def __str__(self):
+        return f"{self.pawn.name}'s SwitchProfile"

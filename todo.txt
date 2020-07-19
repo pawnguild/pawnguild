@@ -1,11 +1,13 @@
 high priority
 - FAQ page
-- model fields ### BLOCKED ###
+- model fields
     - platform on Pawn
     - account_name
         - everything except steam
     - pawn code
         - only on switch
+    - NEXT STEP: tests on steam/switch profiles, then add the other platforms
+    - WHATS THE DIFFERENCE BETWEEN ONCHANGE SUBMIT AND BUTTON SELECT? On button submit, it requires fields
 - email verification
 
 medium priority

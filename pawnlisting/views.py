@@ -126,46 +126,34 @@ class PawnCreate(LoginRequiredMixin, View):
     form_class = PawnForm
     template_name = "pawnlisting/pawn_form.html"
 
+    @staticmethod
+    def _create_pawn(pawn_form, profile_form, user):
+        pawn = pawn_form.save(commit=False)
+        pawn.created_by = user
+        pawn.save()
+        profile_obj = profile_form.save(commit=False)
+        profile_obj.pawn = pawn
+        profile_obj.save()      
+        return redirect(reverse("list_pawn"))
+
     def get(self, request):
-        context = {"form": PawnForm()}
-        return render(request, "pawnlisting/pawn_form.html", context=context)
+        context = {"pawn_form": PawnForm()}
+        return render(request, PawnCreate.template_name, context=context)
 
     def post(self, request):
-        if "steam_url" in request.POST: # Steam only form field
-            pawn_form = PawnForm(request.POST)
-            steam_form = SteamPawnProfileForm(request.POST)
-            if pawn_form.is_valid() and steam_form.is_valid():
-                pawn = pawn_form.save(commit=False)
-                pawn.created_by = request.user
-                pawn.save()
-                steam_profile = steam_form.save(commit=False)
-                steam_profile.pawn = pawn
-                steam_profile.save()
-                return redirect(reverse("list_pawn"))
-            else:
-                return render(request, "pawnlisting/profile_form.html", context={"pawn_form": pawn_form, "profile_form": steam_form})
-        elif "friend_code" in request.POST: # Switch only form field
-            pawn_form = PawnForm(request.POST)
-            switch_form = SwitchPawnProfileForm(request.POST)
-            if pawn_form.is_valid() and switch_form.is_valid():
-                pawn = pawn_form.save(commit=False)
-                pawn.created_by = request.user
-                pawn.save()
-                switch_profile = switch_form.save(commit=False)
-                switch_profile.pawn = pawn
-                switch_profile.save()
-                return redirect(reverse("list_pawn"))
+        pawn_form = PawnForm(request.POST)
+
+        platform = request.POST.get("platform", "")
+
+        # TODO: Base keys of this dict off Model choices
+        profile_form_selector = {"Steam": SteamPawnProfileForm(request.POST), "Switch": SwitchPawnProfileForm(request.POST)}
+
+        profile_form = profile_form_selector.get(platform, "")
+
+        if platform and pawn_form.is_valid() and profile_form.is_valid():
+            return PawnCreate._create_pawn(pawn_form, profile_form, request.user)
         else:
-            platform = request.POST["platform"]
-            pawn_form = PawnForm(request.POST)
-            if pawn_form.is_valid():
-                context = {"pawn_form": pawn_form}
-                if   platform == "Steam" : context.update({"profile_form" : SteamPawnProfileForm()})
-                elif platform == "Switch": context.update({"profile_form" : SwitchPawnProfileForm()})
-                return render(request, f"pawnlisting/profile_form.html", context=context)
-            else:
-                pawn_form = PawnForm(request.POST)
-                return render(request, "pawnlisting/pawn_form.html", context={"form": pawn_form})
+            return render(request, PawnCreate.template_name, context={"pawn_form": pawn_form, "profile_form": profile_form})
 
 
 class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
