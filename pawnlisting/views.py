@@ -167,7 +167,6 @@ class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
 class PawnUpdate(AllowIfUserOwnsPawn, UpdateView):
     model = Pawn
     form_class = PawnForm
-    success_url = reverse_lazy("manage_pawns")
 
 
 class PawnDelete(AllowIfUserOwnsPawn, DeleteView):

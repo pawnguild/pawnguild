@@ -1,3 +1,8 @@
+- highest
+    - update code for profiles
+    - testing everything profiles
+    - everything profiles in general
+
 high priority
 - FAQ page
 - model fields

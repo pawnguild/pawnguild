@@ -33,8 +33,10 @@ class PawnCreateTests(UtilityTestCase):
 
     def test_can_create_pawn_when_logged_in(self):
         self.register_user_log_in("TestUser")
-        pawn_data = self.generate_pawn_data(name="yoshi")
-        response = self.client.post(reverse("create_pawn"), pawn_data)
+        pawn_data, profile_data = self.generate_pawn_data(name="yoshi", platform="Steam")
+
+        post_data = {**pawn_data, **profile_data}
+        response = self.client.post(reverse("create_pawn"), post_data)
         self.assertEqual(response.status_code, 302)
 
         created_pawn = Pawn.objects.get(**pawn_data)
@@ -58,7 +60,7 @@ class PawnUpdateTests(UtilityTestCase):
 
     def test_update_pawn(self):
         self.register_user_log_in("TestUser")
-        pawn_data = self.generate_pawn_data(name="TestPawn", level=72)
+        pawn_data, pawn_profile_data = self.generate_pawn_data(name="TestPawn", platform="Switch", level=72)
         response = self.client.post(reverse("update_pawn", kwargs={"pk": self.pawn.id}), pawn_data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("view_pawn", kwargs={"pk": self.pawn.id}))
@@ -69,7 +71,7 @@ class DeletePawnTests(UtilityTestCase):
 
     def setUp(self):
         super().setUp()
-        self.pawn2 = Pawn.objects.create(**{**self.generate_pawn_data(name="TestPawn"), "created_by": self.user})
+        self.pawn2, self.pawn2_profile = self.createPawnAndProfile(self.user, "Pawn2", "Switch")
 
     def test_403_logged_in_not_owner(self):
         self.register_user_log_in("TestUser2")
@@ -80,4 +82,4 @@ class DeletePawnTests(UtilityTestCase):
         self.register_user_log_in("TestUser")
         response = self.client.post(reverse("delete_pawn", kwargs={"pk": self.pawn2.id}))
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("list_pawn"))
+        self.assertRedirects(response, reverse("manage_pawns"))

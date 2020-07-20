@@ -17,7 +17,8 @@ class PawnTests(UtilityTestCase):
 
     def test_last_modified_changes_on_update(self):
         sleep(1) # Allow time to pass so timestamps can change
-        self.client.post(reverse("update_pawn", kwargs={"pk": self.pawn.id}), self.generate_pawn_data(name="T1", level=51))
+        pawn_data, profile_data = self.generate_pawn_data(name="T1", platform="Steam", level=51)
+        self.client.post(reverse("update_pawn", kwargs={"pk": self.pawn.id}), pawn_data)
         self.assertNotEqual(self.pawn.last_modified, Pawn.objects.get(name="T1").last_modified)
 
     # def test_activity(self):
