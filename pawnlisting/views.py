@@ -11,6 +11,8 @@ from django.core.exceptions import ValidationError
 
 from .models import Pawn, UserProfile, SteamPawn, SwitchPawn
 from .forms import UserProfileForm, SteamPawnForm, SwitchPawnForm
+from .utility import UserPawnCollection
+
 
 class Register(View):
 
@@ -57,8 +59,8 @@ class PawnManager(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["user_pawns"] = Pawn.objects.filter(created_by=self.request.user)
-        return context
+        pawn_collection = UserPawnCollection(self.request.user)
+        return context.update(pawn_collection.get_context())
 
 
 class ChoosePawnPlatform(LoginRequiredMixin, View):
@@ -73,7 +75,6 @@ class ChoosePawnPlatform(LoginRequiredMixin, View):
         elif platform == "Switch":
             return redirect(reverse("create-switch-pawn"))
     
-
 
 class CreateSteamPawn(LoginRequiredMixin, CreateView):
     login_url = "/login/"

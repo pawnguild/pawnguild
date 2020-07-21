@@ -1,11 +1,8 @@
-- highest
-    - update code for profiles
-    - testing everything profiles
-    - everything profiles in general
+Notes for next time:
+- Work on showing all pawns on the same page for manage pawns
+- Update/delete pawns
 
-high priority
-- WTFS:
-    - one Pawn can have a steam profile AND a switch profile... this shouldn't be the
+high
 - FAQ page
 - model fields
     - platform on Pawn
@@ -13,8 +10,7 @@ high priority
         - everything except steam
     - pawn code
         - only on switch
-    - NEXT STEP: tests on steam/switch profiles, then add the other platforms
-    - WHATS THE DIFFERENCE BETWEEN ONCHANGE SUBMIT AND BUTTON SELECT? On button submit, it requires fields
+
 - email verification
 
 medium priority

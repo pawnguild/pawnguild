@@ -1,24 +1,13 @@
-from .models import Pawn, SteamPawnProfile, SwitchPawnProfile
-from .forms import SteamPawnProfileForm, SwitchPawnProfileForm
+from .models import Pawn, SteamPawn, SwitchPawn
 
-def get_pawn_profile(pawn: Pawn):
-    profile = None
-    try:
-        profile = pawn.steampawnprofile
-    except SteamPawnProfile.DoesNotExist:
-        pass
-    try:
-        profile = pawn.switchpawnprofile
-    except SwitchPawnProfile.DoesNotExist:
-        pass
+class UserPawnCollection:
 
-    if profile == None:
-        raise Exception("Pawn profile could not be found")
-    return profile
+    def __init__(self, user):
+        self.steam_pawns = SteamPawn.objects.filter(created_by=user)
+        self.switch_pawns = SwitchPawn.objects.filter(created_by=user)
 
-
-def get_profile_form(pawn: Pawn):
-    if pawn.platform == "Steam":
-        return SteamPawnProfileForm
-    elif pawn.platform == "Switch":
-        return SwitchPawnProfileForm
+    def get_context(self):
+        return {
+            "steam_pawns": self.steam_pawns,
+            "switch_pawns": self.switch_pawns
+        }
