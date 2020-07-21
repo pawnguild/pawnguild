@@ -4,6 +4,8 @@
     - everything profiles in general
 
 high priority
+- WTFS:
+    - one Pawn can have a steam profile AND a switch profile... this shouldn't be the
 - FAQ page
 - model fields
     - platform on Pawn

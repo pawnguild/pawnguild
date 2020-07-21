@@ -10,9 +10,8 @@ from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError
 
 from .models import Pawn, UserProfile
-
-
 from .forms import PawnForm, UserProfileForm, SteamPawnProfileForm, SwitchPawnProfileForm
+from .utility import get_pawn_profile, get_profile_form
 
 class Register(View):
 
@@ -164,10 +163,18 @@ class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
         return pawn_to_delete.created_by == self.request.user
 
 
-class PawnUpdate(AllowIfUserOwnsPawn, UpdateView):
+class PawnUpdate(AllowIfUserOwnsPawn, View):
     model = Pawn
     form_class = PawnForm
 
+    def get(self, request, **kwargs):
+        pawn = Pawn.objects.get(id=kwargs["pk"])
+        pawn_profile = get_pawn_profile(pawn)
+        ProfileForm = get_profile_form(pawn)
+        context = {"pawn_form": PawnForm(instance=pawn), "profile_form": ProfileForm(instance=pawn_profile)}
+        context = {"pawn_form": PawnForm()}
+        return render(request, "pawnlisting/pawn_form.html", context=context)
+        
 
 class PawnDelete(AllowIfUserOwnsPawn, DeleteView):
     model = Pawn

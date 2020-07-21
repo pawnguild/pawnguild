@@ -43,6 +43,10 @@ class PawnCreateTests(UtilityTestCase):
         self.assertTrue(created_pawn) # If this fails, pawn doesn't exist, which means pawn creation does not work
         self.assertEqual(created_pawn.created_by, self.user)
 
+        created_profile = created_pawn.steampawnprofile
+        self.assertEqual(created_profile.steam_url, "https://steamcommunity.com/id/Yellow_Yoshi/")
+
+
 class PawnDetailTests(UtilityTestCase):
 
     def test_detail_view(self):
