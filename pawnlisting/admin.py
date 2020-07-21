@@ -1,9 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Pawn, SteamPawnProfile, SwitchPawnProfile, UserProfile
+from .models import SteamPawn, SwitchPawn, UserProfile
 
-admin.site.register(Pawn)
-admin.site.register(SteamPawnProfile)
-admin.site.register(SwitchPawnProfile)
+admin.site.register(SteamPawn)
+admin.site.register(SwitchPawn)
 admin.site.register(UserProfile)

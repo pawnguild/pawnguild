@@ -1,0 +1,12 @@
+{% extends "pawnlisting/detail_pawn/pawn_detail.html" %}
+
+{% block platform_info %}
+    <div>
+        <label> Friend code: </label>
+        {{ pawn.friend_code }}
+    </div>
+    <div>
+        <label> Pawn code: </label>
+        {{ pawn.pawn_code }}
+    </div>
+{% endblock %}

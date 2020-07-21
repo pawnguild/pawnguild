@@ -25,6 +25,10 @@ class UserProfile(models.Model):
 
 
 class Pawn(models.Model):
+
+    class Meta:
+        abstract = True
+
     id = models.AutoField(primary_key=True)
     
     name = models.CharField(max_length=30)
@@ -46,14 +50,33 @@ class Pawn(models.Model):
     created_by = models.ForeignKey("auth.User", null=False, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(default=timezone.now)
 
-    platform = models.CharField(max_length=20, null=False, blank=False, choices=build_choices(["Steam", "Switch", "XBOne", "PS4", "PS3"]))
-
     @property
     def activity(self):
         """ Return number of stars that should display in pawn list. No stars after 4 weeks"""
         time_since_modified = timezone.now() - self.last_modified
         weeks_since_modified = time_since_modified.days // 7 
         return 4 - weeks_since_modified
+
+
+
+    def save(self, *args, **kwargs):
+        self.last_modified = timezone.now()
+        super(Pawn, self).save(*args, **kwargs)
+
+    def clean(self):
+        errors = {}
+        if self.level not in range(201):
+            errors["level"] = ValidationError('Level must be within 1-200')
+
+        inclinations = {self.primary_inclination, self.secondary_inclination, self.tertiary_inclination}
+        if len(inclinations) != 3 and not (self.secondary_inclination == "None" and self.tertiary_inclination == "None"):
+            errors["primary_inclination"] = ValidationError("Inclinations must all be different")
+
+        if errors:
+            raise ValidationError(errors)
+
+    def __str__(self):
+        return self.name
 
     @property
     def vocation_color(self):
@@ -73,41 +96,21 @@ class Pawn(models.Model):
             ret += f"/{self.tertiary_inclination}"
         return ret
 
-    def save(self, *args, **kwargs):
-        self.last_modified = timezone.now()
-        super(Pawn, self).save(*args, **kwargs)
-
-    def clean(self):
-        errors = {}
-        if self.level not in range(201):
-            errors["level"] = ValidationError('Level must be within 1-200')
-
-        inclinations = {self.primary_inclination, self.secondary_inclination, self.tertiary_inclination}
-        if len(inclinations) != 3 and not (self.secondary_inclination == "None" and self.tertiary_inclination == "None"):
-            errors["primary_inclination"] = ValidationError("Inclinations must all be different")
-
-        if errors:
-            raise ValidationError(errors)
-
-    def get_absolute_url(self):
-        return reverse("view_pawn", kwargs={"pk": self.id})
-    
-
-    def __str__(self):
-        return self.name
+    @property
+    def pawn_url(self):
+        return self.get_absolute_url()
 
 
-class SteamPawnProfile(models.Model):
-    pawn = models.OneToOneField(Pawn, on_delete=models.CASCADE)
+class SteamPawn(Pawn):
     steam_url = models.CharField(max_length=150, blank=False, null=False)
 
-    def __str__(self):
-        return f"{self.pawn.name}'s SteamProfile"
+    def get_absolute_url(self):
+        return reverse("view-steam-pawn", kwargs={"pk": self.id})
 
-class SwitchPawnProfile(models.Model):
-    pawn = models.OneToOneField(Pawn, on_delete=models.CASCADE)
+
+class SwitchPawn(Pawn):
     friend_code = models.CharField(max_length=30, blank=False, null=False)
     pawn_code = models.CharField(max_length=30, blank=False, null=False)
 
-    def __str__(self):
-        return f"{self.pawn.name}'s SwitchProfile"
+    def get_absolute_url(self):
+        return reverse("view-switch-pawn", kwargs={"pk": self.id})

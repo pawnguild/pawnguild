@@ -1,0 +1,9 @@
+<div class="form-group">
+    {% if form.errors.steam_url %}
+    <div class="alert alert-danger">
+        <strong>{{ form.errors.steam_url |escape }}</strong>
+    </div>
+    {% endif %}
+    {{ form.steam_url.label_tag }}
+    {{ form.steam_url }}
+</div>

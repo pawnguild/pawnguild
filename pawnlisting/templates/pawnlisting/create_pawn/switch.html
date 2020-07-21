@@ -1,0 +1,19 @@
+<div class="form-group">
+    {% if form.errors.pawn_code %}
+    <div class="alert alert-danger">
+        <strong>{{ form.errors.pawn_code |escape }}</strong>
+    </div>
+    {% endif %}
+    {{ form.pawn_code.label_tag }}
+    {{ form.pawn_code }}
+</div>
+
+<div class="form-group">
+    {% if form.errors.friend_code %}
+    <div class="alert alert-danger">
+        <strong>{{ form.errors.friend_code |escape }}</strong>
+    </div>
+    {% endif %}
+    {{ form.friend_code.label_tag }}
+    {{ form.friend_code }}
+</div>

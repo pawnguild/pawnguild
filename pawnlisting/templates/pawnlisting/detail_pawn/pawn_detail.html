@@ -32,12 +32,18 @@
             <label> Notes: </label>
             {{ pawn.notes }}
         </div>
+        <div>
+            {% block platform_info %}
+            {% endblock %}
+        </div>
     </div>
     <div class="col">
         {% if pawn.picture %}
             <img src="{{pawn.picture.url}}">
         {% endif %}
     </div>
+
+
   </div>
 </div>
 </b>

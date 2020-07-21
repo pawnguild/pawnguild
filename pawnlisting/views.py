@@ -9,9 +9,8 @@ from django import forms
 from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError
 
-from .models import Pawn, UserProfile
-from .forms import PawnForm, UserProfileForm, SteamPawnProfileForm, SwitchPawnProfileForm
-from .utility import get_pawn_profile, get_profile_form
+from .models import Pawn, UserProfile, SteamPawn, SwitchPawn
+from .forms import UserProfileForm, SteamPawnForm, SwitchPawnForm
 
 class Register(View):
 
@@ -30,7 +29,7 @@ class Register(View):
             profile.save()
 
             login(request, user)
-            return redirect(reverse("list_pawn"))
+            return redirect(reverse("steam-list-pawn"))
         else:
             context = { "user_form": user_form, "profile_form": profile_form}
             return render(request, "registration/register.html", context=context)
@@ -46,7 +45,7 @@ class UpdateProfile(LoginRequiredMixin, View):
         profile_form = UserProfileForm(request.POST, instance=request.user.userprofile)
         if profile_form.is_valid():
             profile_form.save()
-            return redirect(reverse("list_pawn"))
+            return redirect(reverse("steam-list-pawn"))
         else:
             context = {"profile_form": profile_form}
             return render(request, "registration/update_profile.html", context=context)
@@ -62,97 +61,68 @@ class PawnManager(LoginRequiredMixin, TemplateView):
         return context
 
 
-class PawnList(ListView):
-    model = Pawn
+class ChoosePawnPlatform(LoginRequiredMixin, View):
+
+    def get(self, request):
+        return render(request, "pawnlisting/select_platform.html")
+
+    def post(self, request):
+        platform = request.POST["platform"]
+        if platform == "Steam":
+            return redirect(reverse("create-steam-pawn"))
+        elif platform == "Switch":
+            return redirect(reverse("create-switch-pawn"))
+    
+
+
+class CreateSteamPawn(LoginRequiredMixin, CreateView):
+    login_url = "/login/"
+    model = SteamPawn
+    form_class = SteamPawnForm
+    template_name = "pawnlisting/create_pawn.html"
+
+    def form_valid(self, form):
+        pawn = form.save(commit=False)
+        pawn.created_by = self.request.user
+        return super().form_valid(form)
+
+
+class CreateSwitchPawn(LoginRequiredMixin, CreateView):
+    login_url = "/login/"
+    model = SwitchPawn
+    form_class = SwitchPawnForm
+    template_name = "pawnlisting/create_pawn.html"
+
+    def form_valid(self, form):
+        pawn = form.save(commit=False)
+        pawn.created_by = self.request.user
+        return super().form_valid(form)
+
+class SteamPawnList(ListView):
+    model = SteamPawn
     template_name = "pawnlisting/pawn_list.html"
 
     def get_queryset(self):
-        return Pawn.objects.all()
+        return SteamPawn.objects.all()
+
+class SwitchPawnList(ListView):
+    model = SwitchPawn
+    template_name = "pawnlisting/pawn_list.html"
+
+    def get_queryset(self):
+        return SwitchPawn.objects.all()
 
 
 class PawnDetail(DetailView):
-    model = Pawn
-    template_name = "pawnlisting/pawn_detail.html"
+    context_object_name = "pawn"
 
+class SteamPawnDetail(PawnDetail):
+    model = SteamPawn
+    template_name = "pawnlisting/detail_pawn/steam.html"
 
-class GetProfileForms(View):
-
-    def _get_form_and_render(self, request):
-        old_post = request.session["_old_post"]
-
-
-        pawn_form = PawnForm(old_post)
-        
-        # Creating PawnForm will make errors if any data wasn't filled out
-        # They haven't really tried submitting yet, no need to show any errors
-        for error in pawn_form.errors: 
-            pawn_form.errors[error] = ""
-
-        context = {"form" : pawn_form}
-
-        if pawn_form["platform"] == "Steam":
-            context.update({"steam_form": SteamPawnProfileForm(old_post)})
-        elif pawn_form["platform"] == "Switch":
-            context.update({"switch_form": SwitchPawnProfileForm(old_post)})
-
-        return render(request, "pawnlisting/pawn_form.html", context=context)
-
-    def get(self, request):
-        return self._get_form_and_render(request)
-
-    def post(self, request):
-        pawn_form = PawnForm(old_post)
-        
-        # Creating PawnForm will make errors if any data wasn't filled out
-        # They haven't really tried submitting yet, no need to show any errors
-        for error in pawn_form.errors: 
-            pawn_form.errors[error] = ""
-
-        context = {"form" : pawn_form}
-
-        if pawn_form["platform"] == "Steam":
-            context.update({"steam_form": SteamPawnProfileForm(old_post)})
-        elif pawn_form["platform"] == "Switch":
-            context.update({"switch_form": SwitchPawnProfileForm(old_post)})
-
-        return render(request, "pawnlisting/pawn_form.html", context=context)
-
-
-class PawnCreate(LoginRequiredMixin, View):
-    login_url = "/login/"
-
-    model = Pawn
-    form_class = PawnForm
-    template_name = "pawnlisting/pawn_form.html"
-
-    @staticmethod
-    def _create_pawn(pawn_form, profile_form, user):
-        pawn = pawn_form.save(commit=False)
-        pawn.created_by = user
-        pawn.save()
-        profile_obj = profile_form.save(commit=False)
-        profile_obj.pawn = pawn
-        profile_obj.save()      
-        return redirect(reverse("list_pawn"))
-
-    def get(self, request):
-        context = {"pawn_form": PawnForm()}
-        return render(request, PawnCreate.template_name, context=context)
-
-    def post(self, request):
-        pawn_form = PawnForm(request.POST)
-
-        platform = request.POST.get("platform", "")
-
-        # TODO: Base keys of this dict off Model choices
-        profile_form_selector = {"Steam": SteamPawnProfileForm(request.POST), "Switch": SwitchPawnProfileForm(request.POST)}
-
-        profile_form = profile_form_selector.get(platform, "")
-
-        if platform and pawn_form.is_valid() and profile_form.is_valid():
-            return PawnCreate._create_pawn(pawn_form, profile_form, request.user)
-        else:
-            return render(request, PawnCreate.template_name, context={"pawn_form": pawn_form, "profile_form": profile_form})
+class SwitchPawnDetail(PawnDetail):
+    model = SwitchPawn
+    template_name = "pawnlisting/detail_pawn/switch.html"
 
 
 class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
@@ -163,18 +133,9 @@ class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
         return pawn_to_delete.created_by == self.request.user
 
 
-class PawnUpdate(AllowIfUserOwnsPawn, View):
+class PawnUpdate(AllowIfUserOwnsPawn, UpdateView):
     model = Pawn
-    form_class = PawnForm
 
-    def get(self, request, **kwargs):
-        pawn = Pawn.objects.get(id=kwargs["pk"])
-        pawn_profile = get_pawn_profile(pawn)
-        ProfileForm = get_profile_form(pawn)
-        context = {"pawn_form": PawnForm(instance=pawn), "profile_form": ProfileForm(instance=pawn_profile)}
-        context = {"pawn_form": PawnForm()}
-        return render(request, "pawnlisting/pawn_form.html", context=context)
-        
 
 class PawnDelete(AllowIfUserOwnsPawn, DeleteView):
     model = Pawn

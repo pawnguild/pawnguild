@@ -1,0 +1,15 @@
+{% include "pawnlisting/base.html" %}
+
+<div class="container">
+    <form action="{% url 'select_platform' %}" method="POST">
+        {% csrf_token %}
+        <div>
+            <select name="platform">
+                <option disabled selected value> -- select an option -- </option>
+                <option value="Steam">Steam</option>
+                <option value="Switch">Switch</option>
+            </select>
+        </div>
+        <button class="btn btn-light" type="submit"> Submit </button>
+    </form>
+</div>

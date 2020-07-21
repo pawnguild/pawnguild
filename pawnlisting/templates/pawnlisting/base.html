@@ -8,11 +8,26 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
-        <ul class="navbar-nav ml-auto text-center">
-            <a class="navbar-brand nav-item mx-5" href="{% url 'list_pawn' %}"> View pawns </a> 
-            <a class="navbar-brand nav-item mx-5" href="{% url 'create_pawn' %}"> Add pawn </a>
+        <li class="navbar-nav ml-auto text-center">
+
+            <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">
+                    <ul class="navbar-nav mr-auto text-center">
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Viewing ??? Pawns
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'list-steam-pawns' %}"> Show Steam Pawns </a>
+                                <a class="dropdown-item" href="{% url 'list-switch-pawns' %}"> Show Switch Pawns </a>
+                                </div>
+                        </li>
+                    </ul>
+            </div>
+
+            <a class="navbar-brand nav-item mx-5" href="{% url 'select_platform' %}"> Add pawn </a>
             <a class="navbar-brand nav-item mx-5" href="{% url 'manage_pawns' %}"> Manage pawns </a>
-        </ul>
+        </li>
     </div>
     <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ραωи нαℓℓ </h2> 
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">
