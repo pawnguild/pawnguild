@@ -1,0 +1,14 @@
+<div class="container">
+    <table class="table table-dark">
+    <thead>
+        {% include "pawnlisting/pawn_tables/base_pawn_table_cols.html" %}
+    </thead>
+    <tbody>
+        {% for pawn in xbox1_pawns %}     
+            <tr>
+                {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>

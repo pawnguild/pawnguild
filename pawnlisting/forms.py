@@ -1,9 +1,9 @@
 from django import forms
-from .models import Pawn, UserProfile, SteamPawn, SwitchPawn
+from .models import UserProfile, SteamPawn, SwitchPawn, XboxOnePawn
 from urllib.parse import urlparse
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
-from .utility import steam_pawn_fields, switch_pawn_fields
+from .utility import base_pawn_fields, steam_pawn_fields, switch_pawn_fields
 
 
 class UserProfileForm(UserCreationForm):
@@ -32,3 +32,8 @@ class SwitchPawnForm(forms.ModelForm):
         model = SwitchPawn
         fields = switch_pawn_fields
     
+class XboxOnePawnForm(forms.ModelForm):
+
+    class Meta:
+        model = XboxOnePawn
+        fields = base_pawn_fields

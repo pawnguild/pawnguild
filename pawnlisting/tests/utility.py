@@ -6,18 +6,20 @@ from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 
 from pawnlisting.forms import UserProfileForm, SteamPawnForm, SwitchPawnForm
-from pawnlisting.models import SteamPawn, SwitchPawn
+from pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn
 
 class UtilityTestCase(TestCase):
 
     def setUp(self):
         self.test_args = {"test_user": "TestUser", 
                             "steam_pawn_name": "TestSteamPawn",
-                            "switch_pawn_name": "TestSwitchPawn"}
+                            "switch_pawn_name": "TestSwitchPawn",
+                            "xbox1_pawn_name": "TestXbox1Pawn"}
 
-        self.user = self.register_user_log_in(self.test_args["test_user"])
-        self.steam_pawn = SteamPawn.objects.create(**self.generate_steam_pawn_data(self.test_args["steam_pawn_name"]))
+        self.user = self.create_user_log_in(self.test_args["test_user"])
+        self.steam_pawn   = SteamPawn.objects.create(**self.generate_steam_pawn_data(self.test_args["steam_pawn_name"]))
         self.switch_pawn  = SwitchPawn.objects.create(**self.generate_switch_pawn_data(self.test_args["switch_pawn_name"]))
+        self.xbox1_pawn   = XboxOnePawn.objects.create(**self.generate_xbox1_pawn_data(self.test_args["xbox1_pawn_name"]))
 
     def generate_pawn_data(self, name, level=50, vocation="Mage", gender="Male", primary_inclination="Nexus",
                             secondary_inclination="Pioneer", tertiary_inclination="None", created_by=None):
@@ -42,27 +44,16 @@ class UtilityTestCase(TestCase):
         switch_data["pawn_id"] = pawn_id
         return switch_data
 
+    def generate_xbox1_pawn_data(self, name, **kwargs):
+        xbox1_data = self.generate_pawn_data(name, **kwargs)
+        return xbox1_data
+
     def create_user_log_in(self, username):
         user, created = get_user_model().objects.get_or_create(username=username)
         user.set_password("12345")
         user.save()
     
         self.client.login(username=username, password="12345")
-        return user
-
-    def register_user_log_in(self, username):
-        try:
-            user = get_user_model().objects.get(username=username)
-            return user
-        except get_user_model().DoesNotExist as e:
-            pass
-
-        user_creation_form_data = {"username": username, "password1": "testpassword", 
-                                                         "password2": "testpassword"}
-        data = user_creation_form_data
-
-        response = self.client.post(reverse("register"), data=data)
-        user = auth.get_user(self.client)
         return user
 
     def test_setup(self):

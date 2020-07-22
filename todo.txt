@@ -5,6 +5,7 @@ high
     - everything except steam
 
 - email verification
+- select_platform required
 
 medium priority
 - rename switch to nintendo switch in UI

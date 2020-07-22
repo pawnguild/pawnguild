@@ -110,3 +110,9 @@ class SwitchPawn(Pawn):
 
     def get_absolute_url(self):
         return reverse("view-switch-pawn", kwargs={"pk": self.id})
+
+class XboxOnePawn(Pawn):
+    
+    def get_absolute_url(self):
+        return reverse("view-xbox1-pawn", kwargs={"pk": self.pk})
+    

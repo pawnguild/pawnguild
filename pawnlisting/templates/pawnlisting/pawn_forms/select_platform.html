@@ -1,13 +1,19 @@
 {% include "pawnlisting/base.html" %}
 
+<script>
+    document.getElementById("platform-select").required = true;
+</script>
+
 <div class="container">
     <form action="{% url 'select_platform' %}" method="POST">
         {% csrf_token %}
         <div>
-            <select name="platform">
+            <select name="platform" id="platform-select">
                 <option disabled selected value> -- select an option -- </option>
                 <option value="Steam">Steam</option>
                 <option value="Switch">Switch</option>
+                <option value="Xbox1">Xbox One</option>
+
             </select>
         </div>
         <button class="btn btn-light" type="submit"> Submit </button>

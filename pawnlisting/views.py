@@ -9,8 +9,8 @@ from django import forms
 from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError
 
-from .models import Pawn, UserProfile, SteamPawn, SwitchPawn
-from .forms import UserProfileForm, SteamPawnForm, SwitchPawnForm
+from .models import UserProfile, SteamPawn, SwitchPawn, XboxOnePawn
+from .forms import UserProfileForm, SteamPawnForm, SwitchPawnForm, XboxOnePawnForm
 from .utility import *
 
 
@@ -73,30 +73,35 @@ class ChoosePawnPlatform(LoginRequiredMixin, View):
             return redirect(reverse("create-steam-pawn"))
         elif platform == "Switch":
             return redirect(reverse("create-switch-pawn"))
+        elif platform == "Xbox1":
+            return redirect(reverse("create-xbox1-pawn"))
 
-
-class CreateSteamPawn(LoginRequiredMixin, CreateView):
+class CreatePawnMixin(LoginRequiredMixin, CreateView):
     login_url = "/login/"
+
+    def form_valid(self, form):
+        pawn = form.save(commit=False)
+        pawn.created_by = self.request.user
+        return super().form_valid(form)
+
+
+class CreateSteamPawn(CreatePawnMixin):
     model = SteamPawn
     form_class = SteamPawnForm
     template_name = "pawnlisting/pawn_forms/steam.html"
 
-    def form_valid(self, form):
-        pawn = form.save(commit=False)
-        pawn.created_by = self.request.user
-        return super().form_valid(form)
 
-
-class CreateSwitchPawn(LoginRequiredMixin, CreateView):
-    login_url = "/login/"
+class CreateSwitchPawn(CreatePawnMixin):
     model = SwitchPawn
     form_class = SwitchPawnForm
     template_name = "pawnlisting/pawn_forms/switch.html"
 
-    def form_valid(self, form):
-        pawn = form.save(commit=False)
-        pawn.created_by = self.request.user
-        return super().form_valid(form)
+
+class CreateXboxOnePawn(CreatePawnMixin):
+    model = XboxOnePawn
+    form_class = XboxOnePawnForm
+    template_name = "pawnlisting/pawn_forms/xbox1.html"
+
 
 ### End CreateViews ###
 
@@ -109,22 +114,31 @@ class ListAllPawns(View):
         return render(request, "pawnlisting/pawn_tables/list_pawns/list_pawns.html", context=context)
 
 
-class SteamPawnList(ListView):
+def make_ListPawnMixin(Type):
+
+    class ListPawnMixin(ListView):
+        template_name = "pawnlisting/pawn_tables/list_pawns/list_pawns.html"
+
+        def get_queryset(self):
+            return Type.objects.all()
+    
+    return ListPawnMixin
+
+
+class SteamPawnList(make_ListPawnMixin(SteamPawn)):
     model = SteamPawn
-    template_name = "pawnlisting/pawn_tables/list_pawns/list_pawns.html"
     context_object_name = "steam_pawns"
 
-    def get_queryset(self):
-        return SteamPawn.objects.all()
 
-
-class SwitchPawnList(ListView):
+class SwitchPawnList(make_ListPawnMixin(SwitchPawn)):
     model = SwitchPawn
-    template_name = "pawnlisting/pawn_tables/list_pawns/list_pawns.html"
     context_object_name = "switch_pawns"
 
-    def get_queryset(self):
-        return SwitchPawn.objects.all()
+
+class XboxOnePawnList(make_ListPawnMixin(XboxOnePawn)):
+    model = XboxOnePawn
+    context_object_name = "xbox1_pawns"
+
 
 ### End ListViews ###
 
@@ -142,6 +156,11 @@ class SteamPawnDetail(PawnDetail):
 class SwitchPawnDetail(PawnDetail):
     model = SwitchPawn
     template_name = "pawnlisting/detail_pawn/switch.html"
+
+
+class XboxOnePawnDetail(PawnDetail):
+    model = XboxOnePawn
+    template_name = "pawnlisting/detail_pawn/xbox1.html"
 
 ### End DetailViews ###
 
@@ -177,18 +196,32 @@ class SwitchPawnUpdate(make_UserOwnsPawnMixin(SwitchPawn), UpdateView):
     fields = switch_pawn_fields
     template_name = "pawnlisting/pawn_forms/switch.html"
 
+
+class XboxOnePawnUpdate(make_UserOwnsPawnMixin(XboxOnePawn), UpdateView):
+    model = XboxOnePawn
+    fields = base_pawn_fields
+    template_name = "pawnlisting/pawn_forms/xbox1.html"
+
 ### End UpdateViews ###
 
 ### DeleteViews ###
 
-class SteamPawnDelete(make_UserOwnsPawnMixin(SteamPawn), DeleteView):
-    model = SteamPawn
+
+class DeletePawnMixin(DeleteView):
     success_url = reverse_lazy("manage_pawns")
     template_name = "pawnlisting/pawn_forms/confirm_delete.html"
 
-class SwitchPawnDelete(make_UserOwnsPawnMixin(SwitchPawn), DeleteView):
+
+class SteamPawnDelete(make_UserOwnsPawnMixin(SteamPawn), DeletePawnMixin):
+    model = SteamPawn
+
+
+class SwitchPawnDelete(make_UserOwnsPawnMixin(SwitchPawn), DeletePawnMixin):
     model = SwitchPawn
-    success_url = reverse_lazy("manage_pawns")
-    template_name = "pawnlisting/pawn_forms/confirm_delete.html"
+
+
+class XboxOnePawnDelete(make_UserOwnsPawnMixin(XboxOnePawn), DeletePawnMixin):
+    model = XboxOnePawn
+
 
 ### EndDeleteViews ###
