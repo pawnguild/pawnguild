@@ -105,8 +105,8 @@ class SteamPawn(Pawn):
 
 
 class SwitchPawn(Pawn):
-    friend_code = models.CharField(max_length=30, blank=False, null=False)
-    pawn_code = models.CharField(max_length=30, blank=False, null=False)
+    friend_account_id = models.CharField(max_length=30, blank=False, null=False)
+    pawn_id = models.CharField(max_length=30, blank=False, null=False)
 
     def get_absolute_url(self):
         return reverse("view-switch-pawn", kwargs={"pk": self.id})

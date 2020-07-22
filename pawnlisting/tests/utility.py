@@ -36,10 +36,10 @@ class UtilityTestCase(TestCase):
         steam_data["steam_url"] = steam_url
         return steam_data
 
-    def generate_switch_pawn_data(self, name, friend_code="friend_code", pawn_code="pawn_code", **kwargs):
+    def generate_switch_pawn_data(self, name, friend_account_id="friend_code", pawn_id="pawn_code", **kwargs):
         switch_data = self.generate_pawn_data(name, **kwargs)
-        switch_data["friend_code"] = friend_code
-        switch_data["pawn_code"] = pawn_code
+        switch_data["friend_account_id"] = friend_account_id
+        switch_data["pawn_id"] = pawn_id
         return switch_data
 
     def create_user_log_in(self, username):

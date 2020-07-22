@@ -9,8 +9,8 @@
     <tbody>
         {% for pawn in switch_pawns %}     
             <tr>
-                <td>{{ pawn.friend_code }}</td>
-                <td>{{ pawn.pawn_code }}</td>
+                <td>{{ pawn.friend_account_id }}</td>
+                <td>{{ pawn.pawn_id }}</td>
                 {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
                 <td><a href="{% url 'update-switch-pawn' pawn.id %}" class="btn btn-warning btn-sm"> Update </button>
                 <td><a href="{% url 'delete-switch-pawn' pawn.id %}" class="btn btn-danger btn-sm"> Delete </button>

@@ -4,7 +4,7 @@ base_pawn_fields = ["name", "level", "vocation", "gender", "primary_inclination"
     "secondary_inclination", "tertiary_inclination", "notes", "picture"]
 
 steam_pawn_fields = base_pawn_fields + ["steam_url"]
-switch_pawn_fields = base_pawn_fields + ["friend_code", "pawn_code"]
+switch_pawn_fields = base_pawn_fields + ["friend_account_id", "pawn_id"]
 
 class PawnCollection:
 

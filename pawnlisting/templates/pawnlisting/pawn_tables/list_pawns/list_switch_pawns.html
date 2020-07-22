@@ -8,8 +8,8 @@
     <tbody>
         {% for pawn in switch_pawns %}     
             <tr>
-                <td>{{ pawn.friend_code }}</td>
-                <td>{{ pawn.pawn_code }}</td>
+                <td>{{ pawn.friend_account_id }}</td>
+                <td>{{ pawn.pawn_id }}</td>
                 {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
             </tr>
         {% endfor %}

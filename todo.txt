@@ -1,5 +1,6 @@
 high
 - FAQ page
+- add ps4, ps3, xboxone, 
 - model fields
     - everything except steam
 
