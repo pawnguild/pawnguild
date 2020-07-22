@@ -1,16 +1,7 @@
-Notes for next time:
-
-- Update/delete pawns
-
 high
 - FAQ page
-- extend user model and get rid of UserProfile
 - model fields
-    - platform on Pawn
-    - account_name
-        - everything except steam
-    - pawn code
-        - only on switch
+    - everything except steam
 
 - email verification
 

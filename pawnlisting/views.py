@@ -17,23 +17,17 @@ from .utility import *
 class Register(View):
 
     def get(self, request):
-        context = { "user_form": UserCreationForm(), "profile_form": UserProfileForm()}
+        context = {"profile_form": UserProfileForm()}
         return render(request, "registration/register.html", context=context)
 
     def post(self, request):
-        user_form = UserCreationForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save() # Creates a user
-
-            profile = profile_form.save(commit = False)
-            profile.user = user
-            profile.save()
-
+        if profile_form.is_valid():
+            user = profile_form.save() # Creates a user
             login(request, user)
             return redirect(reverse("list-all-pawns"))
         else:
-            context = { "user_form": user_form, "profile_form": profile_form}
+            context = {"profile_form": profile_form}
             return render(request, "registration/register.html", context=context)
 
 
@@ -44,10 +38,10 @@ class UpdateProfile(LoginRequiredMixin, View):
         return render(request, "registration/update_profile.html", context=context)
 
     def post(self, request):
-        profile_form = UserProfileForm(request.POST, instance=request.user.userprofile)
+        profile_form = UserProfileForm(request.POST)
         if profile_form.is_valid():
             profile_form.save()
-            return redirect(reverse("steam-list-pawn"))
+            return redirect(reverse("list-all-pawns"))
         else:
             context = {"profile_form": profile_form}
             return render(request, "registration/update_profile.html", context=context)

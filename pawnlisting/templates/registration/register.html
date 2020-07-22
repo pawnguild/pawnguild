@@ -8,31 +8,31 @@
         {% csrf_token %}
 
         <div>
-            {% if user_form.errors.username %}
+            {% if profile_form.errors.username %}
             <div class="alert alert-danger">
-                <strong>{{ user_form.errors.username |escape }}</strong>
+                <strong>{{ profile_form.errors.username |escape }}</strong>
             </div>
             {% endif %}
             <label for="id_username-input"> Username: </label>
-            {{ user_form.username }}
+            {{ profile_form.username }}
         </div>
         <div>
-            {% if user_form.errors.password1 %}
+            {% if profile_form.errors.password1 %}
                 <div class="alert alert-danger">
-                    <strong>{{ user_form.errors.password1 |escape }}</strong>
+                    <strong>{{ profile_form.errors.password1 |escape }}</strong>
                 </div>
             {% endif %}
             <label for="id_password1"> Password: </label>
-            {{ user_form.password1 }}
+            {{ profile_form.password1 }}
         </div>
         <div>
-            {% if user_form.errors.password2 %}
+            {% if profile_form.errors.password2 %}
                 <div class="alert alert-danger">
-                    <strong>{{ user_form.errors.password2 |escape }}</strong>
+                    <strong>{{ profile_form.errors.password2 |escape }}</strong>
                 </div>
             {% endif %}
             <label for="id_password2"> Verify password: </label>
-            {{ user_form.password2 }}
+            {{ profile_form.password2 }}
         </div>
         <div>
             <input type="submit" value="Register">

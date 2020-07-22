@@ -54,13 +54,12 @@ class UtilityTestCase(TestCase):
         try:
             user = get_user_model().objects.get(username=username)
             return user
-        except User.DoesNotExist as e:
+        except get_user_model().DoesNotExist as e:
             pass
 
         user_creation_form_data = {"username": username, "password1": "testpassword", 
                                                          "password2": "testpassword"}
-        profile_form_data = {"steam_url": "https://steamcommunity.com/id/Yellow_Yoshi/"}
-        data = {**user_creation_form_data, **profile_form_data}
+        data = user_creation_form_data
 
         response = self.client.post(reverse("register"), data=data)
         user = auth.get_user(self.client)

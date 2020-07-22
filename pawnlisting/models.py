@@ -2,8 +2,9 @@ from django.db import models
 from django.shortcuts import reverse
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from django.conf import settings
 
 from datetime import datetime, timedelta
 
@@ -17,11 +18,8 @@ def build_choices(l):
 
 # Create your models here.
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)    
-
-    def __str__(self):
-        return f"{self.user.username} profile"
+class UserProfile(AbstractUser):
+    pass
 
 
 class Pawn(models.Model):
@@ -47,7 +45,7 @@ class Pawn(models.Model):
     notes = models.TextField(max_length=1000, blank=True)
     picture = models.ImageField(upload_to="pawn_pictures/", null=True, blank=True)
 
-    created_by = models.ForeignKey("auth.User", null=False, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):

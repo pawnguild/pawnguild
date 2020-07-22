@@ -34,9 +34,3 @@ class PawnTests(UtilityTestCase):
         # pawn.save()
         # pawn = Pawn.objects.get(name="T1")
         # self.assertEqual(pawn.activity, 3)
-
-class ProfileTests(UtilityTestCase):
-
-    def test_profile_created_with_user(self):
-        self.assertTrue(self.user.userprofile) # It exists
-        

@@ -2,15 +2,15 @@ from django import forms
 from .models import Pawn, UserProfile, SteamPawn, SwitchPawn
 from urllib.parse import urlparse
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth.forms import UserCreationForm
 from .utility import steam_pawn_fields, switch_pawn_fields
 
 
-class UserProfileForm(forms.ModelForm):
+class UserProfileForm(UserCreationForm):
 
-    class Meta:
+    class Meta(UserCreationForm.Meta):
         model = UserProfile
-        fields = []
+        fields = UserCreationForm.Meta.fields
 
 
 class SteamPawnForm(forms.ModelForm):

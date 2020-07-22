@@ -1,18 +1,35 @@
 {% include "pawnlisting/base.html" %}
 
 <div class="container">
+    <p style="color: lightgreen"> This page has not been implemented yet. Please message an admin about changing any account information. <p>
+</div> 
+{% comment %} <div class="container">
     <h1> Update profile </h1>
     <form method="POST">
         {% csrf_token %}
-        {% if profile_form.errors.steam_profile %}
+
+        <div class="form-group">
+            {% if profile_form.errors.username %}
             <div class="alert alert-danger">
-                <strong>{{ profile_form.errors.steam_profile |escape }}</strong>
+                <strong>{{ profile_form.errors.username |escape }}</strong>
             </div>
-        {% endif %}
-        <label> Steam URL: </label>
-        {{ profile_form.steam_profile }}
-        <div>
+            {% endif %}
+            {{ profile_form.username.label_tag }}
+            {{ profile_form.username }}
+        </div>
+
+        <div class="form-group">
+            {% if profile_form.errors.username %}
+            <div class="alert alert-danger">
+                <strong>{{ profile_form.errors.username |escape }}</strong>
+            </div>
+            {% endif %}
+            {{ profile_form.username.label_tag }}
+            {{ profile_form.username }}
+        </div>
+
+
             <button class="btn btn-light" type="submit"> Submit </button>
         </div>
     </form>
-</div>
+</div> {% endcomment %}
