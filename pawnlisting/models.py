@@ -2,7 +2,6 @@ from django.db import models
 from django.shortcuts import reverse
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
-from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.conf import settings
 
@@ -17,10 +16,6 @@ def build_choices(l):
     return [(choice, choice) for choice in l]
 
 # Create your models here.
-
-class UserProfile(AbstractUser):
-    pass
-
 
 class Pawn(models.Model):
 

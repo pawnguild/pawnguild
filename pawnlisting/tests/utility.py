@@ -5,8 +5,14 @@ from django.shortcuts import reverse
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 
-from pawnlisting.forms import UserProfileForm, SteamPawnForm, SwitchPawnForm
+import random
+import string
+
+from pawnlisting.forms import SteamPawnForm, SwitchPawnForm
 from pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
+
+from registration.forms import UserProfileForm
+
 
 class UtilityTestCase(TestCase):
 
@@ -66,6 +72,7 @@ class UtilityTestCase(TestCase):
 
     def create_user_log_in(self, username):
         user, created = get_user_model().objects.get_or_create(username=username)
+        user.email = self.random_char(15) + "@gmail.com"
         user.set_password("12345")
         user.save()
     
@@ -74,3 +81,9 @@ class UtilityTestCase(TestCase):
 
     def test_setup(self):
         self.assertTrue(self.user.is_authenticated)
+
+
+    def random_char(self, y):
+        return ''.join(random.choice(string.ascii_letters) for x in range(y))
+
+

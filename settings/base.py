@@ -33,6 +33,7 @@ SECRET_KEY = get_env_variable("SECRET_KEY")
 
 INSTALLED_APPS = [
     'pawnlisting',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_nose',
+    'django_email_verification',
 ]
 
 MIDDLEWARE = [
@@ -117,7 +119,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = "pawnlisting.UserProfile"
+AUTH_USER_MODEL = "registration.UserProfile"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -133,3 +135,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 #TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+### Settings for django_email_verification ###
+
+EMAIL_ACTIVE_FIELD = 'is_active'
+EMAIL_SERVER = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_ADDRESS = 'pawnhall7@gmail.com'
+EMAIL_FROM_ADDRESS = 'noreply@pawnhall.com'
+EMAIL_PASSWORD = get_env_variable("EMAIL_PASSWORD")
+EMAIL_MAIL_SUBJECT = 'PawnHall email confirmation'
+EMAIL_MAIL_HTML = 'pawnlisting.confirmation_email.html'
+EMAIL_PAGE_TEMPLATE = 'pawnlisting.confirm_template.html'
+EMAIL_PAGE_DOMAIN = 'localhost:8000/'
+
+### End django_email_verificaiton settings

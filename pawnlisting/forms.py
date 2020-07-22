@@ -1,16 +1,9 @@
 from django import forms
-from .models import UserProfile, SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
+from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 from urllib.parse import urlparse
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import UserCreationForm
 from .utility import base_pawn_fields, steam_pawn_fields, switch_pawn_fields, xbox1_pawn_fields, ps3_pawn_fields, ps4_pawn_fields
 
-
-class UserProfileForm(UserCreationForm):
-
-    class Meta(UserCreationForm.Meta):
-        model = UserProfile
-        fields = UserCreationForm.Meta.fields
 
 
 class SteamPawnForm(forms.ModelForm):

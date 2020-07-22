@@ -35,6 +35,15 @@
             {{ profile_form.password2 }}
         </div>
         <div>
+            {% if profile_form.errors.email %}
+                <div class="alert alert-danger">
+                    <strong>{{ profile_form.errors.email |escape }}</strong>
+                </div>
+            {% endif %}
+            <label for="email"> Email: </label>
+            {{ profile_form.email }}
+        </div>
+        <div>
             <input type="submit" value="Register">
         </div>
     </form>
