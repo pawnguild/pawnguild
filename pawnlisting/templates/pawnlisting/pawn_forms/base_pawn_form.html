@@ -90,29 +90,29 @@
                     {% endblock %}
 
                 </div>
-
+            <div class="col">
+                <h2> Optional Fields </h2>
+                <div class="form-group">
+                    {% if form.errors.notes %}
+                    <div class="alert alert-danger">
+                        <strong>{{ form.errors.notes |escape }}</strong>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <label> Pawn Picture </label>
+                        {{ form.picture }}
+                    </div>
+                    <label for="id_notes">Pawn Notes and Requests </label>
+                    <div>
+                        {{ form.notes }}
+                    </div>
+                </div>
+            </div>
             </div>
             <button class="btn btn-light" type="submit"> Submit </button>
 
         </form>
 
     </div>
-    <div class="container">
-        <h2> Optional Fields </h2>
-        <div class="form-group">
-            {% if form.errors.notes %}
-            <div class="alert alert-danger">
-                <strong>{{ form.errors.notes |escape }}</strong>
-            </div>
-            {% endif %}
-            <div>
-                <label> Pawn Picture </label>
-                {{ form.picture }}
-            </div>
-            <label for="id_notes">Pawn Notes and Requests </label>
-            <div>
-                {{ form.notes }}
-            </div>
-        </div>
-    </div>
+
 </div>

@@ -1,7 +1,6 @@
 
 high
 - FAQ page
-- move submit buttom to bottom on pawn_form
 - email verification
 - select_platform required
 
