@@ -86,12 +86,8 @@
                             pawn does not have a 3rd inclination </div>
                     </div>
 
-                    {% if form.steam_url %}
-                        {% include "pawnlisting/create_pawn/steam.html" %}
-                    {% endif %}
-                    {% if form.friend_code %}
-                        {% include "pawnlisting/create_pawn/switch.html" %}
-                    {% endif %}
+                    {% block platform_form %}
+                    {% endblock %}
 
                 </div>
 

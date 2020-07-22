@@ -11,7 +11,7 @@ from django.core.exceptions import ValidationError
 
 from .models import Pawn, UserProfile, SteamPawn, SwitchPawn
 from .forms import UserProfileForm, SteamPawnForm, SwitchPawnForm
-from .utility import UserPawnCollection
+from .utility import *
 
 
 class Register(View):
@@ -31,7 +31,7 @@ class Register(View):
             profile.save()
 
             login(request, user)
-            return redirect(reverse("steam-list-pawn"))
+            return redirect(reverse("list-all-pawns"))
         else:
             context = { "user_form": user_form, "profile_form": profile_form}
             return render(request, "registration/register.html", context=context)
@@ -55,18 +55,23 @@ class UpdateProfile(LoginRequiredMixin, View):
 
 class PawnManager(LoginRequiredMixin, TemplateView):
     login_url = "/login/"
-    template_name = "pawnlisting/manage_pawns.html"
+    template_name = "pawnlisting/pawn_tables/manage_pawns.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pawn_collection = UserPawnCollection(self.request.user)
-        return context.update(pawn_collection.get_context())
+        context.update(pawn_collection.get_context())
+        return context
 
+
+### CreateViews ###
 
 class ChoosePawnPlatform(LoginRequiredMixin, View):
 
+    login_url = "/login/"
+
     def get(self, request):
-        return render(request, "pawnlisting/select_platform.html")
+        return render(request, "pawnlisting/pawn_forms/select_platform.html")
 
     def post(self, request):
         platform = request.POST["platform"]
@@ -74,13 +79,13 @@ class ChoosePawnPlatform(LoginRequiredMixin, View):
             return redirect(reverse("create-steam-pawn"))
         elif platform == "Switch":
             return redirect(reverse("create-switch-pawn"))
-    
+
 
 class CreateSteamPawn(LoginRequiredMixin, CreateView):
     login_url = "/login/"
     model = SteamPawn
     form_class = SteamPawnForm
-    template_name = "pawnlisting/create_pawn.html"
+    template_name = "pawnlisting/pawn_forms/steam.html"
 
     def form_valid(self, form):
         pawn = form.save(commit=False)
@@ -92,53 +97,104 @@ class CreateSwitchPawn(LoginRequiredMixin, CreateView):
     login_url = "/login/"
     model = SwitchPawn
     form_class = SwitchPawnForm
-    template_name = "pawnlisting/create_pawn.html"
+    template_name = "pawnlisting/pawn_forms/switch.html"
 
     def form_valid(self, form):
         pawn = form.save(commit=False)
         pawn.created_by = self.request.user
         return super().form_valid(form)
 
+### End CreateViews ###
+
+### ListViews ###
+
+class ListAllPawns(View):
+
+    def get(self, request):
+        context = PawnCollection().get_context()
+        return render(request, "pawnlisting/pawn_tables/list_pawns/list_pawns.html", context=context)
+
+
 class SteamPawnList(ListView):
     model = SteamPawn
-    template_name = "pawnlisting/pawn_list.html"
+    template_name = "pawnlisting/pawn_tables/list_pawns/list_pawns.html"
+    context_object_name = "steam_pawns"
 
     def get_queryset(self):
         return SteamPawn.objects.all()
 
+
 class SwitchPawnList(ListView):
     model = SwitchPawn
-    template_name = "pawnlisting/pawn_list.html"
+    template_name = "pawnlisting/pawn_tables/list_pawns/list_pawns.html"
+    context_object_name = "switch_pawns"
 
     def get_queryset(self):
         return SwitchPawn.objects.all()
 
+### End ListViews ###
+
+### DetailViews ###
 
 class PawnDetail(DetailView):
     context_object_name = "pawn"
+
 
 class SteamPawnDetail(PawnDetail):
     model = SteamPawn
     template_name = "pawnlisting/detail_pawn/steam.html"
 
+
 class SwitchPawnDetail(PawnDetail):
     model = SwitchPawn
     template_name = "pawnlisting/detail_pawn/switch.html"
 
-
-class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
-    login_url = "/login/"
-
-    def test_func(self):
-        pawn_to_delete = Pawn.objects.get(pk=self.kwargs["pk"])
-        return pawn_to_delete.created_by == self.request.user
+### End DetailViews ###
 
 
-class PawnUpdate(AllowIfUserOwnsPawn, UpdateView):
-    model = Pawn
+def make_UserOwnsPawnMixin(Type):
+    """ Returns a  Mixin that 
+        1. Requires login
+        2. User passes the following test: they own the Pawn
+        3. Applies to any type of Pawn
+        """
+
+    class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
+
+        login_url = "/login/"
+
+        def test_func(self):
+            pawn_to_delete = Type.objects.get(pk=self.kwargs["pk"])
+            return pawn_to_delete.created_by == self.request.user
+
+    return AllowIfUserOwnsPawn
 
 
-class PawnDelete(AllowIfUserOwnsPawn, DeleteView):
-    model = Pawn
+### UpdateViews ###
+
+class SteamPawnUpdate(make_UserOwnsPawnMixin(SteamPawn), UpdateView):
+    model = SteamPawn
+    fields = steam_pawn_fields
+    template_name = "pawnlisting/pawn_forms/steam.html"
+
+
+class SwitchPawnUpdate(make_UserOwnsPawnMixin(SwitchPawn), UpdateView):
+    model = SwitchPawn
+    fields = switch_pawn_fields
+    template_name = "pawnlisting/pawn_forms/switch.html"
+
+### End UpdateViews ###
+
+### DeleteViews ###
+
+class SteamPawnDelete(make_UserOwnsPawnMixin(SteamPawn), DeleteView):
+    model = SteamPawn
     success_url = reverse_lazy("manage_pawns")
+    template_name = "pawnlisting/pawn_forms/confirm_delete.html"
 
+class SwitchPawnDelete(make_UserOwnsPawnMixin(SwitchPawn), DeleteView):
+    model = SwitchPawn
+    success_url = reverse_lazy("manage_pawns")
+    template_name = "pawnlisting/pawn_forms/confirm_delete.html"
+
+### EndDeleteViews ###

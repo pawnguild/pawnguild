@@ -3,20 +3,8 @@ from .models import Pawn, UserProfile, SteamPawn, SwitchPawn
 from urllib.parse import urlparse
 from django.core.exceptions import ValidationError
 
-base_pawn_fields = ["name", "level", "vocation", "gender", "primary_inclination",
-    "secondary_inclination", "tertiary_inclination", "notes", "picture"]
+from .utility import steam_pawn_fields, switch_pawn_fields
 
-
-# class PawnForm(forms.ModelForm):
-
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields["platform"].widget.attrs.update({"onchange": "this.form.submit()"})
-
-#     class Meta:
-#         model = Pawn
-#         fields = ["name", "level", "vocation", "gender", "primary_inclination",
-#     "secondary_inclination", "tertiary_inclination", "notes", "picture", "platform"]
 
 class UserProfileForm(forms.ModelForm):
 
@@ -29,7 +17,7 @@ class SteamPawnForm(forms.ModelForm):
     
     class Meta:
         model = SteamPawn
-        fields = base_pawn_fields + ["steam_url"]
+        fields = steam_pawn_fields
     
     def clean_steam_url(self):
         parsed = urlparse(self.cleaned_data["steam_url"])
@@ -42,5 +30,5 @@ class SwitchPawnForm(forms.ModelForm):
 
     class Meta:
         model = SwitchPawn
-        fields = base_pawn_fields + ["friend_code", "pawn_code"]
+        fields = switch_pawn_fields
     

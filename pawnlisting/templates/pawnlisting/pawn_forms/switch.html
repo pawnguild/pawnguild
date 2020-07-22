@@ -1,3 +1,7 @@
+{% extends "pawnlisting/pawn_forms/base_pawn_form.html" %}
+
+{% block platform_form %}
+
 <div class="form-group">
     {% if form.errors.pawn_code %}
     <div class="alert alert-danger">
@@ -17,3 +21,5 @@
     {{ form.friend_code.label_tag }}
     {{ form.friend_code }}
 </div>
+
+{% endblock platform_form %}

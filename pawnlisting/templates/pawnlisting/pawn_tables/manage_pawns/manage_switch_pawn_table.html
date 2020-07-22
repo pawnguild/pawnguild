@@ -1,0 +1,21 @@
+<div class="container">
+    <table class="table table-dark">
+    <thead>
+        <th scope="col">Friend Code</th>
+        <th scope="col">Pawn Code</th>
+        {% include "pawnlisting/pawn_tables/base_pawn_table_cols.html" %}
+        {% include "pawnlisting/pawn_tables/manage_pawns/manage_pawn_cols.html" %}
+    </thead>
+    <tbody>
+        {% for pawn in switch_pawns %}     
+            <tr>
+                <td>{{ pawn.friend_code }}</td>
+                <td>{{ pawn.pawn_code }}</td>
+                {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
+                <td><a href="{% url 'update-switch-pawn' pawn.id %}" class="btn btn-warning btn-sm"> Update </button>
+                <td><a href="{% url 'delete-switch-pawn' pawn.id %}" class="btn btn-danger btn-sm"> Delete </button>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>

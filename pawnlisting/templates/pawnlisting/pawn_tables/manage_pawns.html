@@ -1,0 +1,13 @@
+{% include "pawnlisting/base.html" %}
+
+<div class="container">
+    {% if steam_pawns %}
+    <h2> Your Steam Pawns <h2>
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_steam_pawn_table.html" %}
+    {% endif %}
+
+    {% if switch_pawns %}
+    <h2> Your Switch Pawns </h2>
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_switch_pawn_table.html" %}
+    {% endif %}
+</div>

@@ -5,49 +5,42 @@ from django.shortcuts import reverse
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 
-from pawnlisting.forms import UserProfileForm, SteamPawnProfileForm, SwitchPawnProfileForm
-from pawnlisting.models import Pawn, SteamPawnProfile, SwitchPawnProfile
-
-pawn_profiles = {SteamPawnProfile: SteamPawnProfileForm, SwitchPawnProfile: SwitchPawnProfileForm}
-
-
+from pawnlisting.forms import UserProfileForm, SteamPawnForm, SwitchPawnForm
+from pawnlisting.models import SteamPawn, SwitchPawn
 
 class UtilityTestCase(TestCase):
 
     def setUp(self):
-        self.user = self.register_user_log_in("TestUser")
-        self.create_args = [self.user, "TestPawn", "Steam"]
-        self.pawn, self.pawn_profile = self.createPawnAndProfile(*self.create_args)
+        self.test_args = {"test_user": "TestUser", 
+                            "steam_pawn_name": "TestSteamPawn",
+                            "switch_pawn_name": "TestSwitchPawn"}
 
-    def createPawnAndProfile(self, user, pawn_name, platform):
-        pawn_data, pawn_profile_data = self.generate_pawn_data(name=pawn_name, platform=platform)
-        pawn = Pawn.objects.create(**pawn_data)
-        
-        for Profile, ProfileForm in pawn_profiles.items():
-            profile_form = ProfileForm(pawn_profile_data)
-            if profile_form.is_valid():
-                pawn_profile = profile_form.save(commit=False)
-                pawn_profile.pawn = pawn
-                pawn_profile.save()
-
-        return pawn, pawn_profile
+        self.user = self.register_user_log_in(self.test_args["test_user"])
+        self.steam_pawn = SteamPawn.objects.create(**self.generate_steam_pawn_data(self.test_args["steam_pawn_name"]))
+        self.switch_pawn  = SwitchPawn.objects.create(**self.generate_switch_pawn_data(self.test_args["switch_pawn_name"]))
 
     def generate_pawn_data(self, name, level=50, vocation="Mage", gender="Male", primary_inclination="Nexus",
-                                secondary_inclination="Pioneer", tertiary_inclination="None", platform="Steam", created_by=None):
+                            secondary_inclination="Pioneer", tertiary_inclination="None", created_by=None):
+
         pawn_data = {"name": name, "level": level, "vocation": vocation, "gender": gender,
             "primary_inclination": primary_inclination, "secondary_inclination": secondary_inclination,
-            "tertiary_inclination": tertiary_inclination, "platform": platform}
-        if created_by:
-            pawn_data.update({"created_by": created_by})
-        else:
-            pawn_data.update({"created_by": self.user})
-        profile_data = {}
-        if platform == "Steam":
-            profile_data["steam_url"] = "https://steamcommunity.com/id/Yellow_Yoshi/"
-        elif platform == "Switch":
-            profile_data["friend_code"] = "friend code"
-            profile_data["pawn_code"] = "pawn code"
-        return pawn_data, profile_data
+            "tertiary_inclination": tertiary_inclination}
+
+        creator = created_by or self.user
+        pawn_data["created_by"] = creator
+
+        return pawn_data
+
+    def generate_steam_pawn_data(self, name, steam_url="https://steamcommunity.com/id/Yellow_Yoshi/", **kwargs):
+        steam_data = self.generate_pawn_data(name, **kwargs)
+        steam_data["steam_url"] = steam_url
+        return steam_data
+
+    def generate_switch_pawn_data(self, name, friend_code="friend_code", pawn_code="pawn_code", **kwargs):
+        switch_data = self.generate_pawn_data(name, **kwargs)
+        switch_data["friend_code"] = friend_code
+        switch_data["pawn_code"] = pawn_code
+        return switch_data
 
     def create_user_log_in(self, username):
         user, created = get_user_model().objects.get_or_create(username=username)

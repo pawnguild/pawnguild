@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'pawnlisting/css/base.css' %}">
 </head>
 
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
         <li class="navbar-nav ml-auto text-center">
@@ -15,11 +16,12 @@
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            View Pawns
+                                            Select Pawns to View
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'list-steam-pawns' %}"> Show Steam Pawns </a>
-                                <a class="dropdown-item" href="{% url 'list-switch-pawns' %}"> Show Switch Pawns </a>
+                                    <a class="dropdown-item" href="{% url 'list-all-pawns' %}"> Show All Pawns </a>
+                                    <a class="dropdown-item" href="{% url 'list-steam-pawns' %}"> Show Steam Pawns </a>
+                                    <a class="dropdown-item" href="{% url 'list-switch-pawns' %}"> Show Switch Pawns </a>
                                 </div>
                         </li>
                     </ul>

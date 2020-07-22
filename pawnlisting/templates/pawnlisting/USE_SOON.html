@@ -1,9 +1,0 @@
-<div>
-    {% if profile_form.errors.steam_profile %}
-        <div class="alert alert-danger">
-            <strong>{{ profile_form.errors.steam_profile |escape }}</strong>
-        </div>
-    {% endif %}
-    <label for="id_steam_url"> Steam URL: </label>
-    {{ profile_form.steam_url }}
-</div>

@@ -50,15 +50,6 @@ class Pawn(models.Model):
     created_by = models.ForeignKey("auth.User", null=False, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(default=timezone.now)
 
-    @property
-    def activity(self):
-        """ Return number of stars that should display in pawn list. No stars after 4 weeks"""
-        time_since_modified = timezone.now() - self.last_modified
-        weeks_since_modified = time_since_modified.days // 7 
-        return 4 - weeks_since_modified
-
-
-
     def save(self, *args, **kwargs):
         self.last_modified = timezone.now()
         super(Pawn, self).save(*args, **kwargs)
@@ -77,6 +68,13 @@ class Pawn(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def activity(self):
+        """ Return number of stars that should display in pawn list. No stars after 4 weeks"""
+        time_since_modified = timezone.now() - self.last_modified
+        weeks_since_modified = time_since_modified.days // 7 
+        return 4 - weeks_since_modified
 
     @property
     def vocation_color(self):

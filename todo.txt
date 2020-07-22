@@ -1,9 +1,10 @@
 Notes for next time:
-- Work on showing all pawns on the same page for manage pawns
+
 - Update/delete pawns
 
 high
 - FAQ page
+- extend user model and get rid of UserProfile
 - model fields
     - platform on Pawn
     - account_name
@@ -14,8 +15,7 @@ high
 - email verification
 
 medium priority
-- test profiles
-- put friend link/created by on pawn detail
+- rename switch to nintendo switch in UI
 
 low priority
 - find a way to not rely on {{form.notes}} so i can customize the textarea how i want
