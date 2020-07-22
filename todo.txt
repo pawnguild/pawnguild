@@ -4,23 +4,13 @@ high
 - email verification
 - select_platform required
 
-low priority
-- find a way to not rely on {{form.notes}} so i can customize the textarea how i want
-- make table look nicer https://dribbble.com/shots/6902973
+medium
+- new fields
+    - skills
+    - requests
 
-very low priority
+low priority
 - fix finding favico
 
 future
 - password resetting
-
-
-field notes
-ps4 fields
-activity, account ID, pawn name, level, gender, vocation , inclinations, notes
-
-
-ps3 fields
-activity, account ID, pawn name, level, gender, vocation, inclinations, version, notes
-
-special fields: version
