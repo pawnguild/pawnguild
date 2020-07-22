@@ -1,0 +1,10 @@
+{% extends "pawnlisting/detail_pawn/pawn_detail.html" %}
+
+{% block platform_info %}
+    <label> PSN: </label>
+    {{ pawn.psn }}
+    <br>
+    
+    <label> Game version: </label>
+    {{ pawn.version }}
+{% endblock %}

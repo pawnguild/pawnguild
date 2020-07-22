@@ -9,8 +9,8 @@ from django import forms
 from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError
 
-from .models import UserProfile, SteamPawn, SwitchPawn, XboxOnePawn
-from .forms import UserProfileForm, SteamPawnForm, SwitchPawnForm, XboxOnePawnForm
+from .models import UserProfile, SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
+from .forms import UserProfileForm, SteamPawnForm, SwitchPawnForm, XboxOnePawnForm, PS4PawnForm, PS3PawnForm
 from .utility import *
 
 
@@ -75,6 +75,11 @@ class ChoosePawnPlatform(LoginRequiredMixin, View):
             return redirect(reverse("create-switch-pawn"))
         elif platform == "Xbox1":
             return redirect(reverse("create-xbox1-pawn"))
+        elif platform == "PS4":
+            return redirect(reverse("create-ps4-pawn"))
+        elif platform == "PS3":
+            return redirect(reverse("create-ps3-pawn"))
+
 
 class CreatePawnMixin(LoginRequiredMixin, CreateView):
     login_url = "/login/"
@@ -102,6 +107,17 @@ class CreateXboxOnePawn(CreatePawnMixin):
     form_class = XboxOnePawnForm
     template_name = "pawnlisting/pawn_forms/xbox1.html"
 
+
+class CreatePS4Pawn(CreatePawnMixin):
+    model = PS4Pawn
+    form_class = PS4PawnForm
+    template_name = "pawnlisting/pawn_forms/ps4.html"
+
+
+class CreatePS3Pawn(CreatePawnMixin):
+    model = PS3Pawn
+    form_class = PS3PawnForm
+    template_name = "pawnlisting/pawn_forms/ps3.html"
 
 ### End CreateViews ###
 
@@ -140,6 +156,15 @@ class XboxOnePawnList(make_ListPawnMixin(XboxOnePawn)):
     context_object_name = "xbox1_pawns"
 
 
+class PS4PawnList(make_ListPawnMixin(PS4Pawn)):
+    model = PS4Pawn
+    context_object_name = "ps4_pawns"
+
+
+class PS3PawnList(make_ListPawnMixin(PS3Pawn)):
+    model = PS3Pawn
+    context_object_name = "ps3_pawns"
+
 ### End ListViews ###
 
 ### DetailViews ###
@@ -161,6 +186,16 @@ class SwitchPawnDetail(PawnDetail):
 class XboxOnePawnDetail(PawnDetail):
     model = XboxOnePawn
     template_name = "pawnlisting/detail_pawn/xbox1.html"
+
+
+class PS4PawnDetail(PawnDetail):
+    model = PS4Pawn
+    template_name = "pawnlisting/detail_pawn/ps4.html"
+
+
+class PS3PawnDetail(PawnDetail):
+    model = PS3Pawn
+    template_name = "pawnlisting/detail_pawn/ps3.html"
 
 ### End DetailViews ###
 
@@ -202,6 +237,18 @@ class XboxOnePawnUpdate(make_UserOwnsPawnMixin(XboxOnePawn), UpdateView):
     fields = base_pawn_fields
     template_name = "pawnlisting/pawn_forms/xbox1.html"
 
+
+class PS4PawnUpdate(make_UserOwnsPawnMixin(PS4Pawn), UpdateView):
+    model = PS4Pawn
+    fields = base_pawn_fields
+    template_name = "pawnlisting/pawn_forms/ps4.html"
+
+
+class PS3PawnUpdate(make_UserOwnsPawnMixin(PS3Pawn), UpdateView):
+    model = PS3Pawn
+    fields = ps3_pawn_fields
+    template_name = "pawnlisting/pawn_forms/ps3.html"
+
 ### End UpdateViews ###
 
 ### DeleteViews ###
@@ -223,5 +270,12 @@ class SwitchPawnDelete(make_UserOwnsPawnMixin(SwitchPawn), DeletePawnMixin):
 class XboxOnePawnDelete(make_UserOwnsPawnMixin(XboxOnePawn), DeletePawnMixin):
     model = XboxOnePawn
 
+
+class PS4PawnDelete(make_UserOwnsPawnMixin(PS4Pawn), DeletePawnMixin):
+    model = PS4Pawn
+
+
+class PS3PawnDelete(make_UserOwnsPawnMixin(PS3Pawn), DeletePawnMixin):
+    model = PS3Pawn
 
 ### EndDeleteViews ###

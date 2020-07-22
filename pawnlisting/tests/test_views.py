@@ -1,4 +1,4 @@
-from pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn
+from pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 from django.shortcuts import reverse
 
 from pawnlisting.tests.utility import UtilityTestCase
@@ -22,6 +22,12 @@ class LoginRequiredTests(UtilityTestCase):
         response = self.client.get(reverse("create-xbox1-pawn"))
         self.assertRedirects(response, f"{reverse('login')}?next={reverse('create-xbox1-pawn')}")
 
+        response = self.client.get(reverse("create-ps4-pawn"))
+        self.assertRedirects(response, f"{reverse('login')}?next={reverse('create-ps4-pawn')}")
+
+        response = self.client.get(reverse("create-ps3-pawn"))
+        self.assertRedirects(response, f"{reverse('login')}?next={reverse('create-ps3-pawn')}")
+
     def test_update_pawn_redirects_anonymous(self):
         steam_pawn_update_url = reverse("update-steam-pawn", kwargs={"pk": self.steam_pawn.id})
         response = self.client.get(steam_pawn_update_url)
@@ -35,6 +41,14 @@ class LoginRequiredTests(UtilityTestCase):
         response = self.client.get(xbox1_pawn_update_url)
         self.assertRedirects(response, f"{reverse('login')}?next={xbox1_pawn_update_url}")
 
+        ps4_pawn_update_url = reverse("update-ps4-pawn", kwargs={"pk": self.ps4_pawn.id})
+        response = self.client.get(ps4_pawn_update_url)
+        self.assertRedirects(response, f"{reverse('login')}?next={ps4_pawn_update_url}")
+
+        ps3_pawn_update_url = reverse("update-ps3-pawn", kwargs={"pk": self.ps3_pawn.id})
+        response = self.client.get(ps3_pawn_update_url)
+        self.assertRedirects(response, f"{reverse('login')}?next={ps3_pawn_update_url}")
+
     def test_pawn_delete_redirects_anonymous(self):
         steam_pawn_delete_url = reverse("delete-steam-pawn", kwargs={"pk": self.steam_pawn.id})
         response = self.client.get(steam_pawn_delete_url)
@@ -47,6 +61,14 @@ class LoginRequiredTests(UtilityTestCase):
         xbox1_pawn_delete_url = reverse("delete-xbox1-pawn", kwargs={"pk": self.xbox1_pawn.id})
         response = self.client.get(xbox1_pawn_delete_url)
         self.assertRedirects(response, f"{reverse('login')}?next={xbox1_pawn_delete_url}")
+
+        ps4_pawn_delete_url = reverse("delete-ps4-pawn", kwargs={"pk": self.ps4_pawn.id})
+        response = self.client.get(ps4_pawn_delete_url)
+        self.assertRedirects(response, f"{reverse('login')}?next={ps4_pawn_delete_url}")
+
+        ps3_pawn_delete_url = reverse("delete-ps3-pawn", kwargs={"pk": self.ps3_pawn.id})
+        response = self.client.get(ps3_pawn_delete_url)
+        self.assertRedirects(response, f"{reverse('login')}?next={ps3_pawn_delete_url}")
 
 
 class PawnCreateTests(UtilityTestCase):
@@ -63,6 +85,12 @@ class PawnCreateTests(UtilityTestCase):
 
         response = self.client.post(reverse("select_platform"), {"platform": "Xbox1"})
         self.assertRedirects(response, reverse("create-xbox1-pawn"))
+
+        response = self.client.post(reverse("select_platform"), {"platform": "PS4"})
+        self.assertRedirects(response, reverse("create-ps4-pawn"))
+
+        response = self.client.post(reverse("select_platform"), {"platform": "PS3"})
+        self.assertRedirects(response, reverse("create-ps3-pawn"))
 
     def test_can_create_pawn_when_logged_in(self):
         steam_pawn_data = self.generate_steam_pawn_data(name="yoshi")
@@ -90,6 +118,17 @@ class PawnCreateTests(UtilityTestCase):
         self.assertTrue(created_pawn)
         self.assertEqual(created_pawn.created_by, self.user)
 
+        ps4_pawn_data = self.generate_ps4_pawn_data(name="ps4er")
+        response = self.client.post(reverse("create-ps4-pawn"), ps4_pawn_data)
+        created_pawn = PS4Pawn.objects.get(**ps4_pawn_data)
+        self.assertTrue(created_pawn)
+        self.assertEqual(created_pawn.created_by, self.user)
+
+        ps3_pawn_data = self.generate_ps3_pawn_data(name="ps3er")
+        response = self.client.post(reverse("create-ps3-pawn"), ps3_pawn_data)
+        created_pawn = PS3Pawn.objects.get(**ps3_pawn_data)
+        self.assertTrue(created_pawn)
+        self.assertEqual(created_pawn.created_by, self.user)
 
 class PawnDetailTests(UtilityTestCase):
 
@@ -102,6 +141,12 @@ class PawnDetailTests(UtilityTestCase):
 
         response = self.client.get(reverse("view-xbox1-pawn", kwargs={"pk": self.xbox1_pawn.id}))
         self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(reverse("view-ps4-pawn", kwargs={"pk": self.ps4_pawn.id}))
+        self.assertEqual(response.status_code, 200)
+        response = self.client.get(reverse("view-ps3-pawn", kwargs={"pk": self.ps3_pawn.id}))
+        self.assertEqual(response.status_code, 200)
+
 
 class PawnUpdateTests(UtilityTestCase):
 
@@ -121,6 +166,16 @@ class PawnUpdateTests(UtilityTestCase):
         self.assertRedirects(response, reverse("view-xbox1-pawn", kwargs={"pk": self.xbox1_pawn.id}))
         self.assertTrue(XboxOnePawn.objects.get(**xbox1_pawn_data))
 
+        ps4_pawn_data = self.generate_ps4_pawn_data(name=self.test_args["ps4_pawn_name"], level=90)
+        response = self.client.post(reverse("update-ps4-pawn", kwargs={"pk": self.ps4_pawn.id}), ps4_pawn_data)
+        self.assertRedirects(response, reverse("view-ps4-pawn", kwargs={"pk": self.ps4_pawn.id}))
+        self.assertTrue(PS4Pawn.objects.get(**ps4_pawn_data))
+
+        ps3_pawn_data = self.generate_ps3_pawn_data(name=self.test_args["ps3_pawn_name"], level=5)
+        response = self.client.post(reverse("update-ps3-pawn", kwargs={"pk": self.ps3_pawn.id}), ps3_pawn_data)
+        self.assertRedirects(response, reverse("view-ps3-pawn", kwargs={"pk": self.ps3_pawn.id}))
+        self.assertTrue(PS3Pawn.objects.get(**ps3_pawn_data))
+
     def test_403_logged_in_not_owner(self):
         self.create_user_log_in(username="TestUser2")
 
@@ -136,6 +191,14 @@ class PawnUpdateTests(UtilityTestCase):
         response = self.client.get(reverse("update-xbox1-pawn", kwargs={"pk": xbox1_pawn_id}))
         self.assertEqual(response.status_code, 403)
 
+        ps4_pawn_id = self.ps4_pawn.id
+        response = self.client.get(reverse("update-ps4-pawn", kwargs={"pk": ps4_pawn_id}))
+        self.assertEqual(response.status_code, 403)
+
+        ps3_pawn_id = self.ps3_pawn.id
+        response = self.client.get(reverse("update-ps3-pawn", kwargs={"pk": ps3_pawn_id}))
+        self.assertEqual(response.status_code, 403)
+
 
 class DeletePawnTests(UtilityTestCase):
 
@@ -144,6 +207,8 @@ class DeletePawnTests(UtilityTestCase):
         self.steam_pawn2 = SteamPawn.objects.create(**self.generate_steam_pawn_data(name="SteamPawn2"))
         self.switch_pawn2 = SwitchPawn.objects.create(**self.generate_switch_pawn_data(name="SwitchPawn2"))
         self.xbox1_pawn2 = XboxOnePawn.objects.create(**self.generate_xbox1_pawn_data(name="XboxOnePawn2"))
+        self.ps4_pawn2 = PS4Pawn.objects.create(**self.generate_ps4_pawn_data(name="PS4Pawn2"))
+        self.ps3_pawn2 = PS3Pawn.objects.create(**self.generate_ps3_pawn_data(name="PS3Pawn2"))
 
     def test_delete_pawn(self):
         response = self.client.post(reverse("delete-steam-pawn", kwargs={"pk": self.steam_pawn.id}))
@@ -153,6 +218,9 @@ class DeletePawnTests(UtilityTestCase):
         self.assertRedirects(response, reverse("manage_pawns"))
 
         response = self.client.post(reverse("delete-xbox1-pawn", kwargs={"pk": self.xbox1_pawn.id}))
+        self.assertRedirects(response, reverse("manage_pawns"))
+
+        response = self.client.post(reverse("delete-ps4-pawn", kwargs={"pk": self.ps4_pawn.id}))
         self.assertRedirects(response, reverse("manage_pawns"))
 
     def test_403_logged_in_not_owner(self):
@@ -165,4 +233,10 @@ class DeletePawnTests(UtilityTestCase):
         self.assertEqual(response.status_code, 403)
 
         response = self.client.post(reverse("delete-xbox1-pawn", kwargs={"pk": self.xbox1_pawn2.id}))
+        self.assertEqual(response.status_code, 403)
+
+        response = self.client.post(reverse("delete-ps4-pawn", kwargs={"pk": self.ps4_pawn2.id}))
+        self.assertEqual(response.status_code, 403)
+
+        response = self.client.post(reverse("delete-ps3-pawn", kwargs={"pk": self.ps3_pawn2.id}))
         self.assertEqual(response.status_code, 403)

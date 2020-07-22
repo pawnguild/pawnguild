@@ -1,14 +1,9 @@
+
 high
 - FAQ page
-- add ps4, ps3, xboxone, 
-- model fields
-    - everything except steam
-
+- move submit buttom to bottom on pawn_form
 - email verification
 - select_platform required
-
-medium priority
-- rename switch to nintendo switch in UI
 
 low priority
 - find a way to not rely on {{form.notes}} so i can customize the textarea how i want
@@ -19,3 +14,14 @@ very low priority
 
 future
 - password resetting
+
+
+field notes
+ps4 fields
+activity, account ID, pawn name, level, gender, vocation , inclinations, notes
+
+
+ps3 fields
+activity, account ID, pawn name, level, gender, vocation, inclinations, version, notes
+
+special fields: version

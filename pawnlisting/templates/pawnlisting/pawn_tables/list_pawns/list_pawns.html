@@ -19,4 +19,16 @@
         {% include "pawnlisting/pawn_tables/list_pawns/list_xbox1_pawns.html" %}
         <br>
     {% endif %}
+
+    {% if ps4_pawns %}
+        <h2> PS4 Pawns </h2>
+        {% include "pawnlisting/pawn_tables/list_pawns/list_ps4_pawns.html" %}
+        <br>
+    {% endif %}
+
+    {% if ps3_pawns %}
+        <h2> PS3 Pawns </h2>
+        {% include "pawnlisting/pawn_tables/list_pawns/list_ps3_pawns.html" %}
+        <br>
+    {% endif %}
 </div>

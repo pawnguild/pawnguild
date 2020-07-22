@@ -1,13 +1,13 @@
 <div class="container">
     <table class="table table-dark">
     <thead>
-        <th scope="col"> Gamertag</th>
+        <th scope="col">PSN</th>
         {% include "pawnlisting/pawn_tables/base_pawn_table_cols.html" %}
     </thead>
     <tbody>
-        {% for pawn in xbox1_pawns %}     
+        {% for pawn in ps4_pawns %}     
             <tr>
-                <td>{{ pawn.gamertag }}</td>
+                <td>{{ pawn.psn }}</td>
                 {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
             </tr>
         {% endfor %}

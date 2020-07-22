@@ -112,7 +112,30 @@ class SwitchPawn(Pawn):
         return reverse("view-switch-pawn", kwargs={"pk": self.id})
 
 class XboxOnePawn(Pawn):
-    
+    gamertag = models.CharField(max_length=15)
+
     def get_absolute_url(self):
         return reverse("view-xbox1-pawn", kwargs={"pk": self.pk})
+
+
+class PS4Pawn(Pawn):
+    psn = models.CharField(max_length=16)
+
+    class Meta:
+        verbose_name = "PS4Pawn"
+        verbose_name_plural = "PS4 Pawns"
+
+    def get_absolute_url(self):
+        return reverse("view-ps4-pawn", kwargs={"pk": self.pk})
     
+    
+class PS3Pawn(Pawn):
+    psn = models.CharField(max_length=16)
+    version = models.TextField(max_length=20, choices=build_choices(["DD", "Dark Arisen"]))
+
+    class Meta:
+        verbose_name = "PS3Pawn"
+        verbose_name_plural = "PS3 Pawns"
+
+    def get_absolute_url(self):
+        return reverse("view-ps3-pawn", kwargs={"pk": self.pk})

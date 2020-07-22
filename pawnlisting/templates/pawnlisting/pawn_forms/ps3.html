@@ -1,0 +1,23 @@
+{% extends "pawnlisting/pawn_forms/base_pawn_form.html" %}
+
+{% block platform_form %}
+<div class="form-group">
+    {% if form.errors.psn %}
+    <div class="alert alert-danger">
+        <strong>{{ form.errors.psn |escape }}</strong>
+    </div>
+    {% endif %}
+    {{ form.psn.label_tag }}
+    {{ form.psn }}
+</div>
+
+<div class="form-group">
+    {% if form.errors.pawn_code %}
+    <div class="alert alert-danger">
+        <strong>{{ form.errors.pawn_code |escape }}</strong>
+    </div>
+    {% endif %}
+    {{ form.version.label_tag }}
+    {{ form.version }}
+</div>
+{% endblock platform_form %}

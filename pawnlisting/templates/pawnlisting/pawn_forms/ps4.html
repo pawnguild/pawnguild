@@ -2,12 +2,12 @@
 
 {% block platform_form %}
 <div class="form-group">
-    {% if form.errors.gamertag %}
+    {% if form.errors.psn %}
     <div class="alert alert-danger">
-        <strong>{{ form.errors.gamertag |escape }}</strong>
+        <strong>{{ form.errors.psn |escape }}</strong>
     </div>
     {% endif %}
-    {{ form.gamertag.label_tag }}
-    {{ form.gamertag }}
+    {{ form.psn.label_tag }}
+    {{ form.psn }}
 </div>
 {% endblock platform_form %}

@@ -18,4 +18,17 @@
     {% include "pawnlisting/pawn_tables/manage_pawns/manage_xbox1_pawn_table.html" %}
     <br>
     {% endif %}
+
+    {% if ps4_pawns %}
+    <h2> Your PS4 Pawns </h2>
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_ps4_pawn_table.html" %}
+    <br>
+    {% endif %}
+
+    {% if ps3_pawns %}
+    <h2> Your PS3 Pawns </h2>
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_ps3_pawn_table.html" %}
+    <br>
+    {% endif %}
+
 </div>
