@@ -145,7 +145,7 @@ EMAIL_ADDRESS = 'pawnhall7@gmail.com'
 EMAIL_FROM_ADDRESS = 'noreply@pawnhall.com'
 EMAIL_PASSWORD = get_env_variable("EMAIL_PASSWORD")
 EMAIL_MAIL_SUBJECT = 'PawnHall email confirmation'
-EMAIL_MAIL_HTML = 'pawnlisting.confirmation_email.html'
+EMAIL_MAIL_HTML = 'confirmation_email.html'
 EMAIL_PAGE_TEMPLATE = 'pawnlisting.confirm_template.html'
 EMAIL_PAGE_DOMAIN = 'localhost:8000/'
 

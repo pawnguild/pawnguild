@@ -7,8 +7,6 @@ from django import forms
 from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError
 
-from django_email_verification import sendConfirm
-
 from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 from .forms import SteamPawnForm, SwitchPawnForm, XboxOnePawnForm, PS4PawnForm, PS3PawnForm
 from .utility import *

@@ -7,6 +7,8 @@ from django.shortcuts import render, reverse, redirect
 
 from .forms import UserProfileForm
 
+from django_email_verification import sendConfirm
+
 # Create your views here.
 
 class Register(View):
@@ -19,7 +21,7 @@ class Register(View):
         profile_form = UserProfileForm(request.POST)
         if profile_form.is_valid():
             user = profile_form.save() # Creates a user
-
+            sendConfirm(user)
             login(request, user)
             return redirect(reverse("list-all-pawns"))
         else:
