@@ -1,5 +1,7 @@
 
 high
+- get vocation coloring working on prod
+    - 2020-07-23 23:42:46,993: Not Found: /static/pawnlisting/css/pawn_table.css
 - select_platform required
 - ui work
 - error messages on login
@@ -8,7 +10,6 @@ high
 low priority
 - change includes everywhere to extends for base
 - footer with links to reddit/discord/steam page
-- fix finding favico
 
 future
 - password resetting

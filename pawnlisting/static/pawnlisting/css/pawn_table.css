@@ -1,0 +1,26 @@
+td.red-vocation {
+    background-color: rgb(235, 45, 76);
+}
+
+td.yellow-vocation {
+    background-color: sandybrown;
+}
+
+td.blue-vocation {
+    background-color: mediumturquoise;
+}
+
+b {
+    color: black;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+a {
+    color: lightskyblue;
+}
+
+2
