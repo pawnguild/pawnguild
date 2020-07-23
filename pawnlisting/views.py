@@ -108,13 +108,14 @@ class ListAllPawns(View):
         return render(request, "pawnlisting/pawn_tables/list_pawns/list_pawns.html", context=context)
 
 
+
 def make_ListPawnMixin(Type):
 
     class ListPawnMixin(ListView):
         template_name = "pawnlisting/pawn_tables/list_pawns/list_pawns.html"
 
         def get_queryset(self):
-            return Type.objects.all()
+            return sort_pawns(Type.objects.all())
     
     return ListPawnMixin
 

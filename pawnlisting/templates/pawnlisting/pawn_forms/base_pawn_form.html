@@ -89,24 +89,31 @@
                     {% endblock %}
 
                 </div>
-            <div class="col">
-                <h2> Optional Fields </h2>
-                <div class="form-group">
-                    {% if form.errors.notes %}
-                    <div class="alert alert-danger">
-                        <strong>{{ form.errors.notes |escape }}</strong>
+                <div class="col">
+                    <h2> Optional Fields </h2>
+                    <div class="form-group">
+                        <label for="id_notes">Pawn Notes and Requests </label>
+                        <div>
+                            {{ form.notes }}
+                        </div>
                     </div>
-                    {% endif %}
+                    <div class="form-group">
+                        <label for="id_notes">Primary Skills</label>
+                        <div>
+                            {{ form.primary_skills }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_notes">Secondary Skills</label>
+                        <div>
+                            {{ form.secondary_skills }}
+                        </div>
+                    </div>
                     <div>
                         <label> Pawn Picture </label>
                         {{ form.picture }}
                     </div>
-                    <label for="id_notes">Pawn Notes and Requests </label>
-                    <div>
-                        {{ form.notes }}
-                    </div>
                 </div>
-            </div>
             </div>
             <button class="btn btn-light" type="submit"> Submit </button>
         </form>

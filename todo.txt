@@ -3,15 +3,11 @@ high
 - select_platform required
 - ui work
 
-medium
-- new fields
-    - skills
-    - requests
-- sort pawns by vocation and level
 
 low priority
-- fix finding favico
+- change includes everywhere to extends for base
 - footer with links to reddit/discord/steam page
+- fix finding favico
 
 future
 - password resetting

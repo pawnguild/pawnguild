@@ -43,6 +43,9 @@ class Pawn(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(default=timezone.now)
 
+    primary_skills = models.CharField(max_length=100, blank=True)
+    secondary_skills = models.CharField(max_length=100, blank=True)
+
     def save(self, *args, **kwargs):
         self.last_modified = timezone.now()
         super(Pawn, self).save(*args, **kwargs)
