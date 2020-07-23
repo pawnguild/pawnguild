@@ -12,3 +12,4 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "pawnhall7@gmail.com"
 EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_PASSWORD")
 EMAIL_USE_TLS = True
+EMAIL_PAGE_DOMAIN = ALLOWED_HOSTS[0] + "/"
