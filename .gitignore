@@ -1,8 +1,8 @@
 htmlcov/
 .coverage
 **/__pycache__
-media/
-venv/
+/media/
+/venv/
 /static/
-.vscode/
+/.vscode/
 db.sqlite3
