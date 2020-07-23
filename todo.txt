@@ -2,7 +2,8 @@
 high
 - select_platform required
 - ui work
-
+- error messages on login
+- debug email confirmations not being sent on pythonanywhere
 
 low priority
 - change includes everywhere to extends for base

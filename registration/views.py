@@ -24,7 +24,7 @@ class Register(View):
             user = profile_form.save() # Creates a user
             login(request, user)
             sendConfirm(user)
-            return redirect(reverse("list-all-pawns"))
+            return render(request, "registration/confirm_account_sent.html", context={"email": request.user.email})
         else:
             context = {"profile_form": profile_form}
             return render(request, "registration/register.html", context=context)
