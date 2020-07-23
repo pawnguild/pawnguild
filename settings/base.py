@@ -138,7 +138,7 @@ MEDIA_URL = "/media/"
 
 ### Settings for django_email_verification ###
 
-EMAIL_ACTIVE_FIELD = 'is_active'
+EMAIL_ACTIVE_FIELD = 'email_verified'
 EMAIL_SERVER = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_ADDRESS = 'pawnhall7@gmail.com'

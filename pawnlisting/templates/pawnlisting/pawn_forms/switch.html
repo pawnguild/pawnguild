@@ -3,23 +3,23 @@
 {% block platform_form %}
 
 <div class="form-group">
-    {% if form.errors.pawn_code %}
+    {% if form.errors.pawn_id %}
     <div class="alert alert-danger">
-        <strong>{{ form.errors.pawn_code |escape }}</strong>
+        <strong>{{ form.errors.pawn_id |escape }}</strong>
     </div>
     {% endif %}
-    {{ form.pawn_code.label_tag }}
-    {{ form.pawn_code }}
+    {{ form.pawn_id.label_tag }}
+    {{ form.pawn_id }}
 </div>
 
 <div class="form-group">
-    {% if form.errors.friend_code %}
+    {% if form.errors.friend_account_id %}
     <div class="alert alert-danger">
-        <strong>{{ form.errors.friend_code |escape }}</strong>
+        <strong>{{ form.errors.friend_account_id |escape }}</strong>
     </div>
     {% endif %}
-    {{ form.friend_code.label_tag }}
-    {{ form.friend_code }}
+    {{ form.friend_account_id.label_tag }}
+    {{ form.friend_account_id }}
 </div>
 
 {% endblock platform_form %}

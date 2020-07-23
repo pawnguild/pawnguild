@@ -1,18 +1,17 @@
-in progress
-- email verification
 
 high
-- FAQ page
-- email verification
 - select_platform required
+- ui work
 
 medium
 - new fields
     - skills
     - requests
+- sort pawns by vocation and level
 
 low priority
 - fix finding favico
+- footer with links to reddit/discord/steam page
 
 future
 - password resetting

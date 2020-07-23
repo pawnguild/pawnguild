@@ -5,16 +5,27 @@ from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
 from django.urls import reverse_lazy
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, PermissionDenied
 
 from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 from .forms import SteamPawnForm, SwitchPawnForm, XboxOnePawnForm, PS4PawnForm, PS3PawnForm
 from .utility import *
 
 
+class EmailVerifiedMixin(LoginRequiredMixin, UserPassesTestMixin):
+
+    def test_func(self):
+        return self.request.user.email_verified
+
+    def handle_no_permission(self):
+        try:
+            login_redirect = super().handle_no_permission()
+            return login_redirect
+        except PermissionDenied:
+            return redirect(reverse("confirm-account"))
 
 
-class PawnManager(LoginRequiredMixin, TemplateView):
+class PawnManager(EmailVerifiedMixin, TemplateView):
     login_url = "/login/"
     template_name = "pawnlisting/pawn_tables/manage_pawns.html"
 
@@ -27,7 +38,7 @@ class PawnManager(LoginRequiredMixin, TemplateView):
 
 ### CreateViews ###
 
-class ChoosePawnPlatform(LoginRequiredMixin, View):
+class ChoosePawnPlatform(EmailVerifiedMixin, View):
 
     login_url = "/login/"
 
@@ -48,7 +59,7 @@ class ChoosePawnPlatform(LoginRequiredMixin, View):
             return redirect(reverse("create-ps3-pawn"))
 
 
-class CreatePawnMixin(LoginRequiredMixin, CreateView):
+class CreatePawnMixin(EmailVerifiedMixin, CreateView):
     login_url = "/login/"
 
     def form_valid(self, form):

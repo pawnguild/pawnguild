@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.shortcuts import render, reverse, redirect
+from django.views.generic import TemplateView
 
 from .forms import UserProfileForm
 
@@ -43,3 +44,12 @@ class UpdateProfile(LoginRequiredMixin, View):
         else:
             context = {"profile_form": profile_form}
             return render(request, "registration/update_profile.html", context=context)
+
+class ConfirmAccount(LoginRequiredMixin, View):
+
+    def get(self, request):
+        return render(request, "registration/confirm_account_send.html", context={"email": request.user.email})
+
+    def post(self, request):
+        sendConfirm(self.request.user)
+        return render(request, "registration/confirm_account_sent.html", context={"email": request.user.email})

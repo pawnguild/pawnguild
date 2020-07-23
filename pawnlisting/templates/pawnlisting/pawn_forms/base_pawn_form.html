@@ -12,12 +12,11 @@
     {% endif %}
 
     <div class="container">
-        <h2> Required Fields </h2>
         <form method="POST" enctype="multipart/form-data">
             <div class="row">
-
                 {% csrf_token %}
                 <div class="col">
+                    <h2> Required Fields </h2>
                     <div class="form-group">
                         {% if form.errors.name %}
                         <div class="alert alert-danger">

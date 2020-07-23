@@ -73,6 +73,7 @@ class UtilityTestCase(TestCase):
     def create_user_log_in(self, username):
         user, created = get_user_model().objects.get_or_create(username=username)
         user.email = self.random_char(15) + "@gmail.com"
+        user.email_verified = True
         user.set_password("12345")
         user.save()
     

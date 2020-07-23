@@ -71,6 +71,25 @@ class LoginRequiredTests(UtilityTestCase):
         self.assertRedirects(response, f"{reverse('login')}?next={ps3_pawn_delete_url}")
 
 
+class EmailVerifiedTests(UtilityTestCase):
+
+    def setUp(self):
+        super().setUp()
+        self.user.email_verified = False
+        self.user.save()
+    
+    def test_not_verified_redirects(self):
+        response = self.client.get(reverse("select_platform"))
+        self.assertRedirects(response, reverse("confirm-account"))
+
+        response = self.client.get(reverse("manage_pawns"))
+        self.assertRedirects(response, reverse("confirm-account"))
+
+    def tearDown(self):
+        self.user.email_verified = True
+        self.user.save()
+
+
 class PawnCreateTests(UtilityTestCase):
 
     def test_pawn_add_no_redirect_logged_in(self):
