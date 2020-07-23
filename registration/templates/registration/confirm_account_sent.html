@@ -2,4 +2,13 @@
 
 <div class="container">
     <p> Confirmation email has been sent to <i>{{ email }}</i>. Copy and paste the link in the email into your browser to confirm account. </p>
+
+    <p> The email may take up to 5 minutes. If it never arrived, click the button to send another one. </p>
+    <form method="post" action="{% url 'confirm-account' %}">
+    {% csrf_token %}
+    <input type="submit" value="Send confirmation email" />
+</form>
+
+    <p> Note that clicking the button will redirect you back to this page </p>
+
 </div>
