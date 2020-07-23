@@ -21,8 +21,8 @@ class Register(View):
         profile_form = UserProfileForm(request.POST)
         if profile_form.is_valid():
             user = profile_form.save() # Creates a user
-            sendConfirm(user)
             login(request, user)
+            sendConfirm(user)
             return redirect(reverse("list-all-pawns"))
         else:
             context = {"profile_form": profile_form}

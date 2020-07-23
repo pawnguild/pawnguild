@@ -16,15 +16,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from pawnlisting import views
-
 from django.conf import settings
 from django.conf.urls.static import static
 
-
+from django_email_verification import urls as mail_urls
+from pawnlisting import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('email/', include(mail_urls)),
     path('', include("pawnlisting.urls")),
     path('', include("registration.urls")),
     path('', include('django.contrib.auth.urls')),

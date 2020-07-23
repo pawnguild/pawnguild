@@ -145,8 +145,9 @@ EMAIL_ADDRESS = 'pawnhall7@gmail.com'
 EMAIL_FROM_ADDRESS = 'noreply@pawnhall.com'
 EMAIL_PASSWORD = get_env_variable("EMAIL_PASSWORD")
 EMAIL_MAIL_SUBJECT = 'PawnHall email confirmation'
-EMAIL_MAIL_HTML = 'confirmation_email.html'
-EMAIL_PAGE_TEMPLATE = 'pawnlisting.confirm_template.html'
+#EMAIL_MAIL_HTML = 'confirmation_email.html'
+EMAIL_MAIL_PLAIN = 'confirmation_email.txt' # Bug in django_email_verification needs this even though it says it doesn't
+EMAIL_PAGE_TEMPLATE = 'email_page.html'
 EMAIL_PAGE_DOMAIN = 'localhost:8000/'
 
 ### End django_email_verificaiton settings

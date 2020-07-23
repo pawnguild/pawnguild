@@ -1,0 +1,3 @@
+Thanks for registering at PawnHall!
+Copy paste the link into your browser to confirm your account. Once confirmed, you can create Pawns
+{{ link }}

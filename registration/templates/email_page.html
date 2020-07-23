@@ -1,0 +1,12 @@
+{% include "pawnlisting/base.html" %}
+
+<div class="container">
+  <p> 
+    {% if success %}
+        You have confirmed your account! 
+    {% else %}
+        Error, invalid token!
+    {% endif %}
+    </p>
+</div>
+</html>
