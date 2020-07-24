@@ -8,7 +8,7 @@
     <tbody>
         {% for pawn in steam_pawns %}     
             <tr>
-                <td> <a href="{{ pawn.steam_url }}"> Friend link </a> </td>
+                <td> <a href="{{ pawn.steam_url }}" target="_blank"> Friend link </a> </td>
                 {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
                 <td><a href="{% url 'update-steam-pawn' pawn.id %}" class="btn btn-warning btn-sm"> Update </button>
                 <td><a href="{% url 'delete-steam-pawn' pawn.id %}" class="btn btn-danger btn-sm"> Delete </button>

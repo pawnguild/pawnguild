@@ -1,3 +1,5 @@
+in next patch
+- friend link opens in new tab for steam_url
 
 high
 - select_platform required

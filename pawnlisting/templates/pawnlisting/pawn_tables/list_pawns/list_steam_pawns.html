@@ -7,7 +7,7 @@
     <tbody>
         {% for pawn in steam_pawns %}     
             <tr>
-                <td> <a href="{{ pawn.steam_url }}"> Friend link </a> </td>
+                <td> <a href="{{ pawn.steam_url }}" target="_blank"> Friend link </a> </td>
                 {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
             </tr>
         {% endfor %}
