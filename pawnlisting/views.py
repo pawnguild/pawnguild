@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, AccessMixin
 from django import forms
 from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError, PermissionDenied
@@ -12,26 +12,14 @@ from .forms import SteamPawnForm, SwitchPawnForm, XboxOnePawnForm, PS4PawnForm, 
 from .utility import *
 
 
-# class EmailVerifiedMixin(LoginRequiredMixin, UserPassesTestMixin):
-
-#     def test_func(self):
-#         return self.request.user.email_verified
-
-#     def handle_no_permission(self):
-#         try:
-#             login_redirect = super().handle_no_permission()
-#             return login_redirect
-#         except PermissionDenied:
-#             return redirect(reverse("confirm-account"))
-
-class EmailVerifiedMixin(LoginRequiredMixin):
+class EmailVerifiedMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.email_verified:
             return redirect(reverse("confirm-account"))
         return super().dispatch(request, *args, **kwargs)
 
 
-class AllowPawnCreate(EmailVerifiedMixin):
+class LimitFivePawnsMixin(AccessMixin):
 
     def dispatch(self, request, *args, **kwargs):
         if UserPawnCollection(request.user).pawn_count() >= 5:
@@ -39,7 +27,7 @@ class AllowPawnCreate(EmailVerifiedMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class PawnManager(EmailVerifiedMixin, TemplateView):
+class PawnManager(LoginRequiredMixin, EmailVerifiedMixin, TemplateView):
     login_url = "/login/"
     template_name = "pawnlisting/pawn_tables/manage_pawns.html"
 
@@ -55,7 +43,10 @@ class TooManyPawns(TemplateView):
 
 ### CreateViews ###
 
-class ChoosePawnPlatform(AllowPawnCreate, View):
+class AllowPawnCreationMixin(LoginRequiredMixin, EmailVerifiedMixin, LimitFivePawnsMixin):
+    pass
+
+class ChoosePawnPlatform(AllowPawnCreationMixin, View):
 
     login_url = "/login/"
 
@@ -76,7 +67,7 @@ class ChoosePawnPlatform(AllowPawnCreate, View):
             return redirect(reverse("create-ps3-pawn"))
 
 
-class CreatePawnMixin(AllowPawnCreate, CreateView):
+class CreatePawnMixin(AllowPawnCreationMixin, CreateView):
     login_url = "/login/"
 
     def form_valid(self, form):

@@ -1,11 +1,11 @@
 in next patch
+- limit pawns to 5 per account
 
 
 high
 - select_platform required
 - ui work
 - error messages on login
-- limit pawns to 5 per account
 
 medium
 - css registration files to registration app

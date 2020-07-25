@@ -114,21 +114,16 @@ class PawnCreateTests(UtilityTestCase):
 
     def test_can_create_pawn_when_logged_in(self):
         steam_pawn_data = self.generate_steam_pawn_data(name="yoshi", created_by=self.new_user)
-
         response = self.client.post(reverse("create-steam-pawn"), steam_pawn_data)
         self.assertEqual(response.status_code, 302)
-
         created_pawn = SteamPawn.objects.get(**steam_pawn_data)
         self.assertEqual(created_pawn.created_by, self.new_user)
 
         switch_pawn_data = self.generate_switch_pawn_data(name="yoshi", created_by=self.new_user)
-
         response = self.client.post(reverse("create-switch-pawn"), switch_pawn_data)
         self.assertEqual(response.status_code, 302)
-
         created_pawn = SwitchPawn.objects.get(**switch_pawn_data)
         self.assertEqual(created_pawn.created_by, self.new_user)
-
 
         xbox1_pawn_data = self.generate_xbox1_pawn_data(name="xboxer", created_by=self.new_user)
         response = self.client.post(reverse("create-xbox1-pawn"), xbox1_pawn_data)
@@ -147,7 +142,12 @@ class PawnCreateTests(UtilityTestCase):
         created_pawn = PS3Pawn.objects.get(**ps3_pawn_data)
         self.assertTrue(created_pawn)
         self.assertEqual(created_pawn.created_by, self.new_user)
-        
+
+        # Limit to 5 Pawns
+        ps3_pawn_data = self.generate_ps3_pawn_data(name="AnotherPs3Pawn", created_by=self.new_user)
+        response = self.client.post(reverse("create-ps3-pawn"), ps3_pawn_data)
+        self.assertRedirects(response, reverse("too-many-pawns"))
+
 
 class PawnDetailTests(UtilityTestCase):
 
