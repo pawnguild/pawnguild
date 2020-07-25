@@ -12,17 +12,31 @@ from .forms import SteamPawnForm, SwitchPawnForm, XboxOnePawnForm, PS4PawnForm, 
 from .utility import *
 
 
-class EmailVerifiedMixin(LoginRequiredMixin, UserPassesTestMixin):
+# class EmailVerifiedMixin(LoginRequiredMixin, UserPassesTestMixin):
 
-    def test_func(self):
-        return self.request.user.email_verified
+#     def test_func(self):
+#         return self.request.user.email_verified
 
-    def handle_no_permission(self):
-        try:
-            login_redirect = super().handle_no_permission()
-            return login_redirect
-        except PermissionDenied:
+#     def handle_no_permission(self):
+#         try:
+#             login_redirect = super().handle_no_permission()
+#             return login_redirect
+#         except PermissionDenied:
+#             return redirect(reverse("confirm-account"))
+
+class EmailVerifiedMixin(LoginRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.email_verified:
             return redirect(reverse("confirm-account"))
+        return super().dispatch(request, *args, **kwargs)
+
+
+class AllowPawnCreate(EmailVerifiedMixin):
+
+    def dispatch(self, request, *args, **kwargs):
+        if UserPawnCollection(request.user).pawn_count() >= 5:
+            return redirect(reverse("too-many-pawns"))
+        return super().dispatch(request, *args, **kwargs)
 
 
 class PawnManager(EmailVerifiedMixin, TemplateView):
@@ -36,9 +50,12 @@ class PawnManager(EmailVerifiedMixin, TemplateView):
         return context
 
 
+class TooManyPawns(TemplateView):
+    template_name = "pawnlisting/errors/too_many_pawns.html"
+
 ### CreateViews ###
 
-class ChoosePawnPlatform(EmailVerifiedMixin, View):
+class ChoosePawnPlatform(AllowPawnCreate, View):
 
     login_url = "/login/"
 
@@ -59,7 +76,7 @@ class ChoosePawnPlatform(EmailVerifiedMixin, View):
             return redirect(reverse("create-ps3-pawn"))
 
 
-class CreatePawnMixin(EmailVerifiedMixin, CreateView):
+class CreatePawnMixin(AllowPawnCreate, CreateView):
     login_url = "/login/"
 
     def form_valid(self, form):

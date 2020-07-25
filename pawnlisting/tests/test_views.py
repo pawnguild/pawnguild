@@ -75,8 +75,9 @@ class EmailVerifiedTests(UtilityTestCase):
 
     def setUp(self):
         super().setUp()
-        self.user.email_verified = False
-        self.user.save()
+        self.new_user = self.create_user_log_in("TestUser2")
+        self.new_user.email_verified = False
+        self.new_user.save()
     
     def test_not_verified_redirects(self):
         response = self.client.get(reverse("select_platform"))
@@ -85,12 +86,12 @@ class EmailVerifiedTests(UtilityTestCase):
         response = self.client.get(reverse("manage_pawns"))
         self.assertRedirects(response, reverse("confirm-account"))
 
-    def tearDown(self):
-        self.user.email_verified = True
-        self.user.save()
-
 
 class PawnCreateTests(UtilityTestCase):
+
+    def setUp(self):
+        super().setUp()
+        self.new_user = self.create_user_log_in("TestUser2")
 
     def test_pawn_add_no_redirect_logged_in(self):
         response = self.client.get(reverse("select_platform"))
@@ -112,42 +113,41 @@ class PawnCreateTests(UtilityTestCase):
         self.assertRedirects(response, reverse("create-ps3-pawn"))
 
     def test_can_create_pawn_when_logged_in(self):
-        steam_pawn_data = self.generate_steam_pawn_data(name="yoshi")
+        steam_pawn_data = self.generate_steam_pawn_data(name="yoshi", created_by=self.new_user)
 
         response = self.client.post(reverse("create-steam-pawn"), steam_pawn_data)
         self.assertEqual(response.status_code, 302)
 
         created_pawn = SteamPawn.objects.get(**steam_pawn_data)
-        self.assertTrue(created_pawn) # If this fails, pawn doesn't exist, which means pawn creation does not work
-        self.assertEqual(created_pawn.created_by, self.user)
+        self.assertEqual(created_pawn.created_by, self.new_user)
 
-        switch_pawn_data = self.generate_switch_pawn_data(name="yoshi")
+        switch_pawn_data = self.generate_switch_pawn_data(name="yoshi", created_by=self.new_user)
 
         response = self.client.post(reverse("create-switch-pawn"), switch_pawn_data)
         self.assertEqual(response.status_code, 302)
 
         created_pawn = SwitchPawn.objects.get(**switch_pawn_data)
-        self.assertTrue(created_pawn) # If this fails, pawn doesn't exist, which means pawn creation does not work
-        self.assertEqual(created_pawn.created_by, self.user)
+        self.assertEqual(created_pawn.created_by, self.new_user)
 
 
-        xbox1_pawn_data = self.generate_xbox1_pawn_data(name="xboxer")
+        xbox1_pawn_data = self.generate_xbox1_pawn_data(name="xboxer", created_by=self.new_user)
         response = self.client.post(reverse("create-xbox1-pawn"), xbox1_pawn_data)
         created_pawn = XboxOnePawn.objects.get(**xbox1_pawn_data)
         self.assertTrue(created_pawn)
-        self.assertEqual(created_pawn.created_by, self.user)
+        self.assertEqual(created_pawn.created_by, self.new_user)
 
-        ps4_pawn_data = self.generate_ps4_pawn_data(name="ps4er")
+        ps4_pawn_data = self.generate_ps4_pawn_data(name="ps4er", created_by=self.new_user)
         response = self.client.post(reverse("create-ps4-pawn"), ps4_pawn_data)
         created_pawn = PS4Pawn.objects.get(**ps4_pawn_data)
         self.assertTrue(created_pawn)
-        self.assertEqual(created_pawn.created_by, self.user)
+        self.assertEqual(created_pawn.created_by, self.new_user)
 
-        ps3_pawn_data = self.generate_ps3_pawn_data(name="ps3er")
+        ps3_pawn_data = self.generate_ps3_pawn_data(name="ps3er", created_by=self.new_user)
         response = self.client.post(reverse("create-ps3-pawn"), ps3_pawn_data)
         created_pawn = PS3Pawn.objects.get(**ps3_pawn_data)
         self.assertTrue(created_pawn)
-        self.assertEqual(created_pawn.created_by, self.user)
+        self.assertEqual(created_pawn.created_by, self.new_user)
+        
 
 class PawnDetailTests(UtilityTestCase):
 

@@ -39,5 +39,6 @@ urlpatterns = [
 
     path("manage_pawns", views.PawnManager.as_view(), name="manage_pawns"),
     path("api/pawns", api.PawnAPIList.as_view(), name="api_pawn_list"),
+    path("errors/too-many-pawns/", views.TooManyPawns.as_view(), name="too-many-pawns"),
 
 ]

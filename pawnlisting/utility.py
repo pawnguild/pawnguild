@@ -44,3 +44,7 @@ class UserPawnCollection(BasePawnCollection):
         self.xbox1_pawns = XboxOnePawn.objects.filter(created_by=user)
         self.ps4_pawns = PS4Pawn.objects.filter(created_by=user)
         self.ps3_pawns = PS3Pawn.objects.filter(created_by=user)
+
+    def pawn_count(self):
+        return (len(self.steam_pawns) + len(self.switch_pawns) + len(self.xbox1_pawns)
+                    + len(self.ps4_pawns) + len(self.ps3_pawns))
