@@ -1,7 +1,8 @@
 from .models import UserProfile
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 
-class UserProfileForm(UserCreationForm):
+class UserProfileCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = UserProfile

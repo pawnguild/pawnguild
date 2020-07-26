@@ -7,13 +7,14 @@ from django.conf import settings
 
 from datetime import datetime, timedelta
 
-
 vocations = ["Fighter", "Warrior", "Strider", "Ranger", "Mage", "Sorcerer"]
 genders = ["Male", "Female"]
 inclinations = ["Scather", "Medicant", "Mitigator", "Challenger", "Utilitarian", "Guardian", "Nexus", "Pioneer", "Acquisitor"]
 
+
 def build_choices(l):
     return [(choice, choice) for choice in l]
+
 
 # Create your models here.
 

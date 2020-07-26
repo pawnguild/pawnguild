@@ -9,9 +9,12 @@ xbox1_pawn_fields = base_pawn_fields + ["gamertag"]
 ps4_pawn_fields = base_pawn_fields + ["psn"]
 ps3_pawn_fields = base_pawn_fields + ["psn", "version"]
 
+platforms = ["Steam", "Switch", "XboxOne", "PS4", "PS3"]
+
 def sort_pawns(pawns):
     vocation_order = {"Fighter": 0, "Warrior": 1, "Strider": 2, "Ranger": 3, "Mage": 4, "Sorcerer": 5}
     return sorted(pawns, key=lambda pawn: (vocation_order[pawn.vocation], pawn.level))
+
 
 
 class BasePawnCollection:

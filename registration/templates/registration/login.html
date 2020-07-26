@@ -5,6 +5,13 @@
     <form method="post">
         {% csrf_token %}
 
+        {% if form.errors %}
+        <div class="alert alert-warning">
+            <strong>{{ form.non_field_errors |escape }}</strong>
+        </div>
+        {% endif %}
+
+
         <p> Username: {{ form.username }}  </p>
         <p> Password:  {{ form.password}} </p>
 

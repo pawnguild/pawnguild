@@ -25,9 +25,9 @@ from pawnlisting import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('email/', include(mail_urls)),
-    path('', include("pawnlisting.urls")),
+    path('', include("django.contrib.auth.urls")),
     path('', include("registration.urls")),
-    path('', include('django.contrib.auth.urls')),
+    path('', include("pawnlisting.urls")),
 ]
 
 if settings.DEBUG:

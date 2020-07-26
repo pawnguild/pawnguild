@@ -11,8 +11,6 @@ import string
 from pawnlisting.forms import SteamPawnForm, SwitchPawnForm
 from pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 
-from registration.forms import UserProfileForm
-
 
 class UtilityTestCase(TestCase):
 

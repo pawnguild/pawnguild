@@ -4,7 +4,7 @@
 
 <div class="form-group">
     {% if form.errors.pawn_id %}
-    <div class="alert alert-danger">
+    <div class="alert alert-warning">
         <strong>{{ form.errors.pawn_id |escape }}</strong>
     </div>
     {% endif %}
@@ -14,7 +14,7 @@
 
 <div class="form-group">
     {% if form.errors.friend_account_id %}
-    <div class="alert alert-danger">
+    <div class="alert alert-warning">
         <strong>{{ form.errors.friend_account_id |escape }}</strong>
     </div>
     {% endif %}

@@ -1,10 +1,5 @@
-in next patch
-- limit pawns to 5 per account
-
-
 high
-- fix email sending on prod
-- select_platform required
+- properly extend loginview
 - ui work
 - error messages on login
 
@@ -14,6 +9,11 @@ medium
 low priority
 - change includes everywhere to extends for base
 - footer with links to reddit/discord/steam page
+- select_platform with {% for %} loop instead of hardcode
+
+- things to lookout for in user testing
+    - email confirmation blocking the server... consider timeout on email confirmation
+
 
 future
 - password resetting

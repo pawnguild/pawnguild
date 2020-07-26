@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError, PermissionDenied
 
 from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
-from .forms import SteamPawnForm, SwitchPawnForm, XboxOnePawnForm, PS4PawnForm, PS3PawnForm
+from .forms import SteamPawnForm, SwitchPawnForm, XboxOnePawnForm, PS4PawnForm, PS3PawnForm, PlatformForm
 from .utility import *
 
 
@@ -55,18 +55,16 @@ class ChoosePawnPlatform(AllowPawnCreationMixin, View):
         return render(request, "pawnlisting/pawn_forms/select_platform.html")
 
     def post(self, request):
-        platform = request.POST["platform"]
-        if platform == "Steam":
-            return redirect(reverse("create-steam-pawn"))
-        elif platform == "Switch":
-            return redirect(reverse("create-switch-pawn"))
-        elif platform == "Xbox1":
-            return redirect(reverse("create-xbox1-pawn"))
-        elif platform == "PS4":
-            return redirect(reverse("create-ps4-pawn"))
-        elif platform == "PS3":
-            return redirect(reverse("create-ps3-pawn"))
-
+        platform_form = PlatformForm(request.POST)
+        if platform_form.is_valid():
+            platform = platform_form.cleaned_data["platform"]
+            if   platform == "Steam":   return redirect(reverse("create-steam-pawn"))
+            elif platform == "Switch":  return redirect(reverse("create-switch-pawn"))
+            elif platform == "XboxOne": return redirect(reverse("create-xbox1-pawn"))
+            elif platform == "PS4":     return redirect(reverse("create-ps4-pawn"))
+            elif platform == "PS3":     return redirect(reverse("create-ps3-pawn"))
+        else:
+            return render(request, "pawnlisting/pawn_forms/select_platform.html", context={"platform_form": platform_form})
 
 class CreatePawnMixin(AllowPawnCreationMixin, CreateView):
     login_url = "/login/"

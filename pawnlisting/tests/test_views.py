@@ -103,7 +103,7 @@ class PawnCreateTests(UtilityTestCase):
         response = self.client.post(reverse("select_platform"), {"platform": "Switch"})
         self.assertRedirects(response, reverse("create-switch-pawn"))
 
-        response = self.client.post(reverse("select_platform"), {"platform": "Xbox1"})
+        response = self.client.post(reverse("select_platform"), {"platform": "XboxOne"})
         self.assertRedirects(response, reverse("create-xbox1-pawn"))
 
         response = self.client.post(reverse("select_platform"), {"platform": "PS4"})

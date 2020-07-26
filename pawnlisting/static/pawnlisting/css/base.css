@@ -27,3 +27,7 @@ a {
 a:hover {
     color: pink;
 }
+
+div.small {
+    color: lightgreen;
+}

@@ -9,7 +9,7 @@
 
         <div>
             {% if profile_form.errors.username %}
-            <div class="alert alert-danger">
+            <div class="alert alert-warning">
                 <strong>{{ profile_form.errors.username |escape }}</strong>
             </div>
             {% endif %}
@@ -18,7 +18,7 @@
         </div>
         <div>
             {% if profile_form.errors.password1 %}
-                <div class="alert alert-danger">
+                <div class="alert alert-warning">
                     <strong>{{ profile_form.errors.password1 |escape }}</strong>
                 </div>
             {% endif %}
@@ -27,7 +27,7 @@
         </div>
         <div>
             {% if profile_form.errors.password2 %}
-                <div class="alert alert-danger">
+                <div class="alert alert-warning">
                     <strong>{{ profile_form.errors.password2 |escape }}</strong>
                 </div>
             {% endif %}
@@ -36,7 +36,7 @@
         </div>
         <div>
             {% if profile_form.errors.email %}
-                <div class="alert alert-danger">
+                <div class="alert alert-warning">
                     <strong>{{ profile_form.errors.email |escape }}</strong>
                 </div>
             {% endif %}

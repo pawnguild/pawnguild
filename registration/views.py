@@ -1,25 +1,38 @@
 from django.shortcuts import render
 from django.views.generic.edit import View
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.shortcuts import render, reverse, redirect
 from django.views.generic import TemplateView
 
-from .forms import UserProfileForm
+from django.contrib.auth.views import LoginView
+
+from .forms import UserProfileCreationForm
 
 from django_email_verification import sendConfirm
 
 # Create your views here.
 
+
+class Login(LoginView):
+    pass
+    # def post(self, request, *args, **kwargs):
+    #     auth_form = AuthenticationForm(request.POST)
+    #     breakpoint()
+    #     if auth_form.is_valid():
+    #         return super().post(request, *args, **kwarsg)
+    #     else:
+    #         return render(request, "registration/login.html", context={"form": auth_form})
+
 class Register(View):
 
     def get(self, request):
-        context = {"profile_form": UserProfileForm()}
+        context = {"profile_form": UserProfileCreationForm()}
         return render(request, "registration/register.html", context=context)
 
     def post(self, request):
-        profile_form = UserProfileForm(request.POST)
+        profile_form = UserProfileCreationForm(request.POST)
         if profile_form.is_valid():
             user = profile_form.save() # Creates a user
             login(request, user)
@@ -33,7 +46,7 @@ class Register(View):
 class UpdateProfile(LoginRequiredMixin, View):
 
     def get(self, request):
-        context = {"profile_form": UserProfileForm() }
+        context = {"profile_form": UserProfileCreationForm() }
         return render(request, "registration/update_profile.html", context=context)
 
     def post(self, request):
