@@ -46,6 +46,7 @@ class TooManyPawns(TemplateView):
 class AllowPawnCreationMixin(LoginRequiredMixin, EmailVerifiedMixin, LimitFivePawnsMixin):
     pass
 
+
 class ChoosePawnPlatform(AllowPawnCreationMixin, View):
 
     login_url = "/login/"
