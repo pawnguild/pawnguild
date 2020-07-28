@@ -3,7 +3,7 @@ high
 - ui work
 
 medium
-- css registration files to registration app
+- switch setting location to match two scoops
 
 low priority
 - change includes everywhere to extends for base

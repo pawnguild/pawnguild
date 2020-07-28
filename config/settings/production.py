@@ -1,4 +1,4 @@
-from settings.base import *
+from .base import *
 
 ALLOWED_HOSTS = ["www.pawnguild.xyz"]
 SECURE_SSL_REDIRECT = True

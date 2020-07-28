@@ -20,14 +20,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django_email_verification import urls as mail_urls
-from pawnlisting import views
+from pawnguild.pawnlisting import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('email/', include(mail_urls)),
     path('', include("django.contrib.auth.urls")),
-    path('', include("registration.urls")),
-    path('', include("pawnlisting.urls")),
+    path('', include("pawnguild.registration.urls")),
+    path('', include("pawnguild.pawnlisting.urls")),
 ]
 
 if settings.DEBUG:

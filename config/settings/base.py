@@ -32,8 +32,8 @@ SECRET_KEY = get_env_variable("SECRET_KEY")
 # Application definition
 
 INSTALLED_APPS = [
-    'pawnlisting',
-    'registration',
+    'pawnguild.pawnlisting',
+    'pawnguild.registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'pawnhall.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pawnhall.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database

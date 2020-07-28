@@ -1,8 +1,8 @@
 from django.test import TestCase
-from pawnlisting.models import Pawn
 from django.shortcuts import reverse
 
-from pawnlisting.tests.utility import UtilityTestCase
+from pawnguild.pawnlisting.models import Pawn
+from pawnguild.pawnlisting.tests.utility import UtilityTestCase
 
 class TestPawnApi(UtilityTestCase):
 

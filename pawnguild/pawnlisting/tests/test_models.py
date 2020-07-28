@@ -1,8 +1,8 @@
 from django.test import TestCase
-from pawnlisting.models import SteamPawn, SwitchPawn
 from django.shortcuts import reverse
 
-from pawnlisting.tests.utility import UtilityTestCase
+from pawnguild.pawnlisting.models import SteamPawn, SwitchPawn
+from pawnguild.pawnlisting.tests.utility import UtilityTestCase
 
 from time import sleep
 from datetime import datetime, timedelta

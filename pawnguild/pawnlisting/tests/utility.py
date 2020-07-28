@@ -8,8 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 
-from pawnlisting.forms import SteamPawnForm, SwitchPawnForm
-from pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
+from pawnguild.pawnlisting.forms import SteamPawnForm, SwitchPawnForm
+from pawnguild.pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 
 
 class UtilityTestCase(TestCase):

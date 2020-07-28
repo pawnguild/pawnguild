@@ -1,7 +1,7 @@
-from pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 from django.shortcuts import reverse
 
-from pawnlisting.tests.utility import UtilityTestCase
+from pawnguild.pawnlisting.tests.utility import UtilityTestCase
+from pawnguild.pawnlisting.models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 
 class LoginRequiredTests(UtilityTestCase):
 
