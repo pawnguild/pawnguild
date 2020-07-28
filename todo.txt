@@ -1,7 +1,6 @@
+
 high
-- properly extend loginview
 - ui work
-- error messages on login
 
 medium
 - css registration files to registration app
@@ -10,6 +9,8 @@ low priority
 - change includes everywhere to extends for base
 - footer with links to reddit/discord/steam page
 - select_platform with {% for %} loop instead of hardcode
+- consider mixtures in tests to make tests cleaner
+
 
 - things to lookout for in user testing
     - email confirmation blocking the server... consider timeout on email confirmation
