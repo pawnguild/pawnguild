@@ -1,23 +1,25 @@
 {% extends "pawnlisting/pawn_forms/base_pawn_form.html" %}
 
 {% block platform_form %}
-<div class="form-group">
-    {% if form.errors.psn %}
-    <div class="alert alert-warning">
+
+{% if form.errors.psn %}
+    <div class="row alert alert-warning">
         <strong>{{ form.errors.psn |escape }}</strong>
     </div>
-    {% endif %}
-    {{ form.psn.label_tag }}
-    {{ form.psn }}
+{% endif %}
+
+<div class="row form-group">
+    <div class="col-4">{{ form.psn.label_tag }}</div>
+    <div class="col-8 long">{{ form.psn }}</div>
 </div>
 
-<div class="form-group">
+<div class="row form-group">
     {% if form.errors.pawn_code %}
     <div class="alert alert-warning">
         <strong>{{ form.errors.pawn_code |escape }}</strong>
     </div>
     {% endif %}
-    {{ form.version.label_tag }}
-    {{ form.version }}
+    <div class="col-4">{{ form.version.label_tag }}</div>
+    <div class="col-8 long">{{ form.version }}</div>
 </div>
 {% endblock platform_form %}

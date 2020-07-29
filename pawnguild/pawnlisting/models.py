@@ -53,7 +53,7 @@ class Pawn(models.Model):
 
     def clean(self):
         errors = {}
-        if self.level not in range(201):
+        if self.level not in range(1,201):
             errors["level"] = ValidationError('Level must be within 1-200')
 
         inclinations = {self.primary_inclination, self.secondary_inclination, self.tertiary_inclination}

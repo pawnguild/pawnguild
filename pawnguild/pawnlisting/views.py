@@ -220,13 +220,13 @@ class SwitchPawnUpdate(make_UserOwnsPawnMixin(SwitchPawn), UpdateView):
 
 class XboxOnePawnUpdate(make_UserOwnsPawnMixin(XboxOnePawn), UpdateView):
     model = XboxOnePawn
-    fields = base_pawn_fields
+    fields = xbox1_pawn_fields
     template_name = "pawnlisting/pawn_forms/xbox1.html"
 
 
 class PS4PawnUpdate(make_UserOwnsPawnMixin(PS4Pawn), UpdateView):
     model = PS4Pawn
-    fields = base_pawn_fields
+    fields = ps4_pawn_fields
     template_name = "pawnlisting/pawn_forms/ps4.html"
 
 

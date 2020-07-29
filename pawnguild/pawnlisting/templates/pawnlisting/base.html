@@ -8,7 +8,7 @@
 </head>
 
 <nav class="navbar navbar-dark bg-dark hidden-lg-up">
-    <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ραωи нαℓℓ </h2> 
+    <a href="{% url 'list-all-pawns' %}"><h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ραωи нαℓℓ </h2> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header">
         &#9776;
     </button>
@@ -82,7 +82,7 @@
             <a class="navbar-brand nav-item mx-5" href="{% url 'manage_pawns' %}"> Manage pawns </a>
         </li>
     </div>
-    <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ραωи нαℓℓ </h2> 
+     <a href="{% url 'list-all-pawns' %}"><h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ραωи нαℓℓ </h2> </a>
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">
         <ul class="navbar-nav mr-auto text-center">
             {% if user.is_authenticated %}

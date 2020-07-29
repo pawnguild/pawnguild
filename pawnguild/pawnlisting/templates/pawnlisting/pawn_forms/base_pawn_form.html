@@ -5,84 +5,108 @@
 
 <div class="container">
 
-    {% if object %}
-    <h1> Updating Pawn: {{ object.name }} </h1>
-    {% else %}
-    <h1> Create a Pawn </h1>
-    {% endif %}
+
 
     <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                {% if object %}
+                    <h1> Updating Pawn: {{ object.name }} </h1>
+                {% else %}
+                    <h1> Create Pawn </h1>
+                {% endif %}
+            </div>
+        </div>
         <form method="POST" enctype="multipart/form-data">
             <div class="row">
                 {% csrf_token %}
-                <div class="col">
+                <div class="col-lg-6">
                     <h2> Required Fields </h2>
-                    <div class="form-group">
-                        {% if form.errors.name %}
-                        <div class="alert alert-warning">
+
+                    {% if form.errors.name %}
+                        <div class="row alert alert-warning">
                             <strong>{{ form.errors.name |escape }}</strong>
                         </div>
-                        {% endif %}
-                        {{ form.name.label_tag }}
-                        {{ form.name }}
+                    {% endif %}
+
+                    <div class="row form-group">
+                        <div class="col-4">{{ form.name.label_tag }}</div>
+                        <div class="col-8 long">{{ form.name }}</div>
                     </div>
-                    <div class="form-group">
-                        {% if form.errors.level %}
-                        <div class="alert alert-warning">
+
+                    {% if form.errors.level %}
+                        <div class="row alert alert-warning">
                             <strong>{{ form.errors.level |escape }}</strong>
                         </div>
-                        {% endif %}
-                        {{ form.level.label_tag }}
-                        {{ form.level }}
+                    {% endif %}
+
+                    <div class="row form-group">
+                        <div class="col-4">{{ form.level.label_tag }}</div>
+                        <div class="col-8 long">{{ form.level }} </div>
                     </div>
-                    <div class="form-group">
-                        {% if form.errors.vocation %}
-                        <div class="alert alert-warning">
+
+
+                    {% if form.errors.vocation %}
+                        <div class="row alert alert-warning">
                             <strong>{{ form.errors.vocation |escape }}</strong>
                         </div>
-                        {% endif %}
-                        {{ form.vocation.label_tag }}
-                        {{ form.vocation }}
+                    {% endif %}
+
+                    <div class="row form-group">
+                        <div class="col-4">{{ form.vocation.label_tag }}</div>
+                        <div class="col-8 long">{{ form.vocation }}</div>
                     </div>
-                    <div class="form-group">
-                        {% if form.errors.gender %}
-                        <div class="alert alert-warning">
+
+                    {% if form.errors.gender %}
+                        <div class="row alert alert-warning">
                             <strong>{{ form.errors.gender |escape }}</strong>
                         </div>
-                        {% endif %}
-                        {{ form.gender.label_tag }}
-                        {{ form.gender }}
+                    {% endif %}
+
+                    <div class="row form-group">
+                        <div class="col-4">{{ form.gender.label_tag }}</div>
+                        <div class="col-8 long">{{ form.gender }}</div>
                     </div>
-                    <div class="form-group">
-                        {% if form.errors.primary_inclination %}
-                        <div class="alert alert-warning">
+
+                    {% if form.errors.primary_inclination %}
+                        <div class="row alert alert-warning">
                             <strong>{{ form.errors.primary_inclination |escape }}</strong>
                         </div>
-                        {% endif %}
-                        {{ form.primary_inclination.label_tag }}
-                        {{ form.primary_inclination }}
+                    {% endif %}
+
+                    <div class="row form-group">
+                        <div class="col-4">{{ form.primary_inclination.label_tag }}</div>
+                        <div class="col-8 long">{{ form.primary_inclination }}</div>
                     </div>
-                    <div class="form-group">
-                        {% if form.errors.secondary_inclination %}
-                        <div class="alert alert-warning">
+
+                    {% if form.errors.secondary_inclination %}
+                        <div class="row alert alert-warning">
                             <strong>{{ form.errors.secondary_inclination |escape }}</strong>
                         </div>
-                        {% endif %}
-                        {{ form.secondary_inclination.label_tag }}
-                        {{ form.secondary_inclination }}
-                        <div class="small" id="secondaryInclinationHelp" class="form-text text-muted"> Select None if
-                            your pawn does not have a 2nd inclination </div>
+                    {% endif %}
+
+                    <div class="row flat form-group">
+                        <div class="col-4">{{ form.secondary_inclination.label_tag }}</div>
+                        <div class="col-8 long">{{ form.secondary_inclination }}</div>
                     </div>
-                    <div class="form-group">
-                        {% if form.errors.tertiary_inclination %}
-                        <div class="alert alert-warning">
+
+                    <div class="row">
+                        <div class="col-12 small fat info" id="secondaryInclinationHelp">Select None if your pawn does not have a 2nd inclination</div>
+                    </div>
+
+                    {% if form.errors.tertiary_inclination %}
+                        <div class="row alert alert-warning">
                             <strong>{{ form.errors.tertiary_inclination |escape }}</strong>
                         </div>
-                        {% endif %}
-                        {{ form.tertiary_inclination.label_tag }}
-                        {{ form.tertiary_inclination }}
-                        <div class="small" id="teriaryInclinationHelp" class="form-text text-muted"> Select None if your
-                            pawn does not have a 3rd inclination </div>
+                    {% endif %}
+
+                    <div class="row flat form-group">
+                        <div class="col-4">{{ form.tertiary_inclination.label_tag }}</div>
+                        <div class="col-8 long">{{ form.tertiary_inclination }}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 small fat info" id="secondaryInclinationHelp">Select None if your pawn does not have a 3rd inclination</div>
                     </div>
 
                     {% block platform_form %}
@@ -91,31 +115,33 @@
                 </div>
                 <div class="col">
                     <h2> Optional Fields </h2>
-                    <div class="form-group">
-                        <label for="id_notes">Pawn Notes and Requests </label>
-                        <div>
-                            {{ form.notes }}
+
+                        <div class="row form-group">
+                            <div class="col-4"><label>Pawn Notes and Requests: </label></div>
+                            <div class="col-8 long">{{ form.notes }}</div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_notes">Primary Skills</label>
-                        <div>
-                            {{ form.primary_skills }}
+
+                        <div class="row form-group">
+                            <div class="col-4">{{ form.primary_skills.label_tag }}</div>
+                            <div class="col-8 long">{{ form.primary_skills }}</div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_notes">Secondary Skills</label>
-                        <div>
-                            {{ form.secondary_skills }}
+
+                        <div class="row form-group">
+                            <div class="col-4">{{ form.secondary_skills.label_tag }}</div>
+                            <div class="col-8 long">{{ form.secondary_skills }}</div>
                         </div>
-                    </div>
-                    <div>
-                        <label> Pawn Picture </label>
-                        {{ form.picture }}
-                    </div>
+
+                        <div class="row">
+                            <div class="col-4"><label> Pawn Picture: </label></div>
+                            <div class="col-8">{{ form.picture }}</div>
+                        </div>
                 </div>
             </div>
-            <button class="btn btn-light" type="submit"> Submit </button>
+            {% if object %}
+                <button class="btn btn-light" type="submit">Update Pawn</button>
+            {% else %}
+                <button class="btn btn-light" type="submit">Create Pawn</button>
+            {% endif %}
         </form>
     </div>
 </div>

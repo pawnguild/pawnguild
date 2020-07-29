@@ -3,3 +3,11 @@ textarea {
     background-color: whitesmoke;
     color: dark;
 }
+
+.flat {
+    margin-bottom: 0px;
+}
+
+.fat {
+    margin-bottom: 30px;
+}

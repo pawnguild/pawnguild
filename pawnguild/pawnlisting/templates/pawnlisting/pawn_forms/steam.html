@@ -2,14 +2,15 @@
 
 {% block platform_form %}
 
-<div class="form-group">
-    {% if form.errors.steam_url %}
-    <div class="alert alert-warning">
+{% if form.errors.steam_url %}
+    <div class="row alert alert-warning">
         <strong>{{ form.errors.steam_url |escape }}</strong>
     </div>
-    {% endif %}
-    {{ form.steam_url.label_tag }}
-    {{ form.steam_url }}
+{% endif %}
+
+<div class="row form-group">
+    <div class="col-4">{{ form.steam_url.label_tag }}</div>
+    <div class="col-8 long">{{ form.steam_url }}</div>
 </div>
 
 {% endblock platform_form %}

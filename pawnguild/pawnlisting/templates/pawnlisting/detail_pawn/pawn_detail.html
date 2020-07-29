@@ -2,54 +2,55 @@
 
 <b>
 <div class="container">
-    <div class="col-xs-12 col-lg-6">
-        <div>
-            <label> Name: </label>
-            {{ pawn.name }}
+    <div class="row">
+        <div class="col-xs-12 col-lg-6">
+            <div>
+                <label> Name: </label>
+                {{ pawn.name }}
+            </div>
+            <div>
+                <label> Level: </label>
+                {{ pawn.level }}
+            </div>
+            <div>
+                <label> Vocation: </label>
+                {{ pawn.vocation }}
+            </div>
+            <div>
+                <label> Gender: </label>
+                {{ pawn.gender }}
+            </div>
+            <div>
+                <label> Primary_inclination: </label>
+                {{ pawn.primary_inclination}}
+            </div>
+            <div>
+                <label> Secondary_inclination: </label>
+                {{ pawn.secondary_inclination}}
+            </div>
+            <div>
+                {% block platform_info %}
+                {% endblock %}
+            </div>
+            <div>
+                <label> Notes: </label>
+                {{ pawn.notes }}
+            </div>
+            <div>
+                <label> Primary Skills: </label>
+                {{ pawn.primary_skills }}
+            </div>
+            <div>
+                <label> Secondary Skills: </label>
+                {{ pawn.secondary_skills }}
+            </div>
         </div>
-        <div>
-            <label> Level: </label>
-            {{ pawn.level }}
-        </div>
-        <div>
-            <label> Vocation: </label>
-            {{ pawn.vocation }}
-        </div>
-        <div>
-            <label> Gender: </label>
-            {{ pawn.gender }}
-        </div>
-        <div>
-            <label> Primary_inclination: </label>
-            {{ pawn.primary_inclination}}
-        </div>
-        <div>
-            <label> Secondary_inclination: </label>
-            {{ pawn.secondary_inclination}}
-        </div>
-        <div>
-            {% block platform_info %}
-            {% endblock %}
-        </div>
-        <div>
-            <label> Notes: </label>
-            {{ pawn.notes }}
-        </div>
-        <div>
-            <label> Primary Skills: </label>
-            {{ pawn.primary_skills }}
-        </div>
-        <div>
-            <label> Secondary Skills: </label>
-            {{ pawn.secondary_skills }}
-        </div>
+        <div class="col-xs-12 col-lg-6">
+            {% if pawn.picture %}
+                <img src="{{pawn.picture.url}}">
+            {% endif %}
+        </div>  
     </div>
-    <div class="col-xs-12 col-lg-6">
-        {% if pawn.picture %}
-            <img src="{{pawn.picture.url}}">
-        {% endif %}
-    </div>
-
 
 </div>
 </b>

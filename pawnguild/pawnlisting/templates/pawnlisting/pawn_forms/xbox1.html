@@ -1,13 +1,16 @@
 {% extends "pawnlisting/pawn_forms/base_pawn_form.html" %}
 
 {% block platform_form %}
-<div class="form-group">
-    {% if form.errors.gamertag %}
-    <div class="alert alert-warning">
+
+{% if form.errors.gamertag %}
+    <div class="row alert alert-warning">
         <strong>{{ form.errors.gamertag |escape }}</strong>
     </div>
-    {% endif %}
-    {{ form.gamertag.label_tag }}
-    {{ form.gamertag }}
+{% endif %}
+
+<div class="row form-group">
+
+    <div class="col-4">{{ form.gamertag.label_tag }}</div>
+    <div class="col-8 long">{{ form.gamertag }}</div>
 </div>
 {% endblock platform_form %}

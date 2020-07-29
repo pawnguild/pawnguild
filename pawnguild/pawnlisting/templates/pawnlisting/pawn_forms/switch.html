@@ -2,24 +2,28 @@
 
 {% block platform_form %}
 
-<div class="form-group">
-    {% if form.errors.pawn_id %}
-    <div class="alert alert-warning">
+{% if form.errors.pawn_id %}
+    <div class="row alert alert-warning">
         <strong>{{ form.errors.pawn_id |escape }}</strong>
     </div>
-    {% endif %}
-    {{ form.pawn_id.label_tag }}
-    {{ form.pawn_id }}
+{% endif %}
+
+<div class="row form-group">
+
+    <div class="col-4">{{ form.pawn_id.label_tag }}</div>
+    <div class="col-8 long">{{ form.pawn_id }}</div>
 </div>
 
-<div class="form-group">
-    {% if form.errors.friend_account_id %}
-    <div class="alert alert-warning">
+{% if form.errors.friend_account_id %}
+    <div class="row alert alert-warning">
         <strong>{{ form.errors.friend_account_id |escape }}</strong>
     </div>
-    {% endif %}
-    {{ form.friend_account_id.label_tag }}
-    {{ form.friend_account_id }}
+{% endif %}
+
+<div class="row form-group">
+
+    <div class="col-4">{{ form.friend_account_id.label_tag }}</div>
+    <div class="col-8 long">{{ form.friend_account_id }}</div>
 </div>
 
 {% endblock platform_form %}

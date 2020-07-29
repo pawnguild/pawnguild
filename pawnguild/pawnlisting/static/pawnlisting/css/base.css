@@ -6,7 +6,10 @@ p {
     color: whitesmoke;
 }
 
-h1,
+h1 {
+    color: lightsalmon;
+}
+
 h2,
 h3 {
     color: lightgreen;
@@ -20,6 +23,13 @@ div {
     color: whitesmoke;
 }
 
+div.long>input,
+div.long>select,
+div.long>textarea {
+    max-width: 100%;
+    width: 100%
+}
+
 a {
     color: skyblue
 }
@@ -28,8 +38,12 @@ a:hover {
     color: pink;
 }
 
-div.small {
+div.small.info {
     color: lightgreen;
+}
+
+div.small.warning {
+    color: lightgoldenrodyellow;
 }
 
 .dropdown-menu,

@@ -1,13 +1,25 @@
 
 high
 - ui work
-- for the tables, look into exptending instead of including first
+    - more detail on detail page! put the stars in there explaining what they are
+    - get the picture sorted out. maybe put a placeholder in?
+
+medium
 
 low priority
 - change includes everywhere to extends for base
 - footer with links to reddit/discord/steam page
 - select_platform with {% for %} loop instead of hardcode
 - consider mixtures in tests to make tests cleaner
+- for the tables, look into extending instead of including first
+
+unsorted
+- create back button on form to select platform
+-uplading images is broken
+    - it works on desktop. doesn't show select image before submitting
+- consider return button on small screens
+- more intuitive scrollbar color for manage pawns on phone
+- some sort of indicator that the submit button WAS in fact hit, and to scroll up to see errors
 
 
 - things to lookout for in user testing
