@@ -1,9 +1,8 @@
 
 high
 - ui work
-
-medium
-- switch setting location to match two scoops
+- responsive ui
+- for the tables, look into exptending instead of including first
 
 low priority
 - change includes everywhere to extends for base

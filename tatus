@@ -1,0 +1,129 @@
+[1mdiff --git a/pawnguild/pawnlisting/templates/pawnlisting/base.html b/pawnguild/pawnlisting/templates/pawnlisting/base.html[m
+[1mindex c1f7cdc..2642477 100644[m
+[1m--- a/pawnguild/pawnlisting/templates/pawnlisting/base.html[m
+[1m+++ b/pawnguild/pawnlisting/templates/pawnlisting/base.html[m
+[36m@@ -4,59 +4,59 @@[m
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">[m
+     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>[m
+     <link rel="stylesheet" href="{% static 'pawnlisting/css/base.css' %}">[m
+[32m+[m[32m    <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+ </head>[m
+ [m
+ [m
+[31m-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">[m
+[31m-    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">[m
+[31m-        <li class="navbar-nav ml-auto text-center">[m
+[31m-[m
+[31m-            <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">[m
+[31m-                    <ul class="navbar-nav mr-auto text-center">[m
+[31m-                        <li class="nav-item dropdown">[m
+[31m-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" [m
+[31m-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[m
+[31m-                                            Select Pawns to View[m
+[31m-                                </a>[m
+[31m-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">[m
+[31m-                                    <a class="dropdown-item" href="{% url 'list-all-pawns' %}"> Show All Pawns </a>[m
+[31m-                                    <a class="dropdown-item" href="{% url 'list-steam-pawns' %}"> Show Steam Pawns </a>[m
+[31m-                                    <a class="dropdown-item" href="{% url 'list-switch-pawns' %}"> Show Switch Pawns </a>[m
+[31m-                                    <a class="dropdown-item" href="{% url 'list-xbox1-pawns' %}"> Show Xbox One Pawns </a>[m
+[31m-                                    <a class="dropdown-item" href="{% url 'list-ps4-pawns' %}"> Show PS4 Pawns </a>[m
+[31m-                                    <a class="dropdown-item" href="{% url 'list-ps3-pawns' %}"> Show PS3 Pawns </a>[m
+[31m-                                </div>[m
+[31m-                        </li>[m
+[31m-                    </ul>[m
+[31m-            </div>[m
+[31m-[m
+[31m-            <a class="navbar-brand nav-item mx-5" href="{% url 'select_platform' %}"> Add pawn </a>[m
+[31m-            <a class="navbar-brand nav-item mx-5" href="{% url 'manage_pawns' %}"> Manage pawns </a>[m
+[31m-        </li>[m
+[31m-    </div>[m
+[31m-    <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ραωи нαℓℓ </h2> [m
+[31m-    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">[m
+[31m-        <ul class="navbar-nav mr-auto text-center">[m
+[31m-            {% if user.is_authenticated %}[m
+[31m-                <li class="nav-item dropdown">[m
+[31m-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" [m
+[31m-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[m
+[31m-                                    Logged in as {{ user.username }}[m
+[31m-                        </a>[m
+[31m-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">[m
+[31m-                        <a class="dropdown-item" href="{% url 'update_profile' %}"> Update Profile </a>[m
+[31m-                        <a class="dropdown-item" href="{% url 'logout' %}"> Logout </a>[m
+[31m-                        </div>[m
+[31m-                </li>[m
+[31m-            {% else %}[m
+[31m-                <a class="navbar-brand" href="{% url 'login' %}"> Login </a>[m
+[31m-            {% endif %}[m
+[31m-            <a class="navbar-brand nav-item mx-5" href="{% url 'register' %}"> Register </a> [m
+[31m-[m
+[31m-        </ul>[m
+[31m-    </div>[m
+[31m-</nav>[m
+[31m-[m
+[32m+[m[32m    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-none d-sm-block">[m
+[32m+[m[32m        <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">[m
+[32m+[m[32m            <li class="navbar-nav ml-auto text-center">[m
+[32m+[m
+[32m+[m[32m                <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">[m
+[32m+[m[32m                        <ul class="navbar-nav mr-auto text-center">[m
+[32m+[m[32m                            <li class="nav-item dropdown">[m
+[32m+[m[32m                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"[m[41m [m
+[32m+[m[32m                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[m
+[32m+[m[32m                                                Select Pawns to View[m
+[32m+[m[32m                                    </a>[m
+[32m+[m[32m                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">[m
+[32m+[m[32m                                        <a class="dropdown-item" href="{% url 'list-all-pawns' %}"> Show All Pawns </a>[m
+[32m+[m[32m                                        <a class="dropdown-item" href="{% url 'list-steam-pawns' %}"> Show Steam Pawns </a>[m
+[32m+[m[32m                                        <a class="dropdown-item" href="{% url 'list-switch-pawns' %}"> Show Switch Pawns </a>[m
+[32m+[m[32m                                        <a class="dropdown-item" href="{% url 'list-xbox1-pawns' %}"> Show Xbox One Pawns </a>[m
+[32m+[m[32m                                        <a class="dropdown-item" href="{% url 'list-ps4-pawns' %}"> Show PS4 Pawns </a>[m
+[32m+[m[32m                                        <a class="dropdown-item" href="{% url 'list-ps3-pawns' %}"> Show PS3 Pawns </a>[m
+[32m+[m[32m                                    </div>[m
+[32m+[m[32m                            </li>[m
+[32m+[m[32m                        </ul>[m
+[32m+[m[32m                </div>[m
+[32m+[m
+[32m+[m[32m                <a class="navbar-brand nav-item mx-5" href="{% url 'select_platform' %}"> Add pawn </a>[m
+[32m+[m[32m                <a class="navbar-brand nav-item mx-5" href="{% url 'manage_pawns' %}"> Manage pawns </a>[m
+[32m+[m[32m            </li>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ραωи нαℓℓ </h2>[m[41m [m
+[32m+[m[32m        <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">[m
+[32m+[m[32m            <ul class="navbar-nav mr-auto text-center">[m
+[32m+[m[32m                {% if user.is_authenticated %}[m
+[32m+[m[32m                    <li class="nav-item dropdown">[m
+[32m+[m[32m                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"[m[41m [m
+[32m+[m[32m                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[m
+[32m+[m[32m                                        Logged in as {{ user.username }}[m
+[32m+[m[32m                            </a>[m
+[32m+[m[32m                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">[m
+[32m+[m[32m                            <a class="dropdown-item" href="{% url 'update_profile' %}"> Update Profile </a>[m
+[32m+[m[32m                            <a class="dropdown-item" href="{% url 'logout' %}"> Logout </a>[m
+[32m+[m[32m                            </div>[m
+[32m+[m[32m                    </li>[m
+[32m+[m[32m                {% else %}[m
+[32m+[m[32m                    <a class="navbar-brand" href="{% url 'login' %}"> Login </a>[m
+[32m+[m[32m                {% endif %}[m
+[32m+[m[32m                <a class="navbar-brand nav-item mx-5" href="{% url 'register' %}"> Register </a>[m[41m [m
+[32m+[m
+[32m+[m[32m            </ul>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m    </nav>[m
+ [m
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>[m
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>[m
+[1mdiff --git a/todo.txt b/todo.txt[m
+[1mindex 805e94b..6b21b45 100644[m
+[1m--- a/todo.txt[m
+[1m+++ b/todo.txt[m
+[36m@@ -1,9 +1,7 @@[m
+ [m
+ high[m
+ - ui work[m
+[31m-[m
+[31m-medium[m
+[31m-- switch setting location to match two scoops[m
+[32m+[m[32m- responsive ui[m
+ [m
+ low priority[m
+ - change includes everywhere to extends for base[m

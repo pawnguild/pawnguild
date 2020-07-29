@@ -2,8 +2,7 @@
 
 <b>
 <div class="container">
-  <div class="row flex-nowrap">
-    <div class="col">
+    <div class="col-xs-12 col-lg-6">
         <div>
             <label> Name: </label>
             {{ pawn.name }}
@@ -45,13 +44,12 @@
             {{ pawn.secondary_skills }}
         </div>
     </div>
-    <div class="col">
+    <div class="col-xs-12 col-lg-6">
         {% if pawn.picture %}
             <img src="{{pawn.picture.url}}">
         {% endif %}
     </div>
 
 
-  </div>
 </div>
 </b>

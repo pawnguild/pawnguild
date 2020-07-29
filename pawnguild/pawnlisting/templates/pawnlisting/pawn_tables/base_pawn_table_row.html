@@ -2,9 +2,9 @@
 
 <link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_table.css' %}">
 
-<td class="{{ pawn.vocation_color }}-vocation"> <b> {{ pawn.vocation }} </b> </td>
+<td class="{{ pawn.vocation_color }}-vocation table-vocation"> <b> {{ pawn.vocation }} </b> </td>
 <td>{{ pawn.name }}</td>
-<td>
+<td class="hidden-sm-down">
 {% if pawn.activity != 0 %}
     {% with ''|center:pawn.activity as range %}
     {% for _ in range %}
@@ -20,6 +20,6 @@
 {% endif %}
 </td>
 <td>{{ pawn.level }}</td>
-<td>{{ pawn.inclination_string }}</td>
-<td>{{ pawn.gender }}</td>
-<td><a href="{{ pawn.pawn_url }}" class="btn btn-info btn-sm"> Detail </button>
+<td class="hidden-sm-down">{{ pawn.inclination_string }}</td>
+<td class="hidden-sm-down">{{ pawn.gender }}</td>
+<td class="table-detail"><a href="{{ pawn.pawn_url }}" class="btn btn-outline-info btn-sm"> Detail </button>
