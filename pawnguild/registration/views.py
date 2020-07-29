@@ -17,18 +17,12 @@ from django_email_verification import sendConfirm
 
 class Login(LoginView):
     pass
-    # def post(self, request, *args, **kwargs):
-    #     auth_form = AuthenticationForm(request.POST)
-    #     breakpoint()
-    #     if auth_form.is_valid():
-    #         return super().post(request, *args, **kwarsg)
-    #     else:
-    #         return render(request, "registration/login.html", context={"form": auth_form})
+
 
 class Register(View):
 
     def get(self, request):
-        context = {"profile_form": UserProfileCreationForm()}
+        context = {"form": UserProfileCreationForm()}
         return render(request, "registration/register.html", context=context)
 
     def post(self, request):

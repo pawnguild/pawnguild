@@ -7,44 +7,16 @@
     <form method="post">
         {% csrf_token %}
 
-        <div>
-            {% if profile_form.errors.username %}
-            <div class="alert alert-warning">
-                <strong>{{ profile_form.errors.username |escape }}</strong>
-            </div>
-            {% endif %}
-            <label for="id_username-input"> Username: </label>
-            {{ profile_form.username }}
+        {% if form.errors %}
+        <div class="alert alert-warning">
+            <strong>{{ form.non_field_errors |escape }}</strong>
         </div>
-        <div>
-            {% if profile_form.errors.password1 %}
-                <div class="alert alert-warning">
-                    <strong>{{ profile_form.errors.password1 |escape }}</strong>
-                </div>
-            {% endif %}
-            <label for="id_password1"> Password: </label>
-            {{ profile_form.password1 }}
-        </div>
-        <div>
-            {% if profile_form.errors.password2 %}
-                <div class="alert alert-warning">
-                    <strong>{{ profile_form.errors.password2 |escape }}</strong>
-                </div>
-            {% endif %}
-            <label for="id_password2"> Verify password: </label>
-            {{ profile_form.password2 }}
-        </div>
-        <div>
-            {% if profile_form.errors.email %}
-                <div class="alert alert-warning">
-                    <strong>{{ profile_form.errors.email |escape }}</strong>
-                </div>
-            {% endif %}
-            <label for="email"> Email: </label>
-            {{ profile_form.email }}
-        </div>
-        <div>
-            <input type="submit" value="Register">
-        </div>
+        {% endif %}
+
+        <p> Username: {{ form.username }} </p>
+        <p> Password: {{ form.password1 }} </p>
+        <p> Verify password: {{ form.password2 }} </p>
+        <p> Email: {{ form.email }} </p>
+        <p> <input type="submit" value="Register"> </p>
     </form>
 </div>

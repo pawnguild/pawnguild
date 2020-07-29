@@ -1,7 +1,6 @@
 
 high
 - ui work
-- responsive ui
 - for the tables, look into exptending instead of including first
 
 low priority

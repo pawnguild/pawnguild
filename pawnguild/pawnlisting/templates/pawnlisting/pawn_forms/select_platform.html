@@ -7,16 +7,21 @@
 <div class="container">
     <form action="{% url 'select_platform' %}" method="POST">
         {% csrf_token %}
-        <div>
-            <select style="display: none;"> </select> {% comment %} for some stupid reason... this being here makes the disabled selected value work {% endcomment %}
 
-            {% if platform_form.errors.platform %}
-            <div class="alert alert-warning">
+        <div class="row mx-3">
+            <h2> Select your platform </h2>
+        </div>
+        {% if platform_form.errors.platform %}
+        <div class="row">
+            <div class="mx-3 alert alert-warning col">
                 <strong>{{ platform_form.errors.platform |escape }}</strong>
             </div>
-            {% endif %}
-
-            <select name="platform" id="platform-select">
+        </div>
+        {% endif %}
+        <div class="row">
+            <select style="display: none;"> </select> {% comment %} for some stupid reason... this being here makes the
+            disabled selected value work {% endcomment %}
+            <select class="mx-3" name="platform" id="platform-select">
                 <option disabled selected value> -- select an option -- </option>
                 <option value="Steam">Steam</option>
                 <option value="Switch">Nintendo Switch</option>
@@ -24,10 +29,9 @@
                 <option value="PS4">PS4</option>
                 <option value="PS3">PS3</option>
             </select>
-
-
-
         </div>
-        <button class="btn btn-light" type="submit"> Submit </button>
+        <div class="row">
+            <button class="mx-3 btn btn-light" type="submit"> Submit </button>
+        </div>
+    </form>
 </div>
-
