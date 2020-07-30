@@ -14,13 +14,13 @@
     </button>
     <div class="collapse navbar-toggleable-xs" id="navbar-header">
         <ul class="nav navbar-nav">
-            <li class="col-4 nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'select_platform' %}"> Add pawn </a>
             </li>
-            <li class="col-4 nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'manage_pawns' %}">Manage Pawns</a>
             </li>
-            <li class="col-4 nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             View Pawns
@@ -55,8 +55,8 @@
 </nav> <!-- /navbar -->
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark hidden-md-down">
-    <div class="col-4 d-flex">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark hidden-md-down d-flex">
+    <div class="col-4">
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
             <li class="navbar-nav ml-auto text-center">
 
@@ -89,7 +89,7 @@
             <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ℙ𝕒𝕨𝕟 𝔾𝕦𝕚𝕝𝕕 </h2>
         </a>
     </div>
-    <div class="col-4 d-flex justify-content-right">
+    <div class="col-4">
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">
             <ul class="navbar-nav mr-auto text-center">
                 {% if user.is_authenticated %}

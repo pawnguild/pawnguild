@@ -116,10 +116,15 @@ class ListAllPawns(View):
 
 
 
-def make_ListPawnMixin(Type):
+def make_ListPawnMixin(Type, origin):
 
     class ListPawnMixin(ListView):
         template_name = "pawnlisting/pawn_tables/list_pawns/list_pawns.html"
+
+        def get_context_data(self):
+            context = super().get_context_data()
+            context.update({"platform": origin})
+            return context
 
         def get_queryset(self):
             return sort_pawns(Type.objects.all())
@@ -127,27 +132,27 @@ def make_ListPawnMixin(Type):
     return ListPawnMixin
 
 
-class SteamPawnList(make_ListPawnMixin(SteamPawn)):
+class SteamPawnList(make_ListPawnMixin(SteamPawn, "Steam")):
     model = SteamPawn
     context_object_name = "steam_pawns"
 
 
-class SwitchPawnList(make_ListPawnMixin(SwitchPawn)):
+class SwitchPawnList(make_ListPawnMixin(SwitchPawn, "Switch")):
     model = SwitchPawn
     context_object_name = "switch_pawns"
 
 
-class XboxOnePawnList(make_ListPawnMixin(XboxOnePawn)):
+class XboxOnePawnList(make_ListPawnMixin(XboxOnePawn, "XboxOne")):
     model = XboxOnePawn
     context_object_name = "xbox1_pawns"
 
 
-class PS4PawnList(make_ListPawnMixin(PS4Pawn)):
+class PS4PawnList(make_ListPawnMixin(PS4Pawn, "PS4")):
     model = PS4Pawn
     context_object_name = "ps4_pawns"
 
 
-class PS3PawnList(make_ListPawnMixin(PS3Pawn)):
+class PS3PawnList(make_ListPawnMixin(PS3Pawn, "PS3")):
     model = PS3Pawn
     context_object_name = "ps3_pawns"
 

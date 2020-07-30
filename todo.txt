@@ -1,6 +1,7 @@
 FEATURES
 high
 
+
 medium
 - footer with links to reddit/discord/steam page
 - password resetting
