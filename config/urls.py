@@ -25,6 +25,7 @@ from pawnguild.pawnlisting import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('email/', include(mail_urls)),
+    path('reset-password', include("password_reset.urls")),
     path('', include("django.contrib.auth.urls")),
     path('', include("pawnguild.registration.urls")),
     path('', include("pawnguild.pawnlisting.urls")),

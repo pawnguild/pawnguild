@@ -55,16 +55,19 @@
 </nav> <!-- /navbar -->
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark hidden-md-down d-flex">
-    <div class="col-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark hidden-md-down">
+    <div class="col-5">
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
             <li class="navbar-nav ml-auto text-center">
 
-                <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">
+
+                <a   class="align-self-center navbar-brand nav-item mx-3" href="{% url 'select_platform' %}"> Add pawn </a>
+                <a   class="align-self-center navbar-brand nav-item mx-3" href="{% url 'manage_pawns' %}"> Manage pawns </a>
+                <div class="navbar-collapse collapse w-100 dual-collapse2 navbar-brand nav-item mx-3">
                     <ul class="navbar-nav mr-auto text-center">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 150px">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 150px;color: #ffabab;">
                                 View Pawns
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -78,19 +81,16 @@
                         </li>
                     </ul>
                 </div>
-
-                <a class="align-self-center navbar-brand nav-item mx-5" href="{% url 'select_platform' %}"> Add pawn </a>
-                <a class="align-self-center navbar-brand nav-item mx-5" href="{% url 'manage_pawns' %}"> Manage pawns </a>
             </li>
         </div>
     </div>
-    <div class="col-4 d-flex justify-content-center">
+    <div class="col-2 d-flex justify-content-center">
         <a href="{% url 'list-all-pawns' %}">
             <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> ℙ𝕒𝕨𝕟 𝔾𝕦𝕚𝕝𝕕 </h2>
         </a>
     </div>
-    <div class="col-4">
-        <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 mx-5">
+    <div class="col-5 px-5">
+        <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
             <ul class="navbar-nav mr-auto text-center">
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
@@ -111,6 +111,14 @@
         </div>
     </div>
 </nav>
+
+<div class="container">
+    {% block title %}
+    {% endblock title %}
+    {% block content%}
+    {% endblock content %}
+</div>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

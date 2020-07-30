@@ -69,6 +69,14 @@ div.small.warning {
     margin-bottom: 20px;
 }
 
+a.nav-link {
+    color: #fbbbac;
+}
+
+.nav-item>a {
+    color: #fbbbac;
+}
+
 
 /*\
  * Restore Bootstrap 3 "hidden" utility classes.

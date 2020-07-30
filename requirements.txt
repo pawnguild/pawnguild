@@ -4,6 +4,7 @@ cryptography==3.0
 Django==3.0.8
 -e git://github.com/DavidJayBrady/django-email-verification@1563b7f368db9f4c69b79cc0e0c8e34967a84541#egg=django_email_verification
 django-nose==1.4.6
+django-password-reset==2.0
 djangorestframework==3.11.0
 ndg-httpsclient==0.5.1
 nose==1.3.7

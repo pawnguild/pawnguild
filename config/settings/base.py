@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_nose',
     'django_email_verification',
+    'password_reset',
 ]
 
 MIDDLEWARE = [
@@ -137,7 +138,13 @@ MEDIA_URL = "/media/"
 
 #TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-### Settings for django_email_verification ###
+### Settings for django_email_verification and reset_password ###
+
+DEFAULT_FROM_EMAIL = "pawnhall7@gmail.com"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "pawnhall7@gmail.com"
+EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_PASSWORD")
+EMAIL_USE_TLS = True
 
 EMAIL_ACTIVE_FIELD = 'email_verified'
 EMAIL_SERVER = 'smtp.gmail.com'
