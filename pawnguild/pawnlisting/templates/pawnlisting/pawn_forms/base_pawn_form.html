@@ -133,14 +133,25 @@
 
                         <div class="row">
                             <div class="col-4"><label> Pawn Picture: </label></div>
-                            <div class="col-8">{{ form.picture }}</div>
+                            <div class="col-8 flat">
+                                <input type="file" name="picture" accept="image/*" id="id_picture">
+                            </div>
                         </div>
+                        {% if object.picture %}
+                            <div class="row">
+                                <div class="col-12 small fat info">Pawn's image is currently <a href={{ object.picture.url }}>
+                                    {{object.picture.url}}</a>, upload a new image if you want to change it</div>
+                            </div>
+                        {% endif %}
                 </div>
             </div>
             {% if object %}
                 <button class="btn btn-light" type="submit">Update Pawn</button>
             {% else %}
                 <button class="btn btn-light" type="submit">Create Pawn</button>
+            {% endif %}
+            {% if form.errors %}
+                <div class="small warning">There were problems submitting the form. Check the errors and try resubmitting</div>
             {% endif %}
         </form>
     </div>

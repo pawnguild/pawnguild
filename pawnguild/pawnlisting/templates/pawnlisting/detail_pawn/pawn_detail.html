@@ -1,56 +1,118 @@
 {% include "pawnlisting/base.html" %}
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_detail.css' %}">
+
 <b>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-lg-6">
-            <div>
-                <label> Name: </label>
-                {{ pawn.name }}
+    <div class="container">
+            <div class="col-12 d-flex justify-content-center">
+                <h1> Viewing pawn: {{ pawn.name }} </h1>
             </div>
-            <div>
-                <label> Level: </label>
-                {{ pawn.level }}
+        <div class="row">
+            <div class="col-xs-12 col-lg-6 centered-row">
+                <div class="row">
+                    <label class="col-4"> Name: </label>
+                    <div class="col-8">{{ pawn.name }}</div>
+                </div>
+                <div class="row">
+                    <label class="col-4"> Level: </label>
+                    <div class="col-8">{{ pawn.level }}</div>
+                </div>
+                <div class="row">
+                    <label class="col-4"> Vocation: </label>
+                    <div class="col-8">{{ pawn.vocation }}</div>
+                </div>
+                <div class="row">
+                    <label class="col-4"> Gender: </label>
+                    <div class="col-8">{{ pawn.gender }}</div>
+                </div>
+                <div class="row">
+                    <label class="col-4"> Inclinations: </label>
+                    <div class="col-8">{{ pawn.inclination_string}}</div>
+                </div>
+                {% if pawn.notes %}
+                <div class="row">
+                    <label class="col-4"> Notes: </label>
+                    <div class="col-8">{{ pawn.notes }}</div>
+                </div>
+                {% endif %}
             </div>
-            <div>
-                <label> Vocation: </label>
-                {{ pawn.vocation }}
-            </div>
-            <div>
-                <label> Gender: </label>
-                {{ pawn.gender }}
-            </div>
-            <div>
-                <label> Primary_inclination: </label>
-                {{ pawn.primary_inclination}}
-            </div>
-            <div>
-                <label> Secondary_inclination: </label>
-                {{ pawn.secondary_inclination}}
-            </div>
-            <div>
+            <div class="col-xs-12 col-lg-6 flat centered-row">
+                <div class="row">
+                    <div class="col-4">
+                        <label> Pawn activity: </label>
+                    </div>
+                    <div class="col-8">
+                        {% if pawn.activity != 0 %}
+                        {% with ''|center:pawn.activity as range %}
+                        {% for _ in range %}
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+                        {% endfor %}
+                        {% endwith %}
+                        {% else %}
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                        </svg>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    {% if pawn.activity == 4 %}
+                    <div class="col-12 small fat info"> Pawn has been edited within the last week </div>
+                    {% elif pawn.activity == 3 %}
+                    <div class="col-12 small fat info"> Pawn has been edited within the last 2 weeks </div>
+                    {% elif pawn.activity == 2 %}
+                    <div class="col-12 small fat info"> Pawn has been edited within the last 3 weeks </div>
+                    {% elif pawn.activity == 1 %}
+                    <div class="col-12 small fat info"> Pawn has been edited within the last month </div>
+                    {% else %}
+                    <div class="col-12 small fat info"> Pawn is inactive </div>
+                    {% endif %}
+                </div>
+
+                {% if pawn.primary_skills %}
+                <div class="row">
+                    <label class="col-4"> Primary Skills: </label>
+                    <div class="col-8">{{ pawn.primary_skills }}</div>
+                </div>
+                {% endif %}
+
+                {% if pawn.secondary_skills %}
+                <div class="row">
+                    <label class="col-4"> Secondary Skills: </label>
+                    <div class="col-8">{{ pawn.secondary_skills }}</div>
+                </div>
+                {% endif %}
+
                 {% block platform_info %}
                 {% endblock %}
             </div>
-            <div>
-                <label> Notes: </label>
-                {{ pawn.notes }}
-            </div>
-            <div>
-                <label> Primary Skills: </label>
-                {{ pawn.primary_skills }}
-            </div>
-            <div>
-                <label> Secondary Skills: </label>
-                {{ pawn.secondary_skills }}
-            </div>
         </div>
-        <div class="col-xs-12 col-lg-6">
-            {% if pawn.picture %}
-                <img src="{{pawn.picture.url}}">
-            {% endif %}
-        </div>  
-    </div>
 
-</div>
+        {% if pawn.picture %}
+        <div style="margin-bottom: 50px"></div>
+        <div class="row">
+            <label class="col d-flex justify-content-center"> Pawn picture</label>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 d-flex">
+                        <img style="max-height:650px" class="picture" src="{{pawn.picture.url}}">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+    </div>
 </b>

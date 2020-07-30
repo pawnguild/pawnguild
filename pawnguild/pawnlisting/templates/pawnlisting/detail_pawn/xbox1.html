@@ -1,7 +1,8 @@
 {% extends "pawnlisting/detail_pawn/pawn_detail.html" %}
 
 {% block platform_info %}
-    <label> Gamertag: </label>
-    {{ pawn.gamertag }}
-    <br>
+<div class="row">
+    <label class="col-4"> Gamertag: </label>
+    <div class="col-8">{{ pawn.gamertag }}</div>
+</div>
 {% endblock %}

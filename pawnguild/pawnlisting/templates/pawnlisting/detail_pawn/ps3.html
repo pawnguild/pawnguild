@@ -1,10 +1,13 @@
 {% extends "pawnlisting/detail_pawn/pawn_detail.html" %}
 
 {% block platform_info %}
-    <label> PSN: </label>
-    {{ pawn.psn }}
-    <br>
-    
-    <label> Game version: </label>
-    {{ pawn.version }}
+<div class="row">
+    <label class="col-4"> PSN: </label>
+    <div class="col-8" type="text" id="ps3psn">{{ pawn.psn }}</div>
+</div>
+
+<div class="row">
+    <label class="col-4"> Game version: </label>
+    <div class="col-8">{{ pawn.version }}</div>
+</div>
 {% endblock %}

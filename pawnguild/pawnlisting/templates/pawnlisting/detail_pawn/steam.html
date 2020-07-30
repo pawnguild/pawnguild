@@ -1,6 +1,8 @@
 {% extends "pawnlisting/detail_pawn/pawn_detail.html" %}
 
 {% block platform_info %}
-    <label> Steam Url: </label>
-    {{ pawn.steam_url }}
+<div class="row">
+    <label class="col-4"> Steam Url: </label>
+    <div class="col-8"> {{ pawn.steam_url }}</div>
+</div>
 {% endblock %}

@@ -1,8 +1,8 @@
 {% extends "pawnlisting/detail_pawn/pawn_detail.html" %}
 
 {% block platform_info %}
-    <label> PSN: </label>
-    {{ pawn.psn }}
-    <br>
-    
+<div class="row">
+    <label class="col-4"> PSN: </label>
+    <div class="col-8">{{ pawn.psn }}</div>
+</div>
 {% endblock %}

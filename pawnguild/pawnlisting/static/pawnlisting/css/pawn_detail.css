@@ -1,0 +1,8 @@
+.picture {
+    width: 100%;
+}
+
+.centered-row {
+    margin: auto;
+    max-width: 300px;
+}

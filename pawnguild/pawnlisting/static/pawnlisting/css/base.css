@@ -1,4 +1,9 @@
 body {
+    background-color: black;
+    ;
+}
+
+.container {
     background-color: #202125;
 }
 
@@ -21,6 +26,10 @@ label {
 
 div {
     color: whitesmoke;
+}
+
+input {
+    color: black;
 }
 
 div.long>input,
@@ -50,6 +59,14 @@ div.small.warning {
 .dropdown-item {
     background-color: #535458;
     color: lightblue;
+}
+
+.flat {
+    margin-bottom: 0px;
+}
+
+.fat {
+    margin-bottom: 20px;
 }
 
 
