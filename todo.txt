@@ -1,15 +1,22 @@
+FEATURES
 high
-- more intuitive scrollbar color for manage pawns on phone
-
 
 medium
-
-low priority
-- change includes everywhere to extends for base
 - footer with links to reddit/discord/steam page
+- password resetting
+
+low
+
+
+CODE IMPROVEMENT
+high
 - select_platform template with for loop instead of hardcode
-- consider mixtures in tests to make tests cleaner
+
+medium
+- change includes everywhere to extends for base
 - for the tables, look into extending instead of including first
+
+
 
 unsorted
 -uplading images is broken
@@ -19,8 +26,5 @@ unsorted
 - things to lookout for in user testing
     - email confirmation blocking the server... consider timeout on email confirmation
     - imagefield may not be working because of type of image from phone
-    - scroll down, hit new link, you're on new page but scrolled down
 
 
-future
-- password resetting
