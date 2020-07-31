@@ -1,7 +1,14 @@
-body {
-    background-color: black;
-    ;
+* {
+    box-sizing: border-box
 }
+
+body {
+    background-color: #202125;
+}
+/* 
+body > .container {
+    padding: 15px;
+} */
 
 .container {
     background-color: #202125;
@@ -75,6 +82,11 @@ a.nav-link {
 
 .nav-item>a {
     color: #fbbbac;
+}
+
+.active {
+    font-weight: bold;
+    color: cyan !important;
 }
 
 
