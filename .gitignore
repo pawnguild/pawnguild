@@ -3,6 +3,7 @@ htmlcov/
 **/__pycache__
 /media/
 /venv/
+.venv/
 /static/
 /.vscode/
 db.sqlite3

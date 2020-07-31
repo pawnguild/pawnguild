@@ -56,59 +56,51 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark hidden-md-down">
-    <div class="col-5">
-        <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
-            <li class="navbar-nav ml-auto text-center">
-
-
-                <a   class="align-self-center navbar-brand nav-item mx-3" href="{% url 'select_platform' %}"> Add pawn </a>
-                <a   class="align-self-center navbar-brand nav-item mx-3" href="{% url 'manage_pawns' %}"> Manage pawns </a>
-                <div class="navbar-collapse collapse w-100 dual-collapse2 navbar-brand nav-item mx-3">
-                    <ul class="navbar-nav mr-auto text-center">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 150px;color: #ffabab;">
-                                View Pawns
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'list-all-pawns' %}"> Show All Pawns </a>
-                                <a class="dropdown-item" href="{% url 'list-steam-pawns' %}"> Show Steam Pawns </a>
-                                <a class="dropdown-item" href="{% url 'list-switch-pawns' %}"> Show Switch Pawns </a>
-                                <a class="dropdown-item" href="{% url 'list-xbox1-pawns' %}"> Show Xbox One Pawns </a>
-                                <a class="dropdown-item" href="{% url 'list-ps4-pawns' %}"> Show PS4 Pawns </a>
-                                <a class="dropdown-item" href="{% url 'list-ps3-pawns' %}"> Show PS3 Pawns </a>
-                            </div>
-                        </li>
-                    </ul>
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
+        <li class="navbar-nav ml-auto text-center">
+            <a   class="align-self-center navbar-brand nav-item mx-3" href="{% url 'select_platform' %}"> Add pawn </a>
+            <a   class="align-self-center navbar-brand nav-item mx-3" href="{% url 'manage_pawns' %}"> Manage pawns </a>
+            <div class="navbar-collapse collapse w-100 dual-collapse2 navbar-brand nav-item mx-3">
+                <ul class="navbar-nav mr-auto text-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 150px;color: #ffabab;">
+                            View Pawns
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'list-all-pawns' %}"> Show All Pawns </a>
+                            <a class="dropdown-item" href="{% url 'list-steam-pawns' %}"> Show Steam Pawns </a>
+                            <a class="dropdown-item" href="{% url 'list-switch-pawns' %}"> Show Switch Pawns </a>
+                            <a class="dropdown-item" href="{% url 'list-xbox1-pawns' %}"> Show Xbox One Pawns </a>
+                            <a class="dropdown-item" href="{% url 'list-ps4-pawns' %}"> Show PS4 Pawns </a>
+                            <a class="dropdown-item" href="{% url 'list-ps3-pawns' %}"> Show PS3 Pawns </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </div>
+    <a href="{% url 'list-all-pawns' %}">
+        <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> Pawn Guild </h2>
+    </a>
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
+        <ul class="navbar-nav mr-auto text-center">
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Logged in as {{ user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}"> Logout </a>
                 </div>
             </li>
-        </div>
-    </div>
-    <div class="col-2 d-flex justify-content-center">
-        <a href="{% url 'list-all-pawns' %}">
-            <h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> Pawn Guild </h2>
-        </a>
-    </div>
-    <div class="col-5 px-5">
-        <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
-            <ul class="navbar-nav mr-auto text-center">
-                {% if user.is_authenticated %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Logged in as {{ user.username }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'logout' %}"> Logout </a>
-                    </div>
-                </li>
-                {% else %}
-                <a class="navbar-brand" href="{% url 'login' %}"> Login </a>
-                {% endif %}
-                <a class="navbar-brand nav-item mx-5" href="{% url 'register' %}"> Register </a>
+            {% else %}
+            <a class="navbar-brand" href="{% url 'login' %}"> Login </a>
+            {% endif %}
+            <a class="navbar-brand nav-item mx-5" href="{% url 'register' %}"> Register </a>
 
-            </ul>
-        </div>
+        </ul>
     </div>
 </nav>
 
