@@ -1,6 +1,5 @@
 FEATURES
 high
-- database backup everyday
 - make table rows slimmer
 
 medium
