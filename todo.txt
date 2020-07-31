@@ -1,5 +1,7 @@
 FEATURES
 high
+- database backup everyday
+- make table rows slimmer
 
 medium
 - footer with links to reddit/discord/steam page
@@ -25,5 +27,5 @@ unsorted
 - things to lookout for in user testing
     - email confirmation blocking the server... consider timeout on email confirmation
     - imagefield may not be working because of type of image from phone
-
+    - activity fields
 

@@ -3,6 +3,6 @@
 {% block platform_info %}
 <div class="row">
     <label class="col-4"> Steam Url: </label>
-    <div class="col-8"> {{ pawn.steam_url }}</div>
+    <div class="col-8" style="word-wrap: break-word;"><a href={{pawn.steam_url}} target="_blank">{{ pawn.steam_url }}</a></div>
 </div>
 {% endblock %}
