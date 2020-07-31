@@ -1,0 +1,16 @@
+--- 
+- 
+  hosts: pythonanywhere
+  name: "Deploy to PythonAnywhere"
+  remote_user: pawnhall
+  gather_facts: False
+  tasks: 
+    - 
+      name: Update code
+      shell: "cd /home/pawnhall/pawnhall
+                && . /home/pawnhall/.virtualenvs/venv/bin/activate
+                && . /home/pawnhall/.virtualenvs/postactivate
+                && git pull
+                && python manage.py makemigrations && python manage.py migrate
+                && python manage.py test --settings='config.settings.test'
+                && python manage.py collectstatic --no-input"

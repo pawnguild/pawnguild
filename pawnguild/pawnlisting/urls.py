@@ -3,7 +3,7 @@ from django.urls import path
 from . import views, api
 
 urlpatterns = [
-    path('',                 views.ListAllPawns.as_view(),    name='list-all-pawns'),
+    path('',                 views.ListAllPawns.as_view(),    name='home'),
     path('pawn_list/all',    views.ListAllPawns.as_view(),    name='list-all-pawns'),
     path('pawn_list/steam',  views.SteamPawnList.as_view(),   name='list-steam-pawns'),
     path('pawn_list/switch', views.SwitchPawnList.as_view(),  name='list-switch-pawns'),
