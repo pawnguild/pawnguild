@@ -7,7 +7,8 @@
   tasks: 
     - 
       name: Update code
-      shell: "cd /home/pawnhall/pawnhall
+      shell: "python3 /home/pawnhall/backup_dbs.py ansible-deploy
+                && cd /home/pawnhall/pawnhall
                 && . /home/pawnhall/.virtualenvs/venv/bin/activate
                 && . /home/pawnhall/.virtualenvs/postactivate
                 && git pull
