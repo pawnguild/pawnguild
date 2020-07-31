@@ -6,6 +6,7 @@
         {% include "pawnlisting/pawn_tables/list_pawns/list_steam_pawns.html" %}
         <br>
     {% elif platform == "Steam" %}
+        <br />
         <h2> There aren't any listed Steam pawns. You can create one <a href="{% url 'create-steam-pawn' %}">here</a></h2>
     {% endif %}
 
@@ -14,6 +15,7 @@
         {% include "pawnlisting/pawn_tables/list_pawns/list_switch_pawns.html" %}
         <br>
     {% elif platform == "Switch" %}
+        <br />
         <h2> There aren't any listed Nintendo Switch pawns. You can create one <a href="{% url 'create-switch-pawn' %}">here</a></h2>
     {% endif %}
 
@@ -22,6 +24,7 @@
         {% include "pawnlisting/pawn_tables/list_pawns/list_xbox1_pawns.html" %}
         <br>
     {% elif platform == "XboxOne"  %}
+        <br />
         <h2> There aren't any listed XboxOne pawns. You can create one <a href="{% url 'create-xbox1-pawn' %}">here</a></h2>
     {% endif %}
 
@@ -30,6 +33,7 @@
         {% include "pawnlisting/pawn_tables/list_pawns/list_ps4_pawns.html" %}
         <br>
     {% elif platform == "PS4" %}
+        <br />
         <h2> There aren't any listed PS4 pawns. You can create one <a href="{% url 'create-ps4-pawn' %}">here</a></h2>
     {% endif %}
 
@@ -38,6 +42,7 @@
         {% include "pawnlisting/pawn_tables/list_pawns/list_ps3_pawns.html" %}
         <br>
     {% elif platform == "PS3" %}
+        <br />
         <h2> There aren't any listed PS3 pawns. You can create one <a href="{% url 'create-ps3-pawn' %}">here</a></h2>
     {% endif %}
 </div>

@@ -1,8 +1,13 @@
 {% include "pawnlisting/base.html" %}
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_form.css' %}">
+
 <script>
     document.getElementById("platform-select").required = true;
 </script>
+
+
 
 <div class="container">
     <form action="{% url 'select_platform' %}" method="POST">

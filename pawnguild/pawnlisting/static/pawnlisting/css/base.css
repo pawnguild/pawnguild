@@ -1,6 +1,9 @@
+* {
+    box-sizing: border-box
+}
+
 body {
     background-color: #202125;
-    ;
 }
 
 .container {

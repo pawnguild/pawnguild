@@ -1,5 +1,10 @@
 {% include "pawnlisting/base.html" %}
     
+<style>
+.row {
+    margin-bottom: 5px;
+}
+</style>
 
 <div class="container form-box">
     <h1> Login </h1>
@@ -11,12 +16,28 @@
             <strong>{{ form.non_field_errors |escape }}</strong>
         </div>
         {% endif %}
-
-        <p> Username: {{ form.username }}  </p>
-        <p> Password:  {{ form.password}} </p>
-
-        <p> <input type="submit" value="Login"> </p>
-        <input type="hidden" name="next" value="{{ next }}">
+        <div class='row'>
+            <div class='col-md-2'>
+            {{ form.username.label_tag }}
+            </div>
+            <div class='col-md-5 long'>
+                {{ form.username }}
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-2'>
+            {{ form.password.label_tag }}
+            </div>
+            <div class='col-md-5 long'>
+                {{ form.password}}
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4 py-3'>
+                <input type="submit" value="Login">
+                <input type="hidden" name="next" value="{{ next }}">
+            </div>
+        </div>
     </form>
     <p> Don't have an account? Register <a href="{% url 'register' %}"> here </a> </p>
     <p> Forgot your password? Click <a href="{% url "password_reset_recover" %}"> here</a></p
