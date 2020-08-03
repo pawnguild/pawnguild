@@ -6,3 +6,8 @@
     margin: auto;
     max-width: 300px;
 }
+
+img {
+    max-height: 650px;
+    object-fit: contain;
+}
