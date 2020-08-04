@@ -15,8 +15,8 @@ class EmailBackendTests(UtilityTestCase):
         self.client.logout()
 
     def test_bad_email_fails(self):
-        with self.assertRaises(get_user_model().DoesNotExist):
-            self.client.login(username=self.user.email + "not_a_real_email", password="12345")
+        self.client.login(username=self.user.email + "not_a_real_email", password="12345")
+        self.assertFalse(get_user(self.client).is_authenticated)        
 
 
     def test_login_with_email(self):
