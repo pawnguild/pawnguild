@@ -11,5 +11,5 @@ class TestRegister(TestCase):
         response = self.client.post(reverse("register"), data = {"username": "testacc",
                                                         "password1": "ventura1",
                                                         "password2": "ventura1",
-                                                        "email": "foobar@gmail.com"})
+                                                        "email": "whatever@mailinator.com"})
         self.assertTrue(get_user(self.client).is_authenticated)        

@@ -7,11 +7,12 @@
   tasks: 
     - 
       name: Update code
-      shell: "python3 /home/pawnhall/backup_dbs.py ansible-deploy
-                && cd /home/pawnhall/pawnhall
-                && . /home/pawnhall/.virtualenvs/venv/bin/activate
+      shell: > 
+                . /home/pawnhall/.virtualenvs/venv/bin/activate
                 && . /home/pawnhall/.virtualenvs/postactivate
+                && python3 /home/pawnhall/backup_dbs.py ansible-deploy
+                && cd /home/pawnhall/pawnhall
                 && git pull
                 && python manage.py makemigrations && python manage.py migrate
                 && python manage.py test --settings='config.settings.test'
-                && python manage.py collectstatic --no-input"
+                && python manage.py collectstatic --no-input
