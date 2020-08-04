@@ -27,6 +27,7 @@ def get_env_variable(var_name):
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+APPS_DIR = BASE_DIR / "pawnguild"
 
 SECRET_KEY = get_env_variable("SECRET_KEY")
 
@@ -55,6 +56,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'pawnguild.pawnlisting.backends.EmailAuthBackend',
 ]
 
 ROOT_URLCONF = 'config.urls'

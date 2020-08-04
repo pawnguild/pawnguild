@@ -1,6 +1,7 @@
 FEATURES
 high
-- make table rows slimmer
+- logging in refreshes pawn stars
+- augments
 
 medium
 - footer with links to reddit/discord/steam page
