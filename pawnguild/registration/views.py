@@ -29,7 +29,7 @@ class Register(View):
         profile_form = UserProfileCreationForm(request.POST)
         if profile_form.is_valid():
             user = profile_form.save() # Creates a user
-            login(request, user)
+            login(request, user, backend="django.contrib.auth.backends.ModelBackend")
             sendConfirm(user)
             return render(request, "registration/confirm_account_sent.html", context={"email": request.user.email})
         else:

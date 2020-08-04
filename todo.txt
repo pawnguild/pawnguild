@@ -13,10 +13,10 @@ CODE IMPROVEMENT
 high
 - select_platform template with for loop instead of hardcode
 
+
 medium
 - change includes everywhere to extends for base
 - for the tables, look into extending instead of including first
-
 
 
 unsorted
