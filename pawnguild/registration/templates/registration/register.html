@@ -11,46 +11,70 @@
 
     <form method="post">
         {% csrf_token %}
-        {% if form.errors %}
+
+        {% if form.errors.username %}
         <div class="alert alert-warning">
-            <strong>{{ form.non_field_errors |escape }}</strong>
+            <strong>{{ form.errors.username |escape }}</strong>
         </div>
         {% endif %}
+
         <div class='row'>
             <div class='col-md-4'>
-            {{ form.username.label_tag }}
+                {{ form.username.label_tag }}
             </div>
             <div class='col-md-5 long'>
                 {{ form.username }}
             </div>
         </div>
+
+        {% if form.errors.password1 %}
+        <div class="row alert alert-warning">
+            <strong>{{ form.errors.password1 |escape }}</strong>
+        </div>
+        {% endif %}
+
         <div class='row'>
             <div class='col-md-4'>
-            {{ form.password1.label_tag }}
+                {{ form.password1.label_tag }}
             </div>
             <div class='col-md-5 long'>
                 {{ form.password1 }}
             </div>
         </div>
+
+        {% if form.errors.password2 %}
+        <div class="row alert alert-warning">
+            <strong>{{ form.errors.password2 |escape }}</strong>
+        </div>
+        {% endif %}
+
         <div class='row'>
             <div class='col-md-4'>
-            {{ form.password2.label_tag }}
+                {{ form.password2.label_tag }}
             </div>
             <div class='col-md-5 long'>
                 {{ form.password2 }}
             </div>
         </div>
+
+        {% if form.errors.email %}
+        <div class="row alert alert-warning">
+            <strong>{{ form.errors.email |escape }}</strong>
+        </div>
+        {% endif %}
+
         <div class='row'>
             <div class='col-md-4'>
-            {{ form.email.label_tag }}
+                {{ form.email.label_tag }}
             </div>
-            <div class='col-md-5 long'>
-                {{ form.email }}
-            </div>
+        </div>
+
+        <div class='col-md-5 long'>
+            {{ form.email }}
         </div>
         <div class='row'>
             <div class='col-md-4'>
-            <input type="submit" value="Register"> </p>
+                <input type="submit" value="Register"> </p>
             </div>
         </div>
     </form>

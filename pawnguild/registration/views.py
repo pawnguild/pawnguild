@@ -33,7 +33,7 @@ class Register(View):
             sendConfirm(user)
             return render(request, "registration/confirm_account_sent.html", context={"email": request.user.email})
         else:
-            context = {"profile_form": profile_form}
+            context = {"form": profile_form}
             return render(request, "registration/register.html", context=context)
 
 
