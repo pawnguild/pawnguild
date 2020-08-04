@@ -1,14 +1,12 @@
 .picture {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
 }
 
 .centered-row {
     margin-left: auto;
     margin-right: auto;
     max-width: 70%;
-}
-
-img {
-    max-height: 70%;
-    object-fit: contain;
 }
