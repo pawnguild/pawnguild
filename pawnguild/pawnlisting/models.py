@@ -5,7 +5,7 @@ from django.core.validators import URLValidator
 from django.utils import timezone
 from django.conf import settings
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 vocations = ["Fighter", "Warrior", "Strider", "Ranger", "Mage", "Sorcerer"]
 genders = ["Male", "Female"]
@@ -72,6 +72,24 @@ class Pawn(models.Model):
         time_since_modified = timezone.now() - self.last_modified
         weeks_since_modified = time_since_modified.days // 7 
         return max(4 - weeks_since_modified, 0)
+
+    @property
+    def sunday_based_activity(self):
+        """ Return number of stars that should display in pawn list. No stars after 4 weeks"""
+        time_since_modified = timezone.now() - self.last_modified
+
+        today = date.today()
+        offset = (today.weekday() - 6) % 7
+        last_sunday = today - timedelta(days=offset)
+        
+        last_modified_date = datetime.date(self.last_modified)
+        if last_modified_date >= last_sunday:
+            return 4
+        else:
+            days_between = (last_sunday - last_modified_date).days
+            sundays_since_modified = (days_between // 7) + 1
+            stars = 4 - sundays_since_modified
+            return max(0, stars)
 
     @property
     def vocation_color(self):
