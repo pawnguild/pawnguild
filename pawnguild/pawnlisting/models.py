@@ -79,14 +79,16 @@ class Pawn(models.Model):
         time_since_modified = timezone.now() - self.last_modified
 
         today = date.today()
-        offset = (today.weekday() - 6) % 7
-        last_sunday = today - timedelta(days=offset)
+
+        # - 0 for monday, - 1 for tuesday, 6 for sunday
+        offset = (today.weekday() - 0) % 7
+        last_monday = today - timedelta(days=offset)
         
         last_modified_date = datetime.date(self.last_modified)
-        if last_modified_date >= last_sunday:
+        if last_modified_date >= last_monday:
             return 4
         else:
-            days_between = (last_sunday - last_modified_date).days
+            days_between = (last_monday - last_modified_date).days
             sundays_since_modified = (days_between // 7) + 1
             stars = 4 - sundays_since_modified
             return max(0, stars)
