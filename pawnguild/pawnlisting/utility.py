@@ -11,21 +11,24 @@ ps3_pawn_fields = base_pawn_fields + ["psn", "version"]
 
 platforms = ["Steam", "Switch", "XboxOne", "PS4", "PS3"]
 
+
+def keep_active_pawns(pawns):
+    return filter(lambda p: p.sunday_based_activity > 0, pawns)
+
 def sort_pawns(pawns):
     vocation_order = {"Fighter": 0, "Warrior": 1, "Strider": 2, "Ranger": 3, "Mage": 4, "Sorcerer": 5}
     return sorted(pawns, key=lambda pawn: (vocation_order[pawn.vocation], pawn.level))
-
 
 
 class BasePawnCollection:
 
     def get_context(self):
         return {
-            "steam_pawns": sort_pawns(self.steam_pawns),
-            "switch_pawns": sort_pawns(self.switch_pawns),
-            "xbox1_pawns": sort_pawns(self.xbox1_pawns),
-            "ps4_pawns": sort_pawns(self.ps4_pawns),
-            "ps3_pawns": sort_pawns(self.ps3_pawns)
+            "steam_pawns": sort_pawns(keep_active_pawns(self.steam_pawns)),
+            "switch_pawns": sort_pawns(keep_active_pawns(self.switch_pawns)),
+            "xbox1_pawns": sort_pawns(keep_active_pawns(self.xbox1_pawns)),
+            "ps4_pawns": sort_pawns(keep_active_pawns(self.ps4_pawns)),
+            "ps3_pawns": sort_pawns(keep_active_pawns(self.ps3_pawns))
         }
 
 class PawnCollection(BasePawnCollection):

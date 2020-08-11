@@ -43,8 +43,8 @@
                         <label> Pawn activity: </label>
                     </div>
                     <div class="col-8">
-                        {% if pawn.activity != 0 %}
-                        {% with ''|center:pawn.activity as range %}
+                        {% if pawn.sunday_based_activity != 0 %}
+                        {% with ''|center:pawn.sunday_based_activity as range %}
                         {% for _ in range %}
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
@@ -64,13 +64,13 @@
                 </div>
 
                 <div class="row">
-                    {% if pawn.activity == 4 %}
+                    {% if pawn.sunday_based_activity == 4 %}
                     <div class="col-12 small fat info"> Pawn has been edited within the last week </div>
-                    {% elif pawn.activity == 3 %}
+                    {% elif pawn.sunday_based_activity == 3 %}
                     <div class="col-12 small fat info"> Pawn has been edited within the last 2 weeks </div>
-                    {% elif pawn.activity == 2 %}
+                    {% elif pawn.sunday_based_activity == 2 %}
                     <div class="col-12 small fat info"> Pawn has been edited within the last 3 weeks </div>
-                    {% elif pawn.activity == 1 %}
+                    {% elif pawn.sunday_based_activity == 1 %}
                     <div class="col-12 small fat info"> Pawn has been edited within the last month </div>
                     {% else %}
                     <div class="col-12 small fat info"> Pawn is inactive </div>
