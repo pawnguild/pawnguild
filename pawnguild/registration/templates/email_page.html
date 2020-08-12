@@ -3,9 +3,16 @@
 <div class="container">
   <p> 
     {% if success %}
-        You have confirmed your account! 
+        <h3> You have confirmed your account! </h3>
+        <p> You can now create/manage pawns. </p>
     {% else %}
-        Error, invalid token!
+        <h1> Invalid token </h1>
+        <h3> This is usually probably due to 1 of 2 things... </h3>
+        <p> 1. It's expired </p>
+        <p> 2. You've logged in/out since the email was sent </p>
+        <p> Try logging out, then back in, and sending another confirmation email. To send another confirmation
+            email, hit the Add Pawn button, it'll prompt you to send another email.  </p>
+        <p> If you're still stuck, reach out to Karathrax or Ciri#7193 (discord) with your username and we'll manually verify your email. </p>
     {% endif %}
     </p>
 </div>

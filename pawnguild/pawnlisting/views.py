@@ -22,7 +22,7 @@ class EmailVerifiedMixin(AccessMixin):
 class LimitFivePawnsMixin(AccessMixin):
 
     def dispatch(self, request, *args, **kwargs):
-        if UserPawnCollection(request.user).pawn_count() >= 5:
+        if ManagePawnCollection(request.user).pawn_count() >= 5:
             return redirect(reverse("too-many-pawns"))
         return super().dispatch(request, *args, **kwargs)
 
@@ -33,7 +33,7 @@ class PawnManager(LoginRequiredMixin, EmailVerifiedMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pawn_collection = UserPawnCollection(self.request.user)
+        pawn_collection = ManagePawnCollection(self.request.user)
         context.update(pawn_collection.get_context())
         return context
 
@@ -111,7 +111,7 @@ class CreatePS3Pawn(CreatePawnMixin):
 class ListAllPawns(View):
 
     def get(self, request):
-        context = PawnCollection().get_context()
+        context = ListPawnCollection().get_context()
         return render(request, "pawnlisting/pawn_tables/list_pawns/list_pawns.html", context=context)
 
 

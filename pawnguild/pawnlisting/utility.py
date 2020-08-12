@@ -24,25 +24,25 @@ class BasePawnCollection:
 
     def get_context(self):
         return {
-            "steam_pawns": sort_pawns(keep_active_pawns(self.steam_pawns)),
-            "switch_pawns": sort_pawns(keep_active_pawns(self.switch_pawns)),
-            "xbox1_pawns": sort_pawns(keep_active_pawns(self.xbox1_pawns)),
-            "ps4_pawns": sort_pawns(keep_active_pawns(self.ps4_pawns)),
-            "ps3_pawns": sort_pawns(keep_active_pawns(self.ps3_pawns))
+            "steam_pawns": sort_pawns(self.steam_pawns),
+            "switch_pawns": sort_pawns(self.switch_pawns),
+            "xbox1_pawns": sort_pawns(self.xbox1_pawns),
+            "ps4_pawns": sort_pawns(self.ps4_pawns),
+            "ps3_pawns": sort_pawns(self.ps3_pawns)
         }
 
-class PawnCollection(BasePawnCollection):
+
+class ListPawnCollection(BasePawnCollection):
 
     def __init__(self):
-        self.steam_pawns = SteamPawn.objects.all()
-        self.switch_pawns = SwitchPawn.objects.all()
-        self.xbox1_pawns = XboxOnePawn.objects.all()
-        self.ps4_pawns = PS4Pawn.objects.all()
-        self.ps3_pawns = PS3Pawn.objects.all()
+        self.steam_pawns = keep_active_pawns(SteamPawn.objects.all())
+        self.switch_pawns = keep_active_pawns(SwitchPawn.objects.all())
+        self.xbox1_pawns = keep_active_pawns(XboxOnePawn.objects.all())
+        self.ps4_pawns = keep_active_pawns(PS4Pawn.objects.all())
+        self.ps3_pawns = keep_active_pawns(PS3Pawn.objects.all())
 
 
-
-class UserPawnCollection(BasePawnCollection):
+class ManagePawnCollection(BasePawnCollection):
 
     def __init__(self, user):
         self.steam_pawns = SteamPawn.objects.filter(created_by=user)
