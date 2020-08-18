@@ -1,7 +1,6 @@
 FEATURES
 high
-- logging in refreshes pawn stars
-- augments
+- don't allow moderators to delete other moderators
 
 medium
 - footer with links to reddit/discord/steam page
