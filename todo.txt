@@ -1,30 +1,27 @@
 FEATURES
 high
-- don't allow moderators to delete other moderators
 
 medium
+- remove pawn image option on update
 - footer with links to reddit/discord/steam page
 
 low
+- don't allow moderators to delete other moderators
+- mask emails on pw confirmation to protect emails
 
 
 CODE IMPROVEMENT
 high
+- change includes everywhere to extends for base
+
+medium
+- for the tables, look into extending instead of including first
 - select_platform template with for loop instead of hardcode
 
 
-medium
-- change includes everywhere to extends for base
-- for the tables, look into extending instead of including first
-
-
-unsorted
--uplading images is broken
-    - it works on desktop. doesn't show select image before submitting
 
 
 - things to lookout for in user testing
-    - email confirmation blocking the server... consider timeout on email confirmation
     - imagefield may not be working because of type of image from phone
     - activity fields
 
