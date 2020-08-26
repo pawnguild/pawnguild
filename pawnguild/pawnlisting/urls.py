@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views, api
 
+from rest_framework.schemas import get_schema_view
+
 urlpatterns = [
     path('',                 views.ListAllPawns.as_view(),    name='home'),
     path('pawn_list/all',    views.ListAllPawns.as_view(),    name='list-all-pawns'),
@@ -36,9 +38,13 @@ urlpatterns = [
     path('pawn/ps4/<pk>/delete/',    views.PS4PawnDelete.as_view(),     name="delete-ps4-pawn"),
     path('pawn/ps3/<pk>/delete/',    views.PS3PawnDelete.as_view(),     name="delete-ps3-pawn"),
 
-
     path("manage_pawns", views.PawnManager.as_view(), name="manage_pawns"),
-    path("api/pawns", api.PawnAPIList.as_view(), name="api_pawn_list"),
     path("errors/too-many-pawns/", views.TooManyPawns.as_view(), name="too-many-pawns"),
 
+    path('api/docs', get_schema_view(title="PawnGuild", description="Pawn API's for each platform"), name='openapi-schema'),
+    path("api/list_pawns/steam",  api.SteamPawnAPIList.as_view(),   name="api_steam_list"),
+    path("api/list_pawns/switch", api.SwitchPawnAPIList.as_view(),  name="api_switch_list"),
+    path("api/list_pawns/xbox1",  api.XboxOnePawnAPIList.as_view(), name="api_xbox1_list"),
+    path("api/list_pawns/ps4",    api.PS4PawnAPIList.as_view(),     name="api_ps4_list"),
+    path("api/list_pawns/ps3",    api.PS3PawnAPIList.as_view(),     name="api_ps3_list"),
 ]
