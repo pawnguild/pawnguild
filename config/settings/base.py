@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_email_verification',
     'password_reset',
     'django_cleanup',
+    'django_unused_media',
 ]
 
 MIDDLEWARE = [
