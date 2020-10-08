@@ -1,5 +1,8 @@
 FEATURES
 high
+- pawn etiquette page
+- lime text on email confirmation page
+- warn @icloud emails somewhere
 
 medium
 - remove pawn image option on update

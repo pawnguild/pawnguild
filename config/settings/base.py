@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_nose',
     'django_email_verification',
     'password_reset',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
