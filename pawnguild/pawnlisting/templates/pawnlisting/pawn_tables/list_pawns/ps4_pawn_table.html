@@ -1,0 +1,12 @@
+{% extends "pawnlisting/base_pawn_table.html"%}
+
+{% block pawn_table_cols %}
+<th class="hidden-sm-down" scope="col">PSN</th>
+{{ block.super }}
+{% endblock pawn_table_cols %}
+
+{% block pawn_table_rows %}
+<td class="hidden-sm-down">{{ pawn.psn }}</td>
+{{ block.super }}
+{% endblock pawn_table_rows %}
+

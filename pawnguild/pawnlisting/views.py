@@ -134,27 +134,32 @@ def make_ListPawnMixin(Type, origin):
 
 class SteamPawnList(make_ListPawnMixin(SteamPawn, "Steam")):
     model = SteamPawn
-    context_object_name = "steam_pawns"
+    context_object_name = "pawns"
+    template_name = "pawnlisting/pawn_tables/list_pawns/list_steam_pawns.html"
 
 
 class SwitchPawnList(make_ListPawnMixin(SwitchPawn, "Switch")):
     model = SwitchPawn
-    context_object_name = "switch_pawns"
+    context_object_name = "pawns"
+    template_name = "pawnlisting/pawn_tables/list_pawns/list_switch_pawns.html"
 
 
 class XboxOnePawnList(make_ListPawnMixin(XboxOnePawn, "XboxOne")):
     model = XboxOnePawn
-    context_object_name = "xbox1_pawns"
+    context_object_name = "pawns"
+    template_name = "pawnlisting/pawn_tables/list_pawns/list_xbox1_pawns.html"
 
 
 class PS4PawnList(make_ListPawnMixin(PS4Pawn, "PS4")):
     model = PS4Pawn
-    context_object_name = "ps4_pawns"
+    context_object_name = "pawns"
+    template_name = "pawnlisting/pawn_tables/list_pawns/list_ps4_pawns.html"
 
 
 class PS3PawnList(make_ListPawnMixin(PS3Pawn, "PS3")):
     model = PS3Pawn
-    context_object_name = "ps3_pawns"
+    context_object_name = "pawns"
+    template_name = "pawnlisting/pawn_tables/list_pawns/list_ps3_pawns.html"
 
 ### End ListViews ###
 

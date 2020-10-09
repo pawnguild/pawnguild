@@ -1,9 +1,12 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
 
+{% block content %}
 <div class="container">
     {% if steam_pawns %}
         <h2> Steam Pawns </h2>
-        {% include "pawnlisting/pawn_tables/list_pawns/list_steam_pawns.html" %}
+        {% with pawns=steam_pawns %}
+            {% include "pawnlisting/pawn_tables/list_pawns/steam_pawn_table.html" %}
+        {% endwith %}
         <br>
     {% elif platform == "Steam" %}
         <br />
@@ -12,7 +15,9 @@
 
     {% if switch_pawns %}
         <h2> Switch Pawns </h2>
-        {% include "pawnlisting/pawn_tables/list_pawns/list_switch_pawns.html" %}
+        {% with pawns=switch_pawns %}
+            {% include "pawnlisting/pawn_tables/list_pawns/switch_pawn_table.html" %}
+        {% endwith %}
         <br>
     {% elif platform == "Switch" %}
         <br />
@@ -21,7 +26,9 @@
 
     {% if xbox1_pawns %}
         <h2> Xbox One Pawns </h2>
-        {% include "pawnlisting/pawn_tables/list_pawns/list_xbox1_pawns.html" %}
+        {% with pawns=xbox1_pawns %}
+            {% include "pawnlisting/pawn_tables/list_pawns/xbox1_pawn_table.html" %}
+        {% endwith %}
         <br>
     {% elif platform == "XboxOne"  %}
         <br />
@@ -30,7 +37,9 @@
 
     {% if ps4_pawns %}
         <h2> PS4 Pawns </h2>
-        {% include "pawnlisting/pawn_tables/list_pawns/list_ps4_pawns.html" %}
+        {% with pawns=ps4_pawns %}
+            {% include "pawnlisting/pawn_tables/list_pawns/ps4_pawn_table.html" %}
+        {% endwith %}
         <br>
     {% elif platform == "PS4" %}
         <br />
@@ -39,10 +48,13 @@
 
     {% if ps3_pawns %}
         <h2> PS3 Pawns </h2>
-        {% include "pawnlisting/pawn_tables/list_pawns/list_ps3_pawns.html" %}
+        {% with pawns=ps3_pawns %}
+            {% include "pawnlisting/pawn_tables/list_pawns/ps3_pawn_table.html" %}
+        {% endwith %}
         <br>
     {% elif platform == "PS3" %}
         <br />
         <h2> There aren't any listed PS3 pawns. You can create one <a href="{% url 'create-ps3-pawn' %}">here</a></h2>
-    {% endif %}
+    {% endif %} 
 </div>
+{% endblock content %}

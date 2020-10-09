@@ -1,0 +1,11 @@
+{% extends "pawnlisting/base_pawn_table.html"%}
+
+{% block pawn_table_cols %}
+<th class="hidden-sm-down" scope="col">Steam URL</th>
+{{ block.super }}
+{% endblock pawn_table_cols %}
+
+{% block pawn_table_rows %}
+<td class="hidden-sm-down"> <a href="{{ pawn.steam_url }}" target="_blank"> Friend link </a> </td>
+{{ block.super }}
+{% endblock pawn_table_rows %}

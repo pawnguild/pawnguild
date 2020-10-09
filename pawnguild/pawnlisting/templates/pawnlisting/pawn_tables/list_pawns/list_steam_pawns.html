@@ -1,16 +1,5 @@
-<div class="container table-responsive">
-    <table class="table table-dark">
-    <thead>
-        <th class="hidden-sm-down" scope="col">Steam URL</th>
-        {% include "pawnlisting/pawn_tables/base_pawn_table_cols.html" %}
-    </thead>
-    <tbody>
-        {% for pawn in steam_pawns %}     
-            <tr>
-                <td class="hidden-sm-down"> <a href="{{ pawn.steam_url }}" target="_blank"> Friend link </a> </td>
-                {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
-            </tr>
-        {% endfor %}
-    </tbody>
-    </table>
-</div>
+{% extends "pawnlisting/base.html"%}
+
+{% block content %}
+{% include "pawnlisting/pawn_tables/list_pawns/steam_pawn_table.html" %}
+{% endblock content %}

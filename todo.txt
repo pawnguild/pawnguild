@@ -23,8 +23,3 @@ medium
 
 
 
-
-- things to lookout for in user testing
-    - imagefield may not be working because of type of image from phone
-    - activity fields
-

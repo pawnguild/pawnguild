@@ -1,0 +1,13 @@
+{% extends "pawnlisting/base_pawn_table.html"%}
+
+{% block pawn_table_cols %}
+<th class="hidden-sm-down" scope="col">Friend Code</th>
+<th class="hidden-sm-down" scope="col">Pawn Code</th>
+{{ block.super }}
+{% endblock pawn_table_cols %}
+
+{% block pawn_table_rows %}
+<td class="hidden-sm-down">{{ pawn.friend_account_id }}</td>
+<td class="hidden-sm-down">{{ pawn.pawn_id }}</td>
+{{ block.super }}
+{% endblock pawn_table_rows %}
