@@ -1,0 +1,45 @@
+{% extends "pawnlisting/base.html" %}
+
+{% block content %}
+
+{% if steam_pawns %}
+<h2> Your Steam Pawns <h2>
+{% with pawns=steam_pawns %}
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_steam_pawn_table.html" %}
+{% endwith %}
+<br>
+{% endif %}
+
+{% if switch_pawns %}
+<h2> Your Switch Pawns </h2>
+{% with pawns=switch_pawns %}
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_switch_pawn_table.html" %}
+{% endwith %}
+<br>
+{% endif %}
+
+{% if xbox1_pawns %}
+<h2> Your Xbox One Pawns </h2>
+{% with pawns=xbox1_pawns %}
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_xbox1_pawn_table.html" %}
+{% endwith %}
+<br>
+{% endif %}
+
+{% if ps4_pawns %}
+<h2> Your PS4 Pawns </h2>
+{% with pawns=ps4_pawns %}
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_ps4_pawn_table.html" %}
+{% endwith %}
+<br>
+{% endif %}
+
+{% if ps3_pawns %}
+<h2> Your PS3 Pawns </h2>
+{% with pawns=ps3_pawns %}
+    {% include "pawnlisting/pawn_tables/manage_pawns/manage_ps3_pawn_table.html" %}
+{% endwith %}
+<br>
+{% endif %}
+
+{% endblock content %}

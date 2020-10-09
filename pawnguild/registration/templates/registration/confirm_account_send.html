@@ -1,15 +1,15 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
 
-{% comment %} <p> You must confirm your account via email before creating pawnlisting/base.html </p>
-
-<p> Click <a href={% url 'confirm_account' %} {% endcomment %}
-
+{% block content %}
 <div class="container">
     <p> You must confirm your account via email before creating Pawns </p>
-    <p> Your email for this account is <i>{{ email }}</i>. If you would like to change emails, please create a new account or message an admin. </p>
+    <p> Your email for this account is <i class="highlight">{{ email }}</i>. If you would like to change emails, please create a new account or message an admin. </p>
+
+    <p> <b> Some email domains block pawnguild's automated emails, such is @icloud. If you never receive the email, try using a gmail. </p> </b>
 
     <form method="post" action="{% url 'confirm-account' %}">
         {% csrf_token %}
         <input type="submit" value="Send confirmation email" />
     </form>
 </div>
+{% endblock content %}

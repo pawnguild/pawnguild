@@ -50,11 +50,11 @@ a {
     background-color: rgb(50, 50, 94);
 }
 
-
 .activity-cell {
     min-width: 101px !important;
     width: 101px !important;
 }
+
 .friend-link-cell {
     min-width: 95px !important;
     width: 95px !important;

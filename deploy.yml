@@ -13,6 +13,7 @@
                 && python3 /home/pawnhall/backup_dbs.py ansible-deploy
                 && cd /home/pawnhall/pawnhall
                 && git pull
+                && pip install -r requirements.txt
                 && python manage.py makemigrations && python manage.py migrate
                 && python manage.py test --settings='config.settings.test'
                 && python manage.py collectstatic --no-input

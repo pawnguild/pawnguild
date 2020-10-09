@@ -1,12 +1,19 @@
 {% load static %}
 {% load pawnlisting_utils %}
 
+
 <head>
+
+    {% block stylesheets %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <link rel="stylesheet" href="{% static 'pawnlisting/css/base.css' %}">
+    {% endblock stylesheets %}
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
+{% block nav %}
 
 <nav class="navbar navbar-dark bg-dark hidden-lg-up">
     <a href="{% url 'list-all-pawns' %}"><h2 class="text-warning navbar-text nav-item mx-5" style="white-space: nowrap;"> Pawn Guild </h2> </a>
@@ -117,7 +124,9 @@
     </div>
 </nav>
 
-<div class="container">
+{% endblock nav %}
+
+<div class="container-fluid">
     {% block title %}
     {% endblock title %}
     {% block content%}

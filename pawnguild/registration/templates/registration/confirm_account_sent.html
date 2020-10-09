@@ -1,9 +1,16 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
+
+{% load static %}
+
+{% block content %}
 
 <div class="container">
-    <p> Confirmation email has been sent to <i>{{ email }}</i> from <i>pawnhall7@gmail.com</i>. Copy and paste the link in the email into your browser to confirm account. </p>
+    <p> Confirmation email has been sent to <i class="highlight">{{ email }}</i> from <i class="highlight">pawnhall7@gmail.com</i>. Copy and paste the link in the email into your browser to confirm account. </p>
 
     <p> The email may take up to 5 minutes. If it never arrived, click the button to send another one. </p>
+
+    <p> <b> Some email domains block pawnguild's automated emails, such is @icloud. If you never receive the email, try using a gmail. </p> </b>
+
     <form method="post" action="{% url 'confirm-account' %}">
     {% csrf_token %}
     <input type="submit" value="Send confirmation email" />
@@ -12,3 +19,5 @@
     <p> Note that clicking the button will redirect you back to this page </p>
 
 </div>
+
+{% endblock content %}
