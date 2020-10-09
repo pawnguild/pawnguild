@@ -1,19 +1,14 @@
-<div class="container-fluid table-responsive">
-    <table class="table table-dark">
-    <thead>
-        <th class="hidden-sm-down" scope="col">Steam URL</th>
-        {% include "pawnlisting/pawn_tables/base_pawn_table_cols.html" %}
-        {% include "pawnlisting/pawn_tables/manage_pawns/manage_pawn_cols.html" %}
-    </thead>
-    <tbody>
-        {% for pawn in steam_pawns %}     
-            <tr>
-                <td class="hidden-sm-down friend-link-cell"> <a href="{{ pawn.steam_url }}" target="_blank"> Friend link </a> </td>
-                {% include "pawnlisting/pawn_tables/base_pawn_table_row.html" %}
-                <td><a href="{% url 'update-steam-pawn' pawn.id %}" class="btn btn-outline-warning btn-sm"> Update </button>
-                <td><a href="{% url 'delete-steam-pawn' pawn.id %}" class="btn btn-outline-danger btn-sm"> Delete </button>
-            </tr>
-        {% endfor %}
-    </tbody>
-    </table>
-</div>
+{% extends "pawnlisting/pawn_tables/list_pawns/steam_pawn_table.html"%}
+
+{% block pawn_table_cols %}
+{{ block.super }}
+{% include "pawnlisting/pawn_tables/manage_pawns/manage_pawn_cols.html" %}
+{% endblock pawn_table_cols %}
+
+{% block pawn_table_rows %}
+{{ block.super }}
+<td><a href="{% url 'update-steam-pawn' pawn.id %}" class="btn btn-outline-warning btn-sm"> Update </button>
+<td><a href="{% url 'delete-steam-pawn' pawn.id %}" class="btn btn-outline-danger btn-sm"> Delete </button>
+{% endblock pawn_table_rows %}
+
+
