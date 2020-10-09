@@ -1,12 +1,34 @@
 {% extends "password_reset/base.html" %}
 {% load i18n %}
 
-{% block title %}<h2>{% trans "Password recovery" %}</h2>{% endblock %}
+{% block title %}
+<div class="container">
+	<h2>{% trans "Password recovery" %}</h2>
+</div>
+{% endblock %}
 
 {% block content %}
+<div class="container">
 	<form method="post" action="{{ url }}">
 		{% csrf_token %}
-		{{ form.as_p }}
+
+        {% if form.errors.username_or_email %}
+        <div class="alert alert-warning">
+            <strong>{{ form.errors.username_or_email |escape }}</strong>
+        </div>
+        {% endif %}
+
+        <div class='row'>
+            <div class='col-md-2'>
+            <label> Username or email: </label>
+            </div>
+            <div class='col-md-5 long'>
+                {{ form.username_or_email }}
+            </div>
+        </div>
+
+
 		<p><input type="submit" value="{% trans "Recover my password" %}"></p>
 	</form>
-{% endblock %}
+</div>
+{% endblock content %}

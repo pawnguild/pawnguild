@@ -1,15 +1,17 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
 
 {% load static %}
 
+{% block stylesheets %}
 <link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_form.css' %}">
-
+{{ block.super }}
+{% endblock stylesheets %}
 <script>
     document.getElementById("platform-select").required = true;
 </script>
 
 
-
+{% block content %}
 <div class="container">
     
     <form action="{% url 'select_platform' %}" method="POST">
@@ -40,3 +42,4 @@
         </div>
     </form>
 </div>
+{% endblock content %}

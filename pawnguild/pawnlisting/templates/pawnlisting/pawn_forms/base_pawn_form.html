@@ -1,11 +1,15 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
 
 {% load static %}
+
+{% block stylesheets %}
 <link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_form.css' %}">
+{{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
 
 <div class="container">
-
-
 
     <div class="container">
         <div class="row">
@@ -156,3 +160,4 @@
         </form>
     </div>
 </div>
+{% endblock content %}

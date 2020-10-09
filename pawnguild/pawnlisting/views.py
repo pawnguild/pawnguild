@@ -29,7 +29,7 @@ class LimitFivePawnsMixin(AccessMixin):
 
 class PawnManager(LoginRequiredMixin, EmailVerifiedMixin, TemplateView):
     login_url = "/login/"
-    template_name = "pawnlisting/pawn_tables/manage_pawns.html"
+    template_name = "pawnlisting/manage_pawns.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -112,14 +112,13 @@ class ListAllPawns(View):
 
     def get(self, request):
         context = ListPawnCollection().get_context()
-        return render(request, "pawnlisting/pawn_tables/list_pawns/list_pawns.html", context=context)
+        return render(request, "pawnlisting/list_pawns/list_pawns.html", context=context)
 
 
 
 def make_ListPawnMixin(Type, origin):
 
     class ListPawnMixin(ListView):
-        template_name = "pawnlisting/pawn_tables/list_pawns/list_pawns.html"
 
         def get_context_data(self):
             context = super().get_context_data()
@@ -135,31 +134,31 @@ def make_ListPawnMixin(Type, origin):
 class SteamPawnList(make_ListPawnMixin(SteamPawn, "Steam")):
     model = SteamPawn
     context_object_name = "pawns"
-    template_name = "pawnlisting/pawn_tables/list_pawns/list_steam_pawns.html"
+    template_name = "pawnlisting/list_pawns/list_steam_pawns.html"
 
 
 class SwitchPawnList(make_ListPawnMixin(SwitchPawn, "Switch")):
     model = SwitchPawn
     context_object_name = "pawns"
-    template_name = "pawnlisting/pawn_tables/list_pawns/list_switch_pawns.html"
+    template_name = "pawnlisting/list_pawns/list_switch_pawns.html"
 
 
 class XboxOnePawnList(make_ListPawnMixin(XboxOnePawn, "XboxOne")):
     model = XboxOnePawn
     context_object_name = "pawns"
-    template_name = "pawnlisting/pawn_tables/list_pawns/list_xbox1_pawns.html"
+    template_name = "pawnlisting/list_pawns/list_xbox1_pawns.html"
 
 
 class PS4PawnList(make_ListPawnMixin(PS4Pawn, "PS4")):
     model = PS4Pawn
     context_object_name = "pawns"
-    template_name = "pawnlisting/pawn_tables/list_pawns/list_ps4_pawns.html"
+    template_name = "pawnlisting/list_pawns/list_ps4_pawns.html"
 
 
 class PS3PawnList(make_ListPawnMixin(PS3Pawn, "PS3")):
     model = PS3Pawn
     context_object_name = "pawns"
-    template_name = "pawnlisting/pawn_tables/list_pawns/list_ps3_pawns.html"
+    template_name = "pawnlisting/list_pawns/list_ps3_pawns.html"
 
 ### End ListViews ###
 

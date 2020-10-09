@@ -1,8 +1,13 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_detail.css' %}">
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_detail.css' %}">
+{{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
 <b>
     <div class="container">
         <div class="col-12 d-flex justify-content-center">
@@ -115,3 +120,4 @@
         <div style="margin-bottom: 50px"></div>
     </div>
 </b>
+{% endblock content %}

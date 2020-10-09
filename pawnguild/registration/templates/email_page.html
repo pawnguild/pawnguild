@@ -1,5 +1,6 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
 
+{% block content %}
 <div class="container">
   <p> 
     {% if success %}
@@ -17,3 +18,4 @@
     </p>
 </div>
 </html>
+{% endblock content %}

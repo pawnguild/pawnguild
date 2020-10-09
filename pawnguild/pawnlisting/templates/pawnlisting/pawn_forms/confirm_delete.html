@@ -1,5 +1,6 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
 
+{% block content %}
 <div class="container">
     <form action="" method="post">
         {% csrf_token %}
@@ -7,3 +8,4 @@
         <button class="btn btn-danger" type="submit" value="Confirm"> <b> Yes, delete the Pawn </b </button>
     </form>
 </div>
+{% endblock content %}
