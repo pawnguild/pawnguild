@@ -126,7 +126,7 @@ def make_ListPawnMixin(Type, origin):
             return context
 
         def get_queryset(self):
-            return sort_pawns(Type.objects.all())
+            return sort_pawns(keep_active_pawns(Type.objects.all()))
     
     return ListPawnMixin
 
