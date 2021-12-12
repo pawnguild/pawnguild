@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+    web:
+        build: ./services/app
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:  
+            - ./services/app:/app/
+        ports:
+            - 8000:8000
+        env_file:
+            - ./.env/web.env
+        depends_on:
+            - db
+    db:
+        image: postgres:14.1-alpine
+        volumes:
+            # https://stackoverflow.com/questions/1510104/where-to-store-application-data-non-user-specific-on-linux
+            - postgres_data:/var/lib/postgresql/data
+            # https://gist.github.com/onjin/2dd3cc52ef79069de1faa2dfd456c945
+            - ./services/db/:/docker-entrypoint-initdb.d/
+        env_file:
+            - ./.env/web.env
+volumes:
+    postgres_data:

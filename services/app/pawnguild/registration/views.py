@@ -10,7 +10,7 @@ from django.contrib.auth.views import LoginView
 
 from .forms import UserProfileCreationForm
 
-from django_email_verification import sendConfirm
+from django_email_verification import send_email
 
 # Create your views here.
 
@@ -30,7 +30,7 @@ class Register(View):
         if profile_form.is_valid():
             user = profile_form.save() # Creates a user
             login(request, user, backend="django.contrib.auth.backends.ModelBackend")
-            sendConfirm(user)
+            send_email(user)
             return render(request, "registration/confirm_account_sent.html", context={"email": request.user.email})
         else:
             context = {"form": profile_form}
@@ -58,5 +58,5 @@ class ConfirmAccount(LoginRequiredMixin, View):
         return render(request, "registration/confirm_account_send.html", context={"email": request.user.email})
 
     def post(self, request):
-        sendConfirm(self.request.user)
+        send_email(self.request.user)
         return render(request, "registration/confirm_account_sent.html", context={"email": request.user.email})
