@@ -4,7 +4,7 @@ htmlcov/
 
 .env/
 
-services/PawnHall/media/
-services/PawnHall/static/
+services/app/media/
+services/app/static/
 /.vscode/
 
