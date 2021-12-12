@@ -15,10 +15,12 @@ services:
         container_name: app
     db:
         image: postgres:14.1-alpine
+        env_file:
+            - ./.env/db.env
         volumes:
             # https://stackoverflow.com/questions/1510104/where-to-store-application-data-non-user-specific-on-linux
             - postgres_data:/var/lib/postgresql/data
-            - ./services/db/:/docker-entrypoint/initdb.d/
+            - ./services/db/:/docker-entrypoint-initdb.d/
         container_name: postgres
 volumes:
     postgres_data:
