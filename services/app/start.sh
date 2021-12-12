@@ -10,4 +10,4 @@ echo 'Migrating database...'
 python manage.py migrate
 
 echo 'Booting up server'
-python manage.py runserver 0.0.0.0:8000
+gunicorn config.wsgi:application --bind 0.0.0.0:8000
