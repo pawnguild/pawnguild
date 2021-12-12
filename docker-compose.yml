@@ -6,15 +6,13 @@ services:
         command: [./start.sh]
         volumes:  
             - ./services/app:/app/
-        # ports:
-        #     - 8000:8000
         expose:
             - 8000
         env_file:
             - ./.env/web.env
         depends_on:
             - db
-        container_name: app
+        container_name: web
     db:
         image: postgres:14.1-alpine
         env_file:
@@ -33,6 +31,7 @@ services:
             - static_files:/static
         depends_on:
             - web
+        container_name: nginx
         
 volumes:
     postgres_data:
