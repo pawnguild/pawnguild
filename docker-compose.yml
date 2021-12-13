@@ -6,6 +6,7 @@ services:
         command: [./start.sh]
         volumes:  
             - ./services/app:/app/
+            - static_files:/app/static
         expose:
             - 8000
         env_file:
@@ -24,9 +25,8 @@ services:
         container_name: postgres
     nginx:
         build: ./services/nginx
-        # ports:
-        #     - 443:443
-        #     - 80:80
+        ports:
+            - 80:80
         volumes:
             - static_files:/static
         depends_on:
