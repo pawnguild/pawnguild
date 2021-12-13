@@ -6,13 +6,14 @@ services:
         command: [./start.sh]
         volumes:  
             - ./services/app:/app/
-        ports:
-            - 8000:8000
+            - static_files:/app/static
+        expose:
+            - 8000
         env_file:
             - ./.env/web.env
         depends_on:
             - db
-        container_name: app
+        container_name: web
     db:
         image: postgres:14.1-alpine
         env_file:
@@ -22,5 +23,16 @@ services:
             - postgres_data:/var/lib/postgresql/data
             - ./services/db/:/docker-entrypoint-initdb.d/
         container_name: postgres
+    nginx:
+        build: ./services/nginx
+        ports:
+            - 80:80
+        volumes:
+            - static_files:/static
+        depends_on:
+            - web
+        container_name: nginx
+        
 volumes:
     postgres_data:
+    static_files:
