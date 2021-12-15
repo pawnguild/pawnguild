@@ -4,7 +4,7 @@ services:
     web:
         build: ./services/app
         command: [./start.sh]
-        volumes:  
+        volumes:
             - ./services/app:/app/
             - static_files:/app/static
         expose:
@@ -14,6 +14,8 @@ services:
         depends_on:
             - db
         container_name: web
+        # Required to recognize the db alias on docker-compose up
+        restart: always
     db:
         image: postgres:14.1-alpine
         env_file:
@@ -32,7 +34,7 @@ services:
         depends_on:
             - web
         container_name: nginx
-        
+
 volumes:
     postgres_data:
     static_files:
