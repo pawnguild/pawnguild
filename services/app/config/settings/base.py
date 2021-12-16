@@ -157,6 +157,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "pawnhall7@gmail.com"
 EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_PASSWORD")
 EMAIL_USE_TLS = True
+EMAIL_TOKEN_LIFE = 60 * 60 # email is valid for 1 hour
 
 EMAIL_ACTIVE_FIELD = 'email_verified'
 EMAIL_SERVER = 'smtp.gmail.com'
@@ -165,7 +166,7 @@ EMAIL_ADDRESS = 'pawnhall7@gmail.com'
 EMAIL_FROM_ADDRESS = 'noreply@pawnhall.com'
 EMAIL_PASSWORD = get_env_variable("EMAIL_PASSWORD")
 EMAIL_MAIL_SUBJECT = 'PawnGuild email confirmation'
-#EMAIL_MAIL_HTML = 'confirmation_email.html'
+EMAIL_MAIL_HTML = 'confirmation_email.html'
 EMAIL_MAIL_PLAIN = 'confirmation_email.txt' # Bug in django_email_verification needs this even though it says it doesn't
 EMAIL_PAGE_TEMPLATE = 'email_page.html'
 

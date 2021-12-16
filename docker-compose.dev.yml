@@ -1,6 +1,5 @@
 version: '3.8'
 
-
 services:
     web:
         command: [./startup_scripts/start.dev.sh]
