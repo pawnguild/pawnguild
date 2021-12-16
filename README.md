@@ -7,6 +7,9 @@
 For ease of use, add these aliases to your ~/.bashrc file.
 
 	alias pgdev="docker-compose -f docker-compose.yml -f docker-compose.dev.yml up"
+	alias pgdown="docker-compose -f docker-compose.yml -f docker-compose.dev.yml down"
+	alias pgtest="docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit"
+
 
 ## Running the pawnguild dev environment
 
@@ -17,6 +20,11 @@ To run the pawnguild dev environment, simply
 You can pass parameters to `docker-compose` via this command by putting them after `pgdev`. For example: 
 
 	pgdev --build
+
+Run tests locally with
+
+	pgtest
+
 
 ## Viewing pawnguild and the admin page
 
