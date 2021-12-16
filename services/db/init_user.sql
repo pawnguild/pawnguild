@@ -1,4 +1,4 @@
-CREATE USER pawnguild_app WITH PASSWORD 'm4KJvXJ/iLbMLcxn47ZwZDBP0jaH+zzf';
+CREATE USER pawnguild_app WITH PASSWORD 'password';
 
 ALTER ROLE pawnguild_app SET client_encoding TO 'utf8';
 ALTER ROLE pawnguild_app SET default_transaction_isolation TO 'read committed';
