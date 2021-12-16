@@ -1,6 +1,6 @@
 ## Initial setup
 
-	git@github.com:pawnguild/pawnguild.git
+	git clone git@github.com:pawnguild/pawnguild.git
 
 
 

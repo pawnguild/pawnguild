@@ -2,8 +2,6 @@ htmlcov/
 .coverage
 **/__pycache__
 
-.env/
-
 services/app/media/
 services/app/static/
 /.vscode/
