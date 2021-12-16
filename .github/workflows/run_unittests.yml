@@ -1,0 +1,19 @@
+name: Run docker-compose test container
+
+on:
+  push:
+    branches: [ production ]
+  pull_request:
+    branches: [ production ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run tests
+      run: docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit
+      
