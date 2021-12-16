@@ -1,19 +1,28 @@
-Clone the repo
+## Initial setup
 
 	git@github.com:pawnguild/pawnguild.git
+
 
 
 For ease of use, add these aliases to your ~/.bashrc file.
 
 	alias pgdev="docker-compose -f docker-compose.yml -f docker-compose.dev.yml up"
 
-`pgdev` will run the pawnguild dev environment. You can pass parameters to `docker-compose` via this command by putting them after `pgdev`. For example: 
+## Running the pawnguild dev environment
+
+To run the pawnguild dev environment, simply
+
+	pgdev
+
+You can pass parameters to `docker-compose` via this command by putting them after `pgdev`. For example: 
 
 	pgdev --build
 
+## Viewing pawnguild and the admin page
+
 Because of nginx listening on port 80, access your local pawnguild at `localhost` in your browser. To access the django admin in your local environment, go to `localhost/admin`, and you can login with the credentials found in `docker-compose.dev.yml`
 
-Populating the database
+## Populating the database
 
 1. Obtain the `db_backup.json`, which resides on our Digital Ocean droplet `137.184.81.130`.
 
