@@ -3,7 +3,7 @@ version: '3.8'
 services:
     web:
         build: ./services/app
-        command: [./start.sh]
+        command: [./startup_scripts/start.sh]
         volumes:
             - ./services/app:/app/
             - static_files:/app/static
