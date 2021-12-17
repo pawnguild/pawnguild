@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Pawnguild
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          git clone
-          cd pawnguild
-          git pull
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            git clone
+            cd pawnguild
+            git pull
+            docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
+            docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
