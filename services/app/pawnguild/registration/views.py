@@ -52,7 +52,9 @@ class UpdateProfile(LoginRequiredMixin, View):
         #     return redirect(reverse("pawnlisting/list-all-pawns"))
         # else:
         #     context = {"profile_form": profile_form}
-        #     return render(request, "registration/update_profile.html", context=context)
+        #     return render(request, 
+        #           "registration/update_profile.html",
+        #            context=context)
 
 
 class ConfirmAccount(LoginRequiredMixin, View):

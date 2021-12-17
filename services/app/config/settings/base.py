@@ -14,6 +14,8 @@ from django.core.exceptions import ImproperlyConfigured
 import os
 from pathlib import Path
 
+# flake8: noqa
+
 
 def get_env_variable(var_name):
     """Get the environment variable or return exception."""
@@ -166,7 +168,7 @@ EMAIL_FROM_ADDRESS = "noreply@pawnhall.com"
 EMAIL_PASSWORD = get_env_variable("EMAIL_PASSWORD")
 EMAIL_MAIL_SUBJECT = "PawnGuild email confirmation"
 EMAIL_MAIL_HTML = "confirmation_email.html"
-EMAIL_MAIL_PLAIN = "confirmation_email.txt"  # Bug in django_email_verification needs this even though it says it doesn't
+EMAIL_MAIL_PLAIN = "confirmation_email.txt"
 EMAIL_PAGE_TEMPLATE = "email_page.html"
 
 # End django_email_verificaiton settings
