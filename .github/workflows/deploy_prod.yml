@@ -1,23 +1,29 @@
 name: Deploy to production - digital ocean
 
+# on:
+#   push:
+#     branches: [production]
+
 on:
-	push:
-		branches: [production]
+  push:
+    branches: [ production ]
+  pull_request:
+    branches: [ production ]
+
 
 jobs:
-	deploy:
-		runs-on: ubuntu-latest
-		steps:
-			- name: Deploy Pawnguild
-			  uses: appleboy/ssh-action@master
-			  with:
-				host: ${{ secrets.SSH_HOST }}
-				username: ${{ secrets.SSH_USER }}
-				key: ${{ secrets.SSH_KEY }}
-
-				script: |
-				  git clone git@github.com:pawnguild/pawnguild.git
-				  cd pawnguild
-				  git pull
-				  docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
-				  docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+  deploy:
+    runs-on: ubuntu-latest
+	  steps:
+	    - name: Deploy Pawnguild
+          uses: appleboy/ssh-action@master
+            with:
+              host: ${{ secrets.SSH_HOST }}
+              username: ${{ secrets.SSH_USER }}
+              key: ${{ secrets.SSH_KEY }}
+              script: |
+                git clone git@github.com:pawnguild/pawnguild.git
+                cd pawnguild
+                git pull
+                docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
+				docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
