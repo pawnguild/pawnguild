@@ -1,7 +1,5 @@
 from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 
-# Flake and black disagree on how to format binary operators with newlines
-# noqa: W503 Black
 
 base_pawn_fields = [
     "name",
@@ -71,10 +69,12 @@ class ManagePawnCollection(BasePawnCollection):
         self.ps3_pawns = PS3Pawn.objects.filter(created_by=user)
 
     def pawn_count(self):
+        # Flake and black disagree on how to format
+        # binary operators with newlines
         return (
             len(self.steam_pawns)
-            + len(self.switch_pawns)
-            + len(self.xbox1_pawns)
-            + len(self.ps4_pawns)
-            + len(self.ps3_pawns)
+            + len(self.switch_pawns)  # noqa: W503
+            + len(self.xbox1_pawns)  # noqa: W503
+            + len(self.ps4_pawns)  # noqa: W503
+            + len(self.ps3_pawns)  # noqa: W503
         )
