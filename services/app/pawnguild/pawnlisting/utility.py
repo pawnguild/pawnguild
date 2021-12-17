@@ -74,4 +74,4 @@ class ManagePawnCollection(BasePawnCollection):
             + len(self.xbox1_pawns)
             + len(self.ps4_pawns)
             + len(self.ps3_pawns)
-        )
+        )  # noqa: W503 Black -- and flake8 disagree here

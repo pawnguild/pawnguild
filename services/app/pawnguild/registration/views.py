@@ -1,7 +1,7 @@
 from django.views.generic.edit import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render
 
 from django.contrib.auth.views import LoginView
 
@@ -45,7 +45,7 @@ class UpdateProfile(LoginRequiredMixin, View):
     def post(self, request):
         # TODO: Implement user profile updating
         # flake8 : Undefined reference of UserProfileform. returning nonsense
-        return render(request, "registration/update_profile.html", context=context)
+        return render(request, "registration/update_profile.html")
         # profile_form = UserProfileForm(request.POST)
         # if profile_form.is_valid():
         #     profile_form.save()
