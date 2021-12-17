@@ -3,8 +3,6 @@ name: Deploy to production - digital ocean
 on:
   push:
     branches: [ production ]
-  pull_request:
-    branches: [ production ]
 
 jobs:
   deploy:
