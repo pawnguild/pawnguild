@@ -6,7 +6,7 @@
 
 For ease of use, add these aliases to your ~/.bashrc file.
 
-	alias pgdev="docker-compose -f docker-compose.yml -f docker-compose.dev.yml up"
+	alias pgup="docker-compose -f docker-compose.yml -f docker-compose.dev.yml up"
 	alias pgdown="docker-compose -f docker-compose.yml -f docker-compose.dev.yml down"
 	alias pgtest="docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit"
 
@@ -15,11 +15,11 @@ For ease of use, add these aliases to your ~/.bashrc file.
 
 To run the pawnguild dev environment, simply
 
-	pgdev
+	pgup
 
-You can pass parameters to `docker-compose` via this command by putting them after `pgdev`. For example: 
+You can pass parameters to `docker-compose` via this command by putting them after `pgup`. For example: 
 
-	pgdev --build
+	pgup --build
 
 Run tests locally with
 
@@ -39,7 +39,7 @@ Because of nginx listening on port 80, access your local pawnguild at `localhost
 2. Copy this file into the pawnguild service, specifically at `pawnguild/services/app/db_backup.json`
 3. Build and run the local environment
 
-		 pgdev
+		 pgup
 
 4. Open a terminal in the django app's container
 
@@ -51,3 +51,14 @@ Because of nginx listening on port 80, access your local pawnguild at `localhost
 		python manage.py loaddata db_backup.json
 
 6. In your terminal (not inside the container), remove `db_backup.json`. There is no further need for it
+
+## Contributing
+
+To contribute code, you currently need write access to the repository. Once given, checkout a new branch
+off of `production` and create a pull request with any changes you make. Note that for your code to pass
+the automated tests, you will need to format your code with `black`.
+
+See https://pypi.org/project/black/ for more info on what `black` is.
+
+Note that where you install black needs to be where your vscode runs. It is not inside the docker container.
+For example, I run VS Code in Linux. I installed black in my user's python environment.
