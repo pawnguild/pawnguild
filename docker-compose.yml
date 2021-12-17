@@ -20,6 +20,7 @@ services:
         image: postgres:14.1-alpine
         env_file:
             - ./.env/db.env
+            - ./.env/web.env
         volumes:
             # https://stackoverflow.com/questions/1510104/where-to-store-application-data-non-user-specific-on-linux
             - postgres_data:/var/lib/postgresql/data

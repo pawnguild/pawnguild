@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+    web:
+        volumes:
+            - static_files:/app/static
+        env_file:
+            - /home/pawnguild/secrets/.env/web.env
+    db:
+        env_file:
+            - /home/pawnguild/secrets/.env/web.env
+            - /home/pawnguild/secrets/.env/db.env
