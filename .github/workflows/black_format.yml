@@ -1,6 +1,13 @@
 # https://github.com/marketplace/actions/run-black-formatter
 name: black-action
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [ production ]
+  pull_request:
+    branches: [ production ]
+
+
 jobs:
   linter_name:
     name: runner / black formatter
