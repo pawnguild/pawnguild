@@ -9,10 +9,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-	  steps:
-	    - name: Deploy Pawnguild
-	  uses: appleboy/ssh-action@master
-	  with:
+    steps:
+      - name: Deploy Pawnguild
+      uses: appleboy/ssh-action@master
+      with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
