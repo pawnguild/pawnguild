@@ -1,14 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from django.test import TestCase
-from django.shortcuts import reverse
-from django.contrib import auth
-from django.contrib.auth.forms import UserCreationForm
 
 import random
 import string
 
-from pawnguild.pawnlisting.forms import SteamPawnForm, SwitchPawnForm
 from pawnguild.pawnlisting.models import (
     SteamPawn,
     SwitchPawn,

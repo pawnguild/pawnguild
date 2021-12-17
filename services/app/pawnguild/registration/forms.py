@@ -1,6 +1,5 @@
 from .models import UserProfile
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
 from django.forms import ValidationError
 

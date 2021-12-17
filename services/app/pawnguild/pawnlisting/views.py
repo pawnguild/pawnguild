@@ -1,5 +1,4 @@
 from django.shortcuts import render, reverse, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import (
@@ -7,9 +6,7 @@ from django.contrib.auth.mixins import (
     UserPassesTestMixin,
     AccessMixin,
 )
-from django import forms
 from django.urls import reverse_lazy
-from django.core.exceptions import ValidationError, PermissionDenied
 
 from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 from .forms import (
@@ -20,7 +17,17 @@ from .forms import (
     PS3PawnForm,
     PlatformForm,
 )
-from .utility import *
+from .utility import (
+    steam_pawn_fields,
+    switch_pawn_fields,
+    xbox1_pawn_fields,
+    ps4_pawn_fields,
+    ps3_pawn_fields,
+    ManagePawnCollection,
+    ListPawnCollection,
+    sort_pawns,
+    keep_active_pawns,
+)
 
 
 class EmailVerifiedMixin(AccessMixin):
@@ -52,7 +59,7 @@ class TooManyPawns(TemplateView):
     template_name = "pawnlisting/errors/too_many_pawns.html"
 
 
-### CreateViews ###
+# CreateViews
 
 
 class AllowPawnCreationMixin(
@@ -129,9 +136,9 @@ class CreatePS3Pawn(CreatePawnMixin):
     template_name = "pawnlisting/pawn_forms/ps3.html"
 
 
-### End CreateViews ###
+# End CreateViews
 
-### ListViews ###
+# ListViews
 
 
 class ListAllPawns(View):
@@ -185,9 +192,9 @@ class PS3PawnList(make_ListPawnMixin(PS3Pawn, "PS3")):
     template_name = "pawnlisting/list_pawns/list_ps3_pawns.html"
 
 
-### End ListViews ###
+# End ListViews
 
-### DetailViews ###
+# DetailViews
 
 
 class PawnDetail(DetailView):
@@ -219,7 +226,7 @@ class PS3PawnDetail(PawnDetail):
     template_name = "pawnlisting/detail_pawn/ps3.html"
 
 
-### End DetailViews ###
+# End DetailViews
 
 
 def make_UserOwnsPawnMixin(Type):
@@ -240,7 +247,7 @@ def make_UserOwnsPawnMixin(Type):
     return AllowIfUserOwnsPawn
 
 
-### UpdateViews ###
+# UpdateViews
 
 
 class SteamPawnUpdate(make_UserOwnsPawnMixin(SteamPawn), UpdateView):
@@ -273,9 +280,9 @@ class PS3PawnUpdate(make_UserOwnsPawnMixin(PS3Pawn), UpdateView):
     template_name = "pawnlisting/pawn_forms/ps3.html"
 
 
-### End UpdateViews ###
+# End UpdateViews
 
-### DeleteViews ###
+# DeleteViews
 
 
 class DeletePawnMixin(DeleteView):
@@ -303,4 +310,4 @@ class PS3PawnDelete(make_UserOwnsPawnMixin(PS3Pawn), DeletePawnMixin):
     model = PS3Pawn
 
 
-### EndDeleteViews ###
+# EndDeleteViews

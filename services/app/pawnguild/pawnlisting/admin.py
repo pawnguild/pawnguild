@@ -10,8 +10,8 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.models import Group
 
 # Need to import this since auth models get registered on import.
-import django.contrib.auth.admin
-import django.contrib.auth.models
+import django.contrib.auth.admin  # noqa: F401
+import django.contrib.auth.models  # noqa: F401
 from django.contrib import auth
 
 admin.site.register(SteamPawn)

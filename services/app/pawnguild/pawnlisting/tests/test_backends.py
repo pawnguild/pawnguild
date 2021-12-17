@@ -1,9 +1,4 @@
-from django.test import TestCase
-from django.shortcuts import reverse
-from django.contrib.auth import get_user, get_user_model
-
-from time import sleep
-from datetime import datetime, timedelta
+from django.contrib.auth import get_user
 
 from pawnguild.pawnlisting.tests.utility import UtilityTestCase
 

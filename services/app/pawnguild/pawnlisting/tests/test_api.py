@@ -1,7 +1,5 @@
-from django.test import TestCase
 from django.shortcuts import reverse
 
-from pawnguild.pawnlisting.models import Pawn
 from pawnguild.pawnlisting.tests.utility import UtilityTestCase
 
 
@@ -17,7 +15,7 @@ class TestPawnApi(UtilityTestCase):
             created_by=self.test_args["test_user"],
         )
 
-        for k, v in pawn_data.items():
+        for k, v in steam_pawn_data.items():
             if k == "created_by":
                 v = v.id
             self.assertEqual(v, pawn_api_data[k])

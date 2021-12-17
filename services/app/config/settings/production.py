@@ -1,4 +1,4 @@
-from .base import *
+from .base import *  # noqa: F401, F403
 
 ALLOWED_HOSTS = ["www.pawnguild.xyz", "137.184.81.130"]
 SECURE_SSL_REDIRECT = True

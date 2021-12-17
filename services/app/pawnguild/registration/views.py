@@ -1,10 +1,7 @@
-from django.shortcuts import render
 from django.views.generic.edit import View
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import login
 from django.shortcuts import render, reverse, redirect
-from django.views.generic import TemplateView
 
 from django.contrib.auth.views import LoginView
 
@@ -46,13 +43,16 @@ class UpdateProfile(LoginRequiredMixin, View):
         return render(request, "registration/update_profile.html", context=context)
 
     def post(self, request):
-        profile_form = UserProfileForm(request.POST)
-        if profile_form.is_valid():
-            profile_form.save()
-            return redirect(reverse("pawnlisting/list-all-pawns"))
-        else:
-            context = {"profile_form": profile_form}
-            return render(request, "registration/update_profile.html", context=context)
+        # TODO: Implement user profile updating
+        # flake8 : Undefined reference of UserProfileform. returning nonsense
+        return render(request, "registration/update_profile.html", context=context)
+        # profile_form = UserProfileForm(request.POST)
+        # if profile_form.is_valid():
+        #     profile_form.save()
+        #     return redirect(reverse("pawnlisting/list-all-pawns"))
+        # else:
+        #     context = {"profile_form": profile_form}
+        #     return render(request, "registration/update_profile.html", context=context)
 
 
 class ConfirmAccount(LoginRequiredMixin, View):

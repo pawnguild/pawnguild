@@ -9,11 +9,10 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
+from django.core.exceptions import ImproperlyConfigured
 
 import os
 from pathlib import Path
-import json
-from django.core.exceptions import ImproperlyConfigured
 
 
 def get_env_variable(var_name):
@@ -150,7 +149,7 @@ MEDIA_URL = "/media/"
 
 # TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-### Settings for django_email_verification and reset_password ###
+# Settings for django_email_verification and reset_password
 
 DEFAULT_FROM_EMAIL = "pawnhall7@gmail.com"
 EMAIL_HOST = "smtp.gmail.com"
@@ -170,4 +169,4 @@ EMAIL_MAIL_HTML = "confirmation_email.html"
 EMAIL_MAIL_PLAIN = "confirmation_email.txt"  # Bug in django_email_verification needs this even though it says it doesn't
 EMAIL_PAGE_TEMPLATE = "email_page.html"
 
-### End django_email_verificaiton settings
+# End django_email_verificaiton settings

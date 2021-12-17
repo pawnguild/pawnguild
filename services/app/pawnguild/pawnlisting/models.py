@@ -1,7 +1,6 @@
 from django.db import models
 from django.shortcuts import reverse
 from django.core.exceptions import ValidationError
-from django.core.validators import URLValidator
 from django.utils import timezone
 from django.conf import settings
 
@@ -22,8 +21,8 @@ inclinations = [
 ]
 
 
-def build_choices(l):
-    return [(choice, choice) for choice in l]
+def build_choices(list_):
+    return [(choice, choice) for choice in list_]
 
 
 # Create your models here.
@@ -102,8 +101,6 @@ class Pawn(models.Model):
     @property
     def sunday_based_activity(self):
         """Return number of stars that should display in pawn list. No stars after 4 weeks"""
-        time_since_modified = timezone.now() - self.last_modified
-
         today = date.today()
 
         # - 0 for monday, - 1 for tuesday, 6 for sunday

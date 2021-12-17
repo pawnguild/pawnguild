@@ -3,7 +3,6 @@ from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn, build_
 from urllib.parse import urlparse
 from django.core.exceptions import ValidationError
 from .utility import (
-    base_pawn_fields,
     steam_pawn_fields,
     switch_pawn_fields,
     xbox1_pawn_fields,
