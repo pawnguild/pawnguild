@@ -350,6 +350,7 @@ class DeletePawnTests(UtilityTestCase):
         )
 
     def test_delete_pawn(self):
+        self.assertTrue(False)
         response = self.client.post(
             reverse("delete-steam-pawn", kwargs={"pk": self.steam_pawn.id})
         )
