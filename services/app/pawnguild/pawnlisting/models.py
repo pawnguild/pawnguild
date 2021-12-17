@@ -93,14 +93,16 @@ class Pawn(models.Model):
 
     @property
     def activity(self):
-        """Return number of stars that should display in pawn list. No stars after 4 weeks"""
+        """Return number of stars that should display in pawn list.
+        No stars after 4 weeks"""
         time_since_modified = timezone.now() - self.last_modified
         weeks_since_modified = time_since_modified.days // 7
         return max(4 - weeks_since_modified, 0)
 
     @property
     def sunday_based_activity(self):
-        """Return number of stars that should display in pawn list. No stars after 4 weeks"""
+        """Return number of stars that should display in pawn list.
+        No stars after 4 weeks"""
         today = date.today()
 
         # - 0 for monday, - 1 for tuesday, 6 for sunday
