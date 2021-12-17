@@ -1,15 +1,33 @@
 from django.shortcuts import render, reverse, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, AccessMixin
-from django import forms
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    AccessMixin,
+)
 from django.urls import reverse_lazy
-from django.core.exceptions import ValidationError, PermissionDenied
 
 from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
-from .forms import SteamPawnForm, SwitchPawnForm, XboxOnePawnForm, PS4PawnForm, PS3PawnForm, PlatformForm
-from .utility import *
+from .forms import (
+    SteamPawnForm,
+    SwitchPawnForm,
+    XboxOnePawnForm,
+    PS4PawnForm,
+    PS3PawnForm,
+    PlatformForm,
+)
+from .utility import (
+    steam_pawn_fields,
+    switch_pawn_fields,
+    xbox1_pawn_fields,
+    ps4_pawn_fields,
+    ps3_pawn_fields,
+    ManagePawnCollection,
+    ListPawnCollection,
+    sort_pawns,
+    keep_active_pawns,
+)
 
 
 class EmailVerifiedMixin(AccessMixin):
@@ -20,7 +38,6 @@ class EmailVerifiedMixin(AccessMixin):
 
 
 class LimitFivePawnsMixin(AccessMixin):
-
     def dispatch(self, request, *args, **kwargs):
         if ManagePawnCollection(request.user).pawn_count() >= 5:
             return redirect(reverse("too-many-pawns"))
@@ -41,9 +58,13 @@ class PawnManager(LoginRequiredMixin, EmailVerifiedMixin, TemplateView):
 class TooManyPawns(TemplateView):
     template_name = "pawnlisting/errors/too_many_pawns.html"
 
-### CreateViews ###
 
-class AllowPawnCreationMixin(LoginRequiredMixin, EmailVerifiedMixin, LimitFivePawnsMixin):
+# CreateViews
+
+
+class AllowPawnCreationMixin(
+    LoginRequiredMixin, EmailVerifiedMixin, LimitFivePawnsMixin
+):
     pass
 
 
@@ -58,13 +79,23 @@ class ChoosePawnPlatform(AllowPawnCreationMixin, View):
         platform_form = PlatformForm(request.POST)
         if platform_form.is_valid():
             platform = platform_form.cleaned_data["platform"]
-            if   platform == "Steam":   return redirect(reverse("create-steam-pawn"))
-            elif platform == "Switch":  return redirect(reverse("create-switch-pawn"))
-            elif platform == "XboxOne": return redirect(reverse("create-xbox1-pawn"))
-            elif platform == "PS4":     return redirect(reverse("create-ps4-pawn"))
-            elif platform == "PS3":     return redirect(reverse("create-ps3-pawn"))
+            if platform == "Steam":
+                return redirect(reverse("create-steam-pawn"))
+            elif platform == "Switch":
+                return redirect(reverse("create-switch-pawn"))
+            elif platform == "XboxOne":
+                return redirect(reverse("create-xbox1-pawn"))
+            elif platform == "PS4":
+                return redirect(reverse("create-ps4-pawn"))
+            elif platform == "PS3":
+                return redirect(reverse("create-ps3-pawn"))
         else:
-            return render(request, "pawnlisting/pawn_forms/select_platform.html", context={"platform_form": platform_form})
+            return render(
+                request,
+                "pawnlisting/pawn_forms/select_platform.html",
+                context={"platform_form": platform_form},
+            )
+
 
 class CreatePawnMixin(AllowPawnCreationMixin, CreateView):
     login_url = "/login/"
@@ -104,22 +135,22 @@ class CreatePS3Pawn(CreatePawnMixin):
     form_class = PS3PawnForm
     template_name = "pawnlisting/pawn_forms/ps3.html"
 
-### End CreateViews ###
 
-### ListViews ###
+# End CreateViews
+
+# ListViews
+
 
 class ListAllPawns(View):
-
     def get(self, request):
         context = ListPawnCollection().get_context()
-        return render(request, "pawnlisting/list_pawns/list_pawns.html", context=context)
-
+        return render(
+            request, "pawnlisting/list_pawns/list_pawns.html", context=context
+        )
 
 
 def make_ListPawnMixin(Type, origin):
-
     class ListPawnMixin(ListView):
-
         def get_context_data(self):
             context = super().get_context_data()
             context.update({"platform": origin})
@@ -127,7 +158,7 @@ def make_ListPawnMixin(Type, origin):
 
         def get_queryset(self):
             return sort_pawns(keep_active_pawns(Type.objects.all()))
-    
+
     return ListPawnMixin
 
 
@@ -160,9 +191,11 @@ class PS3PawnList(make_ListPawnMixin(PS3Pawn, "PS3")):
     context_object_name = "pawns"
     template_name = "pawnlisting/list_pawns/list_ps3_pawns.html"
 
-### End ListViews ###
 
-### DetailViews ###
+# End ListViews
+
+# DetailViews
+
 
 class PawnDetail(DetailView):
     context_object_name = "pawn"
@@ -192,15 +225,16 @@ class PS3PawnDetail(PawnDetail):
     model = PS3Pawn
     template_name = "pawnlisting/detail_pawn/ps3.html"
 
-### End DetailViews ###
+
+# End DetailViews
 
 
 def make_UserOwnsPawnMixin(Type):
-    """ Returns a  Mixin that 
-        1. Requires login
-        2. User passes the following test: they own the Pawn
-        3. Applies to any type of Pawn
-        """
+    """Returns a  Mixin that
+    1. Requires login
+    2. User passes the following test: they own the Pawn
+    3. Applies to any type of Pawn
+    """
 
     class AllowIfUserOwnsPawn(LoginRequiredMixin, UserPassesTestMixin):
 
@@ -213,7 +247,8 @@ def make_UserOwnsPawnMixin(Type):
     return AllowIfUserOwnsPawn
 
 
-### UpdateViews ###
+# UpdateViews
+
 
 class SteamPawnUpdate(make_UserOwnsPawnMixin(SteamPawn), UpdateView):
     model = SteamPawn
@@ -244,9 +279,10 @@ class PS3PawnUpdate(make_UserOwnsPawnMixin(PS3Pawn), UpdateView):
     fields = ps3_pawn_fields
     template_name = "pawnlisting/pawn_forms/ps3.html"
 
-### End UpdateViews ###
 
-### DeleteViews ###
+# End UpdateViews
+
+# DeleteViews
 
 
 class DeletePawnMixin(DeleteView):
@@ -273,4 +309,5 @@ class PS4PawnDelete(make_UserOwnsPawnMixin(PS4Pawn), DeletePawnMixin):
 class PS3PawnDelete(make_UserOwnsPawnMixin(PS3Pawn), DeletePawnMixin):
     model = PS3Pawn
 
-### EndDeleteViews ###
+
+# EndDeleteViews

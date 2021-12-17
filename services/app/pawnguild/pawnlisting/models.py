@@ -1,7 +1,6 @@
 from django.db import models
 from django.shortcuts import reverse
 from django.core.exceptions import ValidationError
-from django.core.validators import URLValidator
 from django.utils import timezone
 from django.conf import settings
 
@@ -9,17 +8,27 @@ from datetime import datetime, timedelta, date
 
 vocations = ["Fighter", "Warrior", "Strider", "Ranger", "Mage", "Sorcerer"]
 genders = ["Male", "Female"]
-inclinations = ["Scather", "Medicant", "Mitigator", "Challenger", "Utilitarian", "Guardian", "Nexus", "Pioneer", "Acquisitor"]
+inclinations = [
+    "Scather",
+    "Medicant",
+    "Mitigator",
+    "Challenger",
+    "Utilitarian",
+    "Guardian",
+    "Nexus",
+    "Pioneer",
+    "Acquisitor",
+]
 
 
-def build_choices(l):
-    return [(choice, choice) for choice in l]
+def build_choices(list_):
+    return [(choice, choice) for choice in list_]
 
 
 # Create your models here.
 
-class Pawn(models.Model):
 
+class Pawn(models.Model):
     class Meta:
         abstract = True
 
@@ -34,14 +43,22 @@ class Pawn(models.Model):
     PRIMARY_INCLINATION_CHOICES = build_choices(inclinations)
     SECONDARY_INCLINATION_CHOICES = PRIMARY_INCLINATION_CHOICES[:] + [("None", "None")]
 
-    primary_inclination = models.CharField(max_length=30, choices=PRIMARY_INCLINATION_CHOICES)
-    secondary_inclination= models.CharField(max_length=30, choices=SECONDARY_INCLINATION_CHOICES, default="None")
-    tertiary_inclination= models.CharField(max_length=30, choices=SECONDARY_INCLINATION_CHOICES, default="None")
+    primary_inclination = models.CharField(
+        max_length=30, choices=PRIMARY_INCLINATION_CHOICES
+    )
+    secondary_inclination = models.CharField(
+        max_length=30, choices=SECONDARY_INCLINATION_CHOICES, default="None"
+    )
+    tertiary_inclination = models.CharField(
+        max_length=30, choices=SECONDARY_INCLINATION_CHOICES, default="None"
+    )
 
     notes = models.TextField(max_length=1000, blank=True)
     picture = models.ImageField(upload_to="pawn_pictures/", null=True, blank=True)
 
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE
+    )
     last_modified = models.DateTimeField(default=timezone.now)
 
     primary_skills = models.CharField(max_length=100, blank=True)
@@ -53,12 +70,20 @@ class Pawn(models.Model):
 
     def clean(self):
         errors = {}
-        if self.level not in range(1,201):
-            errors["level"] = ValidationError('Level must be within 1-200')
+        if self.level not in range(1, 201):
+            errors["level"] = ValidationError("Level must be within 1-200")
 
-        inclinations = {self.primary_inclination, self.secondary_inclination, self.tertiary_inclination}
-        if len(inclinations) != 3 and not (self.secondary_inclination == "None" and self.tertiary_inclination == "None"):
-            errors["primary_inclination"] = ValidationError("Inclinations must all be different")
+        inclinations = {
+            self.primary_inclination,
+            self.secondary_inclination,
+            self.tertiary_inclination,
+        }
+        if len(inclinations) != 3 and not (
+            self.secondary_inclination == "None" and self.tertiary_inclination == "None"
+        ):
+            errors["primary_inclination"] = ValidationError(
+                "Inclinations must all be different"
+            )
 
         if errors:
             raise ValidationError(errors)
@@ -68,22 +93,20 @@ class Pawn(models.Model):
 
     @property
     def activity(self):
-        """ Return number of stars that should display in pawn list. No stars after 4 weeks"""
+        """Return number of stars that should display in pawn list. No stars after 4 weeks"""
         time_since_modified = timezone.now() - self.last_modified
-        weeks_since_modified = time_since_modified.days // 7 
+        weeks_since_modified = time_since_modified.days // 7
         return max(4 - weeks_since_modified, 0)
 
     @property
     def sunday_based_activity(self):
-        """ Return number of stars that should display in pawn list. No stars after 4 weeks"""
-        time_since_modified = timezone.now() - self.last_modified
-
+        """Return number of stars that should display in pawn list. No stars after 4 weeks"""
         today = date.today()
 
         # - 0 for monday, - 1 for tuesday, 6 for sunday
         offset = (today.weekday() - 0) % 7
         last_monday = today - timedelta(days=offset)
-        
+
         last_modified_date = datetime.date(self.last_modified)
         if last_modified_date >= last_monday:
             return 4
@@ -130,6 +153,7 @@ class SwitchPawn(Pawn):
     def get_absolute_url(self):
         return reverse("view-switch-pawn", kwargs={"pk": self.id})
 
+
 class XboxOnePawn(Pawn):
     gamertag = models.CharField(max_length=15)
 
@@ -146,11 +170,13 @@ class PS4Pawn(Pawn):
 
     def get_absolute_url(self):
         return reverse("view-ps4-pawn", kwargs={"pk": self.pk})
-    
-    
+
+
 class PS3Pawn(Pawn):
     psn = models.CharField(max_length=16)
-    version = models.TextField(max_length=20, choices=build_choices(["DD", "Dark Arisen"]))
+    version = models.TextField(
+        max_length=20, choices=build_choices(["DD", "Dark Arisen"])
+    )
 
     class Meta:
         verbose_name = "PS3Pawn"

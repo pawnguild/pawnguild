@@ -1,6 +1,6 @@
-from .base import *
+from .base import *  # noqa: F401, F403
 
-ALLOWED_HOSTS = ["www.pawnguild.xyz", '137.184.81.130']
+ALLOWED_HOSTS = ["www.pawnguild.xyz", "137.184.81.130"]
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
