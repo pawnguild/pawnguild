@@ -4,8 +4,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
 from django.forms import ValidationError
 
-class UserProfileCreationForm(UserCreationForm):
 
+class UserProfileCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = UserProfile
         fields = UserCreationForm.Meta.fields + ("email",)

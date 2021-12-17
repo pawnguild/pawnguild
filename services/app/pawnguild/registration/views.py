@@ -20,7 +20,6 @@ class Login(LoginView):
 
 
 class Register(View):
-
     def get(self, request):
         context = {"form": UserProfileCreationForm()}
         return render(request, "registration/register.html", context=context)
@@ -28,19 +27,22 @@ class Register(View):
     def post(self, request):
         profile_form = UserProfileCreationForm(request.POST)
         if profile_form.is_valid():
-            user = profile_form.save() # Creates a user
+            user = profile_form.save()  # Creates a user
             login(request, user, backend="django.contrib.auth.backends.ModelBackend")
             send_email(user)
-            return render(request, "registration/confirm_account_sent.html", context={"email": request.user.email})
+            return render(
+                request,
+                "registration/confirm_account_sent.html",
+                context={"email": request.user.email},
+            )
         else:
             context = {"form": profile_form}
             return render(request, "registration/register.html", context=context)
 
 
 class UpdateProfile(LoginRequiredMixin, View):
-
     def get(self, request):
-        context = {"profile_form": UserProfileCreationForm() }
+        context = {"profile_form": UserProfileCreationForm()}
         return render(request, "registration/update_profile.html", context=context)
 
     def post(self, request):
@@ -52,11 +54,19 @@ class UpdateProfile(LoginRequiredMixin, View):
             context = {"profile_form": profile_form}
             return render(request, "registration/update_profile.html", context=context)
 
-class ConfirmAccount(LoginRequiredMixin, View):
 
+class ConfirmAccount(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, "registration/confirm_account_send.html", context={"email": request.user.email})
+        return render(
+            request,
+            "registration/confirm_account_send.html",
+            context={"email": request.user.email},
+        )
 
     def post(self, request):
         send_email(self.request.user)
-        return render(request, "registration/confirm_account_sent.html", context={"email": request.user.email})
+        return render(
+            request,
+            "registration/confirm_account_sent.html",
+            context={"email": request.user.email},
+        )

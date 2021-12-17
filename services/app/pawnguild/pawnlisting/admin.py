@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import SteamPawn, SwitchPawn,  XboxOnePawn, PS4Pawn, PS3Pawn
+from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 
 
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.admin.widgets import FilteredSelectMultiple    
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.models import Group
 
 # Need to import this since auth models get registered on import.
@@ -28,10 +28,10 @@ class GroupAdminForm(forms.ModelForm):
 
     # Add the users field.
     users = forms.ModelMultipleChoiceField(
-         queryset=get_user_model().objects.all(), 
-         required=False,
-         # Use the pretty 'filter_horizontal widget'.
-         widget=FilteredSelectMultiple('users', False)
+        queryset=get_user_model().objects.all(),
+        required=False,
+        # Use the pretty 'filter_horizontal widget'.
+        widget=FilteredSelectMultiple("users", False),
     )
 
     def __init__(self, *args, **kwargs):
@@ -40,11 +40,11 @@ class GroupAdminForm(forms.ModelForm):
         # If it is an existing group (saved objects have a pk).
         if self.instance.pk:
             # Populate the users field with the current Group users.
-            self.fields['users'].initial = self.instance.user_set.all()
+            self.fields["users"].initial = self.instance.user_set.all()
 
     def save_m2m(self):
         # Add the users to the Group.
-        self.instance.user_set.set(self.cleaned_data['users'])
+        self.instance.user_set.set(self.cleaned_data["users"])
 
     def save(self, *args, **kwargs):
         # Default save
@@ -54,13 +54,13 @@ class GroupAdminForm(forms.ModelForm):
         return instance
 
 
-
 # Create a new Group admin.
 class GroupAdmin(admin.ModelAdmin):
     # Use our custom form.
     form = GroupAdminForm
     # Filter permissions horizontal as well.
-    filter_horizontal = ['permissions']
+    filter_horizontal = ["permissions"]
+
 
 admin.site.unregister(auth.models.Group)
 admin.site.register(Group, GroupAdmin)
