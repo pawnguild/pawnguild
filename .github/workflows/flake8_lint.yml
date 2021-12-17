@@ -1,6 +1,6 @@
 name: flake8 Lint
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   flake8-lint:
@@ -14,4 +14,4 @@ jobs:
         with:
           python-version: "3.8"
       - name: flake8 Lint
-        uses: py-actions/flake8@v2
+		uses: py-actions/flake8@v2
