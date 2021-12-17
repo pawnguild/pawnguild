@@ -1,9 +1,7 @@
 name: Black Check
 
 # Run action on PRs to production
-on:
-  pull_request:
-    branches: [ production ]
+on: [push, pull_request]
 
 jobs:
   suggest:
