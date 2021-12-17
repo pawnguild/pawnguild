@@ -8,7 +8,7 @@ from django.contrib.auth import get_user
 class TestRegister(TestCase):
     def test_register(self):
         self.assertFalse(get_user(self.client).is_authenticated)
-        response = self.client.post(
+        response = self.client.post(  # noqa: F841
             reverse("register"),
             data={
                 "username": "testacc",
@@ -16,5 +16,5 @@ class TestRegister(TestCase):
                 "password2": "ventura1",
                 "email": "whatever@mailinator.com",
             },
-        )  # noqa: F841
+        )
         self.assertTrue(get_user(self.client).is_authenticated)

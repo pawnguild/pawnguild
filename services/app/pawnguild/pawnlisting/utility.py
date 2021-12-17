@@ -1,5 +1,8 @@
 from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
 
+# Flake and black disagree on how to format binary operators with newlines
+# noqa: W503 Black
+
 base_pawn_fields = [
     "name",
     "level",
@@ -74,4 +77,4 @@ class ManagePawnCollection(BasePawnCollection):
             + len(self.xbox1_pawns)
             + len(self.ps4_pawns)
             + len(self.ps3_pawns)
-        )  # noqa: W503 Black -- and flake8 disagree here
+        )
