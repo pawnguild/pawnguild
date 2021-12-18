@@ -2,5 +2,7 @@ version: '3.8'
 
 services:
     web:
-        command: [./startup_scripts/start.test.sh]
+        command: > # Sleeping for 10 seconds ensures postgres is done building in time
+          bash -c "sleep 10 &&
+          python manage.py test --no-input"
         restart: "no"
