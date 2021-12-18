@@ -9,5 +9,8 @@ python manage.py makemigrations
 echo 'Migrating database...'
 python manage.py migrate
 
-echo 'Running tests...'
-python manage.py test --no-input
+echo 'Creating superuser...'
+python manage.py createsuperuser --noinput
+
+echo 'Booting up server'
+gunicorn config.wsgi:application --bind 0.0.0.0:${DJANGO_PORT}

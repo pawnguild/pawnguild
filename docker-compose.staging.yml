@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+    web:
+        environment:
+          # https://stackoverflow.com/questions/6244382/how-to-automate-createsuperuser-on-django
+          - DJANGO_SUPERUSER_USERNAME=admin  
+          - DJANGO_SUPERUSER_PASSWORD=darkarisen
+          - DJANGO_SUPERUSER_EMAIL=test@example.com
+          - DJANGO_PORT=9000
+        expose:
+            - 9000
+    db:
+        volumes:
+            # https://stackoverflow.com/questions/1510104/where-to-store-application-data-non-user-specific-on-linux
+            - staging_postgres_data:/var/lib/postgresql/data
+            # - ./services/db/:/docker-entrypoint-initdb.d/
+    nginx:
+        ports:
+            - 9090:9090
+
+volumes:
+    staging_postgres_data:
+    static_files:
