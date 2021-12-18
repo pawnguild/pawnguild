@@ -6,14 +6,14 @@
 </head>
 <body>
 <h1>Thank you for registering on PawnGuild, {{ user.username }}!</h1><br>
-<h2>In order to create and manage pawns, please click <a href="{{ link }}">here</a> to activate your account.</h2><br>
+<h2>In order to create and manage pawns, please click <a href="{{ link }}" title="PawnGuild Activation URL">here</a> to activate your account.</h2><br>
 <p>If the link above does not work, you can copy and paste the following:</p>
 <p>{{ link }}</p>
 <p><em>This link expires on {{ expiry|time:"TIME_FORMAT" }}</em></p>
 <p>If you did not register on PawnGuild, please ignore this email.</p>
 <p>
   PawnGuild Team<br>
-  https://www.pawnguild.xyz/
+  <a href="https://www.pawnguild.xyz/" title="PawnGuild Website">https://www.pawnguild.xyz/</a>
 </p>
 </body>
 </html>
