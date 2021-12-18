@@ -28,8 +28,6 @@ services:
         container_name: postgres
     nginx:
         build: ./services/nginx
-        env_file:
-            - ./.env/web.env
         ports:
             - 80:80
         volumes:
