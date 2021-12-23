@@ -8,7 +8,7 @@ In order to create and manage pawns, please copy and paste the following link in
 
 {{ link }}
 
-This link expires on {{ expiry|time:"TIME_FORMAT" }}
+This link expires in 1 hour
 
 If you did not register on PawnGuild, please ignore this email.
 
