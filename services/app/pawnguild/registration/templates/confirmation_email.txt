@@ -1,3 +1,16 @@
-Thanks for registering at PawnGuild!
-Copy paste the link into your browser to confirm your account. Once confirmed, you can create Pawns
+-------------------------------------------------
+Activate your PawnGuild Account
+-------------------------------------------------
+
+Thank you for registering on PawnGuild, {{ user.username }}!
+
+In order to create and manage pawns, please copy and paste the following link in to your browser to activate your account.
+
 {{ link }}
+
+This link expires in 1 hour
+
+If you did not register on PawnGuild, please ignore this email.
+
+PawnGuild Team
+https://www.pawnguild.xyz/

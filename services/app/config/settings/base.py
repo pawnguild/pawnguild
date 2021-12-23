@@ -153,7 +153,7 @@ MEDIA_URL = "/media/"
 
 # Settings for django_email_verification and reset_password
 
-DEFAULT_FROM_EMAIL = "pawnhall7@gmail.com"
+DEFAULT_FROM_EMAIL = "PawnGuild <pawnhall7@gmail.com>"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "pawnhall7@gmail.com"
 EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_PASSWORD")
@@ -163,10 +163,10 @@ EMAIL_TOKEN_LIFE = 60 * 60  # email is valid for 1 hour
 EMAIL_ACTIVE_FIELD = "email_verified"
 EMAIL_SERVER = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_ADDRESS = "pawnhall7@gmail.com"
-EMAIL_FROM_ADDRESS = "noreply@pawnhall.com"
+EMAIL_ADDRESS = "PawnGuild <pawnhall7@gmail.com>"
+EMAIL_FROM_ADDRESS = "PawnGuild <pawnhall7@gmail.com>"
 EMAIL_PASSWORD = get_env_variable("EMAIL_PASSWORD")
-EMAIL_MAIL_SUBJECT = "PawnGuild email confirmation"
+EMAIL_MAIL_SUBJECT = "Activate your PawnGuild Account"
 EMAIL_MAIL_HTML = "confirmation_email.html"
 EMAIL_MAIL_PLAIN = "confirmation_email.txt"
 EMAIL_PAGE_TEMPLATE = "email_page.html"
