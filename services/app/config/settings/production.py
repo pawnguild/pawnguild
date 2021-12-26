@@ -1,6 +1,7 @@
 from .base import *  # noqa: F401, F403
 
-ALLOWED_HOSTS = ["www.pawnguild.xyz", "137.184.81.130"]
+# For 2.0, only have pawnguild here here
+ALLOWED_HOSTS = ["www.pawnguild.xyz", "pawntest.xyz"]
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -10,4 +11,6 @@ SECURE_HSTS_PRELOAD = True
 
 
 EMAIL_USE_TLS = True
-EMAIL_PAGE_DOMAIN = ALLOWED_HOSTS[0] + "/"
+# When releasing 2.0, we will go back to ALLOWED_HOSTS[0]
+# EMAIL_PAGE_DOMAIN = ALLOWED_HOSTS[0] + "/"
+EMAIL_PAGE_DOMAIN = "pawntest.xyz" + "/"
