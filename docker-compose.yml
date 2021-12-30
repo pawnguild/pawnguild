@@ -35,7 +35,11 @@ services:
         depends_on:
             - web
         container_name: nginx
-
+    certbot:
+        image: certbot/certbot:latest
+        volumes:
+            - ./services/certbot/data/certbot/conf:/etc/letsencrypt
+            - ./services/certbot/www:/var/www/certbot
 volumes:
     postgres_data:
     static_files:

@@ -5,8 +5,17 @@ services:
         volumes:
             - static_files:/app/static
         env_file:
-            - /home/pawnguild/secrets/.env/web.env
+            - /home/david/secrets/.env/web.env
     db:
         env_file:
-            - /home/pawnguild/secrets/.env/web.env
-            - /home/pawnguild/secrets/.env/db.env
+            - /home/david/secrets/.env/web.env
+            - /home/david/secrets/.env/db.env
+    nginx:
+        volumes:
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+    certbot:
+        image: certbot/certbot:latest
+        volumes:
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
