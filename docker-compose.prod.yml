@@ -11,11 +11,7 @@ services:
             - /home/david/secrets/.env/web.env
             - /home/david/secrets/.env/db.env
     nginx:
-        volumes:
-            - ./data/certbot/conf:/etc/letsencrypt
-            - ./data/certbot/www:/var/www/certbot
-    certbot:
-        image: certbot/certbot:latest
-        volumes:
-            - ./data/certbot/conf:/etc/letsencrypt
-            - ./data/certbot/www:/var/www/certbot
+        environment:
+            - RUN_CERTBOT=true
+            - CERTBOT_DOMAINS=pawntest.xyz,www.pawntest.xyz
+            - CERTBOT_EMAIL=davidjbrady97@gmail.com

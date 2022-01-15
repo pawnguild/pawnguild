@@ -30,14 +30,15 @@ services:
         build: ./services/nginx
         ports:
             - 80:80
+            - 443:443
         volumes:
             - static_files:/static
         depends_on:
             - web
         container_name: nginx
         environment:
-            - RUN_CERTBOT=true
-            - CERTBOT_DOMAINS=pawntest.xyz
+            - RUN_CERTBOT=false
+            - CERTBOT_DOMAINS=pawntest.xyz,www.pawntest.xyz
             - CERTBOT_EMAIL=davidjbrady97@gmail.com
 volumes:
     postgres_data:

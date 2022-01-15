@@ -1,7 +1,7 @@
 from .base import *  # noqa: F401, F403
 
 # For 2.0, only have pawnguild here here
-ALLOWED_HOSTS = ["www.pawnguild.xyz", "pawntest.xyz"]
+ALLOWED_HOSTS = ["pawntest.xyz", "www.pawntest.xyz"]
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
