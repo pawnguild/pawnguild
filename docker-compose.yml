@@ -35,11 +35,10 @@ services:
         depends_on:
             - web
         container_name: nginx
-    certbot:
-        image: certbot/certbot:latest
-        volumes:
-            - ./services/certbot/data/certbot/conf:/etc/letsencrypt
-            - ./services/certbot/www:/var/www/certbot
+        environment:
+            - RUN_CERTBOT=true
+            - CERTBOT_DOMAINS=pawntest.xyz
+            - CERTBOT_EMAIL=davidjbrady97@gmail.com
 volumes:
     postgres_data:
     static_files:
