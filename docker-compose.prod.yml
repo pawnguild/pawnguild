@@ -15,3 +15,4 @@ services:
             - RUN_CERTBOT=true
             - CERTBOT_DOMAINS=pawntest.xyz,www.pawntest.xyz
             - CERTBOT_EMAIL=davidjbrady97@gmail.com
+        command: ['sh', '/opt/command']

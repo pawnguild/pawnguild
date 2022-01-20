@@ -36,10 +36,6 @@ services:
         depends_on:
             - web
         container_name: nginx
-        environment:
-            - RUN_CERTBOT=false
-            - CERTBOT_DOMAINS=pawntest.xyz,www.pawntest.xyz
-            - CERTBOT_EMAIL=davidjbrady97@gmail.com
 volumes:
     postgres_data:
     static_files:
