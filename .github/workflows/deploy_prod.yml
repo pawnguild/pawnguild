@@ -19,4 +19,5 @@ jobs:
             cd pawnguild
             git pull
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
+            docker-compose down
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d

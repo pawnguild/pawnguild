@@ -1,15 +1,15 @@
 #!/bin/bash
 
-echo 'Collecting static files...'
+# echo 'Collecting static files...'
 python manage.py collectstatic --no-input
 
-echo 'Creating migration files...'
+# echo 'Creating migration files...'
 python manage.py makemigrations
 
-echo 'Migrating database...'
+# echo 'Migrating database...'
 python manage.py migrate
 
-echo 'Creating superuser...'
+# echo 'Creating superuser...'
 python manage.py createsuperuser --noinput
 
 echo 'Booting up server'

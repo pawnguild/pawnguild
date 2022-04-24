@@ -30,12 +30,12 @@ services:
         build: ./services/nginx
         ports:
             - 80:80
+            - 443:443
         volumes:
             - static_files:/static
         depends_on:
             - web
         container_name: nginx
-
 volumes:
     postgres_data:
     static_files:

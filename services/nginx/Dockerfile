@@ -1,4 +1,6 @@
 FROM nginx:1.21-alpine
 
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d
+RUN apk add inotify-tools certbot openssl bash certbot-nginx
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY command /opt/command
