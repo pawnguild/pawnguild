@@ -15,7 +15,9 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            git clone
+            if [ -d "pawnguild" ]; then
+              git clone https://github.com/pawnguild/pawnguild
+            fi
             cd pawnguild
             git pull
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
