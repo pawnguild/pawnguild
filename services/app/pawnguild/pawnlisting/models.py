@@ -68,6 +68,10 @@ class Pawn(models.Model):
         self.last_modified = timezone.now()
         super(Pawn, self).save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        self.picture.delete()
+        super(Pawn, self).delete(*args, **kwargs)
+
     def clean(self):
         errors = {}
         if self.level not in range(1, 201):
