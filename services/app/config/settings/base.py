@@ -161,7 +161,12 @@ EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_TOKEN_LIFE = 60 * 60  # email is valid for 1 hour
 
-EMAIL_ACTIVE_FIELD = "email_verified"
+
+def verified_callback(user):
+    user.email_verified = True
+
+
+EMAIL_VERIFIED_CALLBACK = verified_callback
 EMAIL_SERVER = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_ADDRESS = "PawnGuild <pawnhall7@gmail.com>"

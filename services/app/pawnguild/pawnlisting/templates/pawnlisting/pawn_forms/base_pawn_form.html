@@ -2,6 +2,15 @@
 
 {% load static %}
 
+{% block title %}
+<title> Pawn Form </title>
+{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="Create pawns on Pawnguild! Rent other active pawns and farm rift crystals together">
+{% endblock meta%}
+
+
 {% block stylesheets %}
 <link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_form.css' %}">
 {{ block.super }}

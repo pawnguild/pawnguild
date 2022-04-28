@@ -1,4 +1,15 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
+
+{% block title %}
+<title> Create Account </title>
+{% endblock title %}
+
+{% block page_description %}
+<meta name="description" content="Create account to Pawnguild to share pawns with other active players">
+{% endblock page_description%}
+
+
+{% block content %}
 
 <style>
 .row {
@@ -79,3 +90,5 @@
         </div>
     </form>
 </div>
+
+{% endblock content %}

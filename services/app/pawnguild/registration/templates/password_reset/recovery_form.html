@@ -2,12 +2,13 @@
 {% load i18n %}
 
 {% block title %}
+<title> Recover Password </title>
+{% endblock title %}
+
+{% block content %}
 <div class="container">
 	<h2>{% trans "Password recovery" %}</h2>
 </div>
-{% endblock %}
-
-{% block content %}
 <div class="container">
 	<form method="post" action="{{ url }}">
 		{% csrf_token %}

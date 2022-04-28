@@ -1,5 +1,16 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
     
+{% block title %}
+<title> Login </title>
+{% endblock title %}
+
+{% block page_description %}
+<meta name="description" content="Login to Pawnguild">
+{% endblock page_description%}
+
+
+{% block content %}
+
 <style>
 .row {
     margin-bottom: 5px;
@@ -42,3 +53,5 @@
     <p> Don't have an account? Register <a href="{% url 'register' %}"> here </a> </p>
     <p> Forgot your password? Click <a href="{% url "password_reset_recover" %}"> here</a></p>
 </div>
+
+{% endblock content %}

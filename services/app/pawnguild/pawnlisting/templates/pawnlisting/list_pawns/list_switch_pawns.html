@@ -1,5 +1,14 @@
 {% extends "pawnlisting/base.html"%}
 
+{% block title %}
+<title> Switch Pawns </title>
+{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="List of all Pawnguild Switch Pawns">
+{% endblock meta%}
+
+
 {% block content %}
 {% include "pawnlisting/pawn_tables/list_pawns/switch_pawn_table.html" %}
 {% endblock content %}
