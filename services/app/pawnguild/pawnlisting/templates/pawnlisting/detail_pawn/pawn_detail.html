@@ -6,9 +6,25 @@
 <title> Viewing Pawn {{ pawn.name }} </title>
 {% endblock title %}
 
-{% block page_description %}
-<meta name="description" content="View details for this pawn, such as vocation, level, and inclinations.">
-{% endblock page_description%}
+{% block meta %}
+<meta name="description" content="{{ pawn.name }} - Level {{ pawn.level }} {{ pawn.vocation }}">
+<meta name="robots" content="noindex" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Pawn Guild"></meta>
+
+<meta property="og:title" content="View Pawn {{ pawn.name }}">
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ request.get_host }}" />
+<meta property="og:description" content="{{ pawn.name }} - Level {{ pawn.level }} {{ pawn.vocation }}"></meta>
+
+<meta name="theme-color" content="#394447">
+
+<meta property="og:image" content="{{request.get_host}}{{ pawn.picture.url }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="250">
+<meta property="og:image:height" content="250">
+{% endblock meta%}
 
 
 {% block stylesheets %}
@@ -120,7 +136,7 @@
             <div class="col d-flex justify-content-center">
                 <div class="row">
                     <div class="col-12">
-                        <img class="picture" src="{{pawn.picture.url}}">
+                        <img class="picture" src="{{pawn.picture.url}}" alt="Pawn {{pawn.name}}">
                     </div>
                 </div>
             </div>
