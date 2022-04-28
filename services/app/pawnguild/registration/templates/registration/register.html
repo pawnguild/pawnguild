@@ -1,4 +1,11 @@
-{% include "pawnlisting/base.html" %}
+{% extends "pawnlisting/base.html" %}
+
+{% block title %}
+<title> Create Account </title>
+{% endblock title %}
+
+
+{% block content %}
 
 <style>
 .row {
@@ -79,3 +86,5 @@
         </div>
     </form>
 </div>
+
+{% endblock content %}

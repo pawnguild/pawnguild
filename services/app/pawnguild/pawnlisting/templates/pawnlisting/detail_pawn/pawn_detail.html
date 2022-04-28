@@ -2,6 +2,11 @@
 
 {% load static %}
 
+{% block title %}
+<title> Viewing Pawn {{ pawn.name }} </title>
+{% endblock title %}
+
+
 {% block stylesheets %}
 <link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_detail.css' %}">
 {{ block.super }}
