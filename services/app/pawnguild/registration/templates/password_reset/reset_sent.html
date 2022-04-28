@@ -3,15 +3,16 @@
 
 
 {% block title %}
+<title> Recover Password </title>
+{% endblock title %}
+
+
+{% block content %}
 <div class="container">
     <h2>
         {% trans "Password recovery sent" %}
     </h2>
 </div>
-{% endblock %}
-
-
-{% block content %}
 <div class="container">
 	<p>{% blocktrans with ago=timestamp|timesince %}An email was sent to <strong class="highlight">{{ email }}</strong> {{ ago }} ago. Use the link in it to set a new password.{% endblocktrans %}</p>
 </div>

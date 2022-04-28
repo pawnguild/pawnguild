@@ -1,5 +1,9 @@
 {% extends "password_reset/base.html" %}{% load i18n %}
 
+{% block title %}
+<title> Recover Password </title>
+{% endblock title %}
+
 {% block content %}
 <div class="container">
 	{% if invalid %}{% url "password_reset_recover" as recovery_url %}
