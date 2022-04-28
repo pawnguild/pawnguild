@@ -6,6 +6,10 @@
 <title> Viewing Pawn {{ pawn.name }} </title>
 {% endblock title %}
 
+{% block page_description %}
+<meta name="description" content="View details for this pawn, such as vocation, level, and inclinations.">
+{% endblock page_description%}
+
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_detail.css' %}">
