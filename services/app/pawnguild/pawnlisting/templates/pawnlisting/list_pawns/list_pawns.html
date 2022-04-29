@@ -10,59 +10,54 @@
 
 {% block content %}
 <div class="container">
+    <h2> Steam Pawns </h2>
     {% if steam_pawns %}
-        <h2> Steam Pawns </h2>
         {% with pawns=steam_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/steam_pawn_table.html" %}
         {% endwith %}
         <br>
-    {% elif platform == "Steam" %}
-        <br />
-        <h2> There aren't any listed Steam pawns. You can create one <a href="{% url 'create-steam-pawn' %}">here</a></h2>
+    {% else %}
+        <p> There aren't any active Steam pawns. You can create one <a href="{% url 'create-steam-pawn' %}">here</a></p>
     {% endif %}
 
+    <h2> Switch Pawns </h2>
     {% if switch_pawns %}
-        <h2> Switch Pawns </h2>
         {% with pawns=switch_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/switch_pawn_table.html" %}
         {% endwith %}
         <br>
-    {% elif platform == "Switch" %}
-        <br />
-        <h2> There aren't any listed Nintendo Switch pawns. You can create one <a href="{% url 'create-switch-pawn' %}">here</a></h2>
+    {% else %}
+        <p> There aren't any active Nintendo Switch pawns. You can create one <a href="{% url 'create-switch-pawn' %}">here</a></p>
     {% endif %}
 
+    <h2> Xbox One Pawns </h2>
     {% if xbox1_pawns %}
-        <h2> Xbox One Pawns </h2>
         {% with pawns=xbox1_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/xbox1_pawn_table.html" %}
         {% endwith %}
         <br>
-    {% elif platform == "XboxOne"  %}
-        <br />
-        <h2> There aren't any listed XboxOne pawns. You can create one <a href="{% url 'create-xbox1-pawn' %}">here</a></h2>
+    {% else %}
+        <p> There aren't any active XboxOne pawns. You can create one <a href="{% url 'create-xbox1-pawn' %}">here</a></p>
     {% endif %}
 
+    <h2> PS4 Pawns </h2>
     {% if ps4_pawns %}
-        <h2> PS4 Pawns </h2>
         {% with pawns=ps4_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/ps4_pawn_table.html" %}
         {% endwith %}
         <br>
-    {% elif platform == "PS4" %}
-        <br />
-        <h2> There aren't any listed PS4 pawns. You can create one <a href="{% url 'create-ps4-pawn' %}">here</a></h2>
+    {% else %}
+        <p> There aren't any active PS4 pawns. You can create one <a href="{% url 'create-ps4-pawn' %}">here</a></p>
     {% endif %}
 
+    <h2> PS3 Pawns </h2>
     {% if ps3_pawns %}
-        <h2> PS3 Pawns </h2>
         {% with pawns=ps3_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/ps3_pawn_table.html" %}
         {% endwith %}
         <br>
-    {% elif platform == "PS3" %}
-        <br />
-        <h2> There aren't any listed PS3 pawns. You can create one <a href="{% url 'create-ps3-pawn' %}">here</a></h2>
+    {% else %}
+        <p> There aren't any listed PS3 pawns. You can create one <a href="{% url 'create-ps3-pawn' %}">here</a></p>
     {% endif %} 
 </div>
 {% endblock content %}
