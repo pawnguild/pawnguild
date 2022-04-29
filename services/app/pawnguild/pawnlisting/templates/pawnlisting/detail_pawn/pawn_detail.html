@@ -11,20 +11,15 @@
 <meta name="robots" content="noindex" />
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="Pawn Guild"></meta>
 
-<meta property="og:title" content="View Pawn {{ pawn.name }}">
+<meta name="og:site_name" content="Pawn Guild"></meta>
+<meta property="og:title" content="{{ pawn.name }}">
 <meta property="og:type" content="website" />
-<meta property="og:url" content="{{ request.get_host }}" />
-<meta property="og:description" content="{{ pawn.name }} - Level {{ pawn.level }} {{ pawn.vocation }}"></meta>
-
-<meta name="theme-color" content="#394447">
+<meta property="og:description" content="Level {{ pawn.level }} {{ pawn.vocation }}"></meta>
+<!-- <meta name="theme-color" content="#91ee91"> -->
 
 {% if pawn.picture %}
-    <meta property="og:image" content="{{request.get_host}}{{ pawn.picture.url }}">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="250">
-    <meta property="og:image:height" content="250">
+    <meta property="og:image" content="{{ pawn.picture.url }}" >
 {% endif %}
 {% endblock meta%}
 
