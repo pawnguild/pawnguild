@@ -35,6 +35,7 @@ SECRET_KEY = get_env_variable("SECRET_KEY")
 # Application definition
 
 INSTALLED_APPS = [
+    "pawnguild.pawnguild_common",
     "pawnguild.pawnlisting",
     "pawnguild.registration",
     "django.contrib.admin",
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "pawnguild.pawnguild_common.middleware.LogErrors.LogErrorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -178,3 +180,22 @@ EMAIL_MAIL_PLAIN = "confirmation_email.txt"
 EMAIL_PAGE_TEMPLATE = "email_page.html"
 
 # End django_email_verificaiton settings
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
