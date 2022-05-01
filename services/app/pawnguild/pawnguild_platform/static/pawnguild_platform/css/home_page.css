@@ -1,0 +1,15 @@
+.banner {
+    background-color: darkblue;
+    height: 400px;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.info-box {
+    height: 300px;
+    background-color: darkgrey;
+    flex-grow: 1;
+}

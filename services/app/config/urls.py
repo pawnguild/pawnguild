@@ -26,6 +26,7 @@ urlpatterns = [
     path("email/", include(mail_urls)),
     path("", include("password_reset.urls")),
     path("", include("django.contrib.auth.urls")),
+    path("", include("pawnguild.pawnguild_platform.urls")),
     path("", include("pawnguild.registration.urls")),
     path("", include("pawnguild.pawnlisting.urls")),
 ]

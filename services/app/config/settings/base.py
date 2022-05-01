@@ -36,6 +36,7 @@ SECRET_KEY = get_env_variable("SECRET_KEY")
 
 INSTALLED_APPS = [
     "pawnguild.pawnguild_common",
+    "pawnguild.pawnguild_platform",
     "pawnguild.pawnlisting",
     "pawnguild.registration",
     "django.contrib.admin",
