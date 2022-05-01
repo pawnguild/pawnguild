@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, reverse, redirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
@@ -151,13 +152,26 @@ class ListAllPawns(View):
 
 def make_ListPawnMixin(Type, origin):
     class ListPawnMixin(ListView):
-        def get_context_data(self):
-            context = super().get_context_data()
+
+        def filter_pawns(self, pawns):
+            conds = Q()
+            if min_level := self.request.GET['min-level']:
+                conds &= Q(level__gte=min_level)
+            if max_level := self.request.GET['max-level']:
+                conds &= Q(level__lte=max_level)
+            return pawns.filter(conds)
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
             context.update({"platform": origin})
             return context
 
         def get_queryset(self):
-            return sort_pawns(keep_active_pawns(Type.objects.all()))
+            return sort_pawns(
+                keep_active_pawns(
+                    self.filter_pawns(Type.objects.all())
+                )
+            )
 
     return ListPawnMixin
 

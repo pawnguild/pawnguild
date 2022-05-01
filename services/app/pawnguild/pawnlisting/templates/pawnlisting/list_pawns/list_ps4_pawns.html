@@ -1,4 +1,4 @@
-{% extends "pawnlisting/base.html"%}
+{% extends "pawnlisting/list_pawns/list_pawns_base.html"%}
 
 {% block title %}
 <title> PS4 Pawns </title>
@@ -9,6 +9,6 @@
 {% endblock meta%}
 
 
-{% block content %}
+{% block pawn_table %}
 {% include "pawnlisting/pawn_tables/list_pawns/ps4_pawn_table.html" %}
-{% endblock content %}
+{% endblock pawn_table %}

@@ -1,0 +1,41 @@
+{% extends "pawnlisting/base.html"%}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    <div class="search-tools-container">
+        <form action="{{ request.path }}" method="GET">
+            <div class="row mx-3 py-3">
+                <h2> Search for Pawns </h2>
+            </div>
+            
+            Min Level
+            <input type="number" min="1" max="200" id="min-level" name="min-level">
+            Max Level
+            <input type="number" min="1" max="200" id="max-level" name="max-level">
+
+            <div class="row mx-3 py-3">
+                <select name="platform" id="platform-select">
+                    <option disabled selected value> -- select an option -- </option>
+                    <option value="Steam">Steam</option>
+                    <option value="Switch">Nintendo Switch</option>
+                    <option value="XboxOne">Xbox One</option>
+                    <option value="PS4">PS4</option>
+                    <option value="PS3">PS3</option>
+                </select>
+            </div>
+            <div class="row mx-3 py-3">
+                <button class="btn btn-light" type="submit"> Filter </button>
+            </div>
+        </form>
+    </div>
+    {% if pawns %}
+        {% block pawn_table %}
+        {% endblock pawn_table %}
+    {% else %}
+        <p> There aren't any active {{ platform }} pawns. You can create one <a href="{% url 'select_platform' %}">here</a></p>
+    {% endif %}
+</div>
+{% endblock content %}
