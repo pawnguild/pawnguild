@@ -1,5 +1,7 @@
 {% extends "pawnlisting/base.html" %}
 
+{% load static %}
+
 {% block title %}
 <title> All Pawns </title>
 {% endblock title %}
@@ -8,18 +10,41 @@
 <meta name="description" content="List of all Pawnguild pawns">
 {% endblock meta%}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_list.css' %}">
+{{ block.super }}
+{% endblock stylesheets %}
+
+
 {% block content %}
 <div class="container">
-    <h2> Steam Pawns </h2>
-    {% if steam_pawns %}
-        {% with pawns=steam_pawns %}
-            {% include "pawnlisting/pawn_tables/list_pawns/steam_pawn_table.html" %}
-        {% endwith %}
+
+    <div>
+        <h4> Go to Pawn Page </h4>
+        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-steam-pawns' %}">Steam</a>
+        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-switch-pawns' %}">Switch</a>
+        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-xbox1-pawns' %}">Xbox One</a>
+        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-ps4-pawns' %}">PS4</a>
+        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-ps3-pawns' %}">PS3</a>
+        <!-- <a class="dropdown-item" href="{% url 'list-all-pawns' %}"> Show All Pawns </a>
+        <a class="dropdown-item" href="{% url 'list-steam-pawns' %}"> Show Steam Pawns </a>
+        <a class="dropdown-item" href="{% url 'list-switch-pawns' %}"> Show Switch Pawns </a>
+        <a class="dropdown-item" href="{% url 'list-xbox1-pawns' %}"> Show Xbox One Pawns </a>
+        <a class="dropdown-item" href="{% url 'list-ps4-pawns' %}"> Show PS4 Pawns </a>
+        <a class="dropdown-item" href="{% url 'list-ps3-pawns' %}"> Show PS3 Pawns </a> -->
+    </div>
+    <div id="steam-list" class="very-tall-element">
+        <h2> Steam Pawns </h2>
+        {% if steam_pawns %}
+            {% with pawns=steam_pawns %}
+                    {% include "pawnlisting/pawn_tables/list_pawns/steam_pawn_table.html" %}
+            {% endwith %}
         <br>
     {% else %}
         <p> There aren't any active Steam pawns. You can create one <a href="{% url 'create-steam-pawn' %}">here</a></p>
     {% endif %}
-
+    </div>
+    <div id="switch-list" class="very-tall-element">
     <h2> Switch Pawns </h2>
     {% if switch_pawns %}
         {% with pawns=switch_pawns %}
@@ -29,7 +54,8 @@
     {% else %}
         <p> There aren't any active Nintendo Switch pawns. You can create one <a href="{% url 'create-switch-pawn' %}">here</a></p>
     {% endif %}
-
+    </div>
+    <div id="xbox-one-list" class="very-tall-element">
     <h2> Xbox One Pawns </h2>
     {% if xbox1_pawns %}
         {% with pawns=xbox1_pawns %}
@@ -39,7 +65,8 @@
     {% else %}
         <p> There aren't any active XboxOne pawns. You can create one <a href="{% url 'create-xbox1-pawn' %}">here</a></p>
     {% endif %}
-
+    </div>
+    <div id="ps4-list" class="very-tall-element">
     <h2> PS4 Pawns </h2>
     {% if ps4_pawns %}
         {% with pawns=ps4_pawns %}
@@ -49,7 +76,8 @@
     {% else %}
         <p> There aren't any active PS4 pawns. You can create one <a href="{% url 'create-ps4-pawn' %}">here</a></p>
     {% endif %}
-
+    </div>
+    <div id="ps3-list" class="very-tall-element">
     <h2> PS3 Pawns </h2>
     {% if ps3_pawns %}
         {% with pawns=ps3_pawns %}
@@ -59,5 +87,6 @@
     {% else %}
         <p> There aren't any listed PS3 pawns. You can create one <a href="{% url 'create-ps3-pawn' %}">here</a></p>
     {% endif %} 
+    </div>
 </div>
 {% endblock content %}
