@@ -17,7 +17,7 @@ services:
         # Required to recognize the db alias on docker-compose up
         restart: always
     db:
-        image: postgres:14.1-alpine
+        image: postgres:14.2
         env_file:
             - ./.env/db.env
             - ./.env/web.env
