@@ -3,3 +3,9 @@
 .scroll-button:not(:last-child) {
     margin-right: 5px;
 }
+
+
+.hidden-vocation-checkbox {
+    display: none;
+}
+

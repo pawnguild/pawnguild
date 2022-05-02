@@ -16,6 +16,14 @@
             Max Level
             <input type="number" min="1" max="200" id="max-level" name="max-level">
 
+            <div>
+                {% for vocation in vocations %}
+                <input class="hidden-vocation-checkbox" type="checkbox" id="{{ vocation }}" name="{{ vocation }}"checked>
+                <label class="vocation-checkbox-button btn" for="{{ vocation }}"> {{ vocation }} </label>
+            </div>
+
+              {% endfor %}
+
             <div class="row mx-3 py-3">
                 <select name="platform" id="platform-select">
                     <option disabled selected value> -- select an option -- </option>

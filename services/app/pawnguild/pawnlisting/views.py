@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import (
 )
 from django.urls import reverse_lazy
 
-from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
+from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn, vocations
 from .forms import (
     SteamPawnForm,
     SwitchPawnForm,
@@ -163,7 +163,7 @@ def make_ListPawnMixin(Type, origin):
 
         def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
-            context.update({"platform": origin})
+            context.update({"platform": origin, "vocations": vocations})
             return context
 
         def get_queryset(self):
