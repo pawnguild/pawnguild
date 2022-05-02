@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, reverse, redirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import View, CreateView, UpdateView, DeleteView
@@ -8,7 +9,7 @@ from django.contrib.auth.mixins import (
 )
 from django.urls import reverse_lazy
 
-from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn
+from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn, vocations
 from .forms import (
     SteamPawnForm,
     SwitchPawnForm,
@@ -151,13 +152,29 @@ class ListAllPawns(View):
 
 def make_ListPawnMixin(Type, origin):
     class ListPawnMixin(ListView):
-        def get_context_data(self):
-            context = super().get_context_data()
-            context.update({"platform": origin})
+        def filter_pawns(self, pawns):
+            conds = Q()
+            if min_level := self.request.GET.get("min-level"):
+                conds &= Q(level__gte=min_level)
+            if max_level := self.request.GET.get("max-level"):
+                conds &= Q(level__lte=max_level)
+
+            # This will show all vocations if someone deselects all vocations,
+            # because the cond will be skipped. If they deselect all of them,
+            # vocations not in query dict, and we can't know if they came
+            # to page normally or through filter
+            if vocations := self.request.GET.getlist("vocations"):
+                conds &= Q(vocation__in=vocations)
+
+            return pawns.filter(conds)
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context.update({"platform": origin, "vocations": vocations})
             return context
 
         def get_queryset(self):
-            return sort_pawns(keep_active_pawns(Type.objects.all()))
+            return sort_pawns(keep_active_pawns(self.filter_pawns(Type.objects.all())))
 
     return ListPawnMixin
 
