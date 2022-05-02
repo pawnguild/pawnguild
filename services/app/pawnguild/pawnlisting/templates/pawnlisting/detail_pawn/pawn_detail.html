@@ -31,12 +31,12 @@
 
 {% block content %}
 <b>
-    <div class="container">
-        <div class="col-12 d-flex justify-content-center">
-            <h1> Viewing pawn: {{ pawn.name }} </h1>
+    <div class="container detail-wrapper">
+        <div class="pawn-header-wrapper col-12 px-0">
+            <h1> {{ pawn.name }} </h1>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-lg-6 centered-row">
+            <div class="col-xs-12 col-lg-6">
                 <div class="row">
                     <label class="col-4"> Name: </label>
                     <div class="col-8">{{ pawn.name }}</div>
@@ -57,15 +57,11 @@
                     <label class="col-4"> Inclinations: </label>
                     <div class="col-8">{{ pawn.inclination_string}}</div>
                 </div>
-                {% if pawn.notes %}
-                <div class="row">
-                    <label class="col-4"> Notes: </label>
-                    <div class="col-8">{{ pawn.notes }}</div>
-                </div>
-                {% endif %}
+                {% block platform_info %}
+                {% endblock %}
             </div>
-            <div class="col-xs-12 col-lg-6 flat centered-row">
-                <div class="row">
+            <div class="col-xs-12 col-lg-6 flat">
+                <div class="row d-flex align-items-center">
                     <div class="col-4">
                         <label> Pawn activity: </label>
                     </div>
@@ -107,7 +103,7 @@
                 {% if pawn.primary_skills %}
                 <div class="row">
                     <label class="col-4"> Primary Skills: </label>
-                    <div class="col-8">{{ pawn.primary_skills }}</div>
+                    <div class="col-8">{{ pawn.primary_skills|linebreaks }}</div>
                 </div>
                 {% endif %}
 
@@ -117,12 +113,19 @@
                     <div class="col-8">{{ pawn.secondary_skills }}</div>
                 </div>
                 {% endif %}
-
-                {% block platform_info %}
-                {% endblock %}
             </div>
         </div>
-
+</b>
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 py-3">
+            {% if pawn.notes %}
+            <div class="row">
+                <label class="col-2"> Notes: </label>
+                <div class="col-10">{{ pawn.notes|linebreaks }}</div>
+            </div>
+            {% endif %}
+            </div>
+        </div>
         {% if pawn.picture %}
         <div style="margin-bottom: 50px"></div>
         <div class="row">
@@ -141,5 +144,4 @@
         </div>
         <div style="margin-bottom: 50px"></div>
     </div>
-</b>
 {% endblock content %}
