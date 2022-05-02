@@ -2,8 +2,11 @@
     margin-right: 5px;
 }
 
-.search-tools-container {
+.search-form {
     background-color: #212529;
+}
+
+.search-tools-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -11,10 +14,21 @@
 
 .search-tools-max-width-wrapper {
     width: -webkit-calc(100% - 32px);
-    width:    -moz-calc(100% - 32px);
-    width:         calc(100% - 32px);
+    width: -moz-calc(100% - 32px);
+    width: calc(100% - 32px);
     margin-left: auto;
     margin-right: auto;
+}
+
+.level-selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.level-selector>label {
+    margin-bottom: 0px;
 }
 
 .vocation-selector {
@@ -24,6 +38,13 @@
     gap: 5px;
 }
 
+.vocation-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
 .hidden-vocation-checkbox {
     display: none;
 }
@@ -31,20 +52,23 @@
 form label.vocation-checkbox-button {
     color: whitesmoke;
     border-color: whitesmoke;
+    width: 90px;
 }
 
-.hidden-vocation-checkbox:checked + .Fighter, .hidden-vocation-checkbox:checked + .Warrior {
+.hidden-vocation-checkbox:checked+.Fighter,
+.hidden-vocation-checkbox:checked+.Warrior {
     color: rgb(235, 45, 76);
     border-color: rgb(235, 45, 76);
 }
 
-.hidden-vocation-checkbox:checked + .Strider, .hidden-vocation-checkbox:checked + .Ranger {
+.hidden-vocation-checkbox:checked+.Strider,
+.hidden-vocation-checkbox:checked+.Ranger {
     color: sandybrown;
     border-color: sandybrown;
 }
 
-.hidden-vocation-checkbox:checked + .Mage, .hidden-vocation-checkbox:checked + .Sorcerer {
+.hidden-vocation-checkbox:checked+.Mage,
+.hidden-vocation-checkbox:checked+.Sorcerer {
     color: mediumturquoise;
     border-color: mediumturquoise;
 }
-
