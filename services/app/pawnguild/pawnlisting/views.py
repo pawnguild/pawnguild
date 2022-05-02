@@ -161,6 +161,13 @@ def make_ListPawnMixin(Type, origin):
                 conds &= Q(level__gte=min_level)
             if max_level := self.request.GET.get('max-level'):
                 conds &= Q(level__lte=max_level)
+            
+            # This will show all vocations if someone deselects all vocations, because the cond will be skipped.
+            # If they deselect all of them, vocations not in query dict, and 
+            # we can't know if they came to page normally or through filter
+            if vocations := self.request.GET.getlist('vocations'):
+                conds &= Q(vocation__in=vocations)
+
             return pawns.filter(conds)
 
         def get_context_data(self, **kwargs):

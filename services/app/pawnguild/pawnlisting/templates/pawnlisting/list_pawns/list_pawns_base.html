@@ -26,7 +26,7 @@
                 <label> Choose vocations: </label>
                 {% for vocation in vocations %}
                 <input class="hidden-vocation-checkbox" type="checkbox" 
-                        id="{{ vocation }}" name="vocation" value="{{vocation}}" checked>
+                        id="{{ vocation }}" name="vocations" value="{{vocation}}" checked>
                 <label class="vocation-checkbox-button btn {{vocation}}" for="{{ vocation }}"> {{ vocation }} </label>
                 {% endfor %}
             </div>
