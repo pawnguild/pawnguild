@@ -36,7 +36,7 @@
             <h1> {{ pawn.name }} </h1>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-lg-6 centered-row">
+            <div class="col-xs-12 col-lg-6">
                 <div class="row">
                     <label class="col-4"> Name: </label>
                     <div class="col-8">{{ pawn.name }}</div>
@@ -60,8 +60,8 @@
                 {% block platform_info %}
                 {% endblock %}
             </div>
-            <div class="col-xs-12 col-lg-6 flat centered-row">
-                <div class="row">
+            <div class="col-xs-12 col-lg-6 flat">
+                <div class="row d-flex align-items-center">
                     <div class="col-4">
                         <label> Pawn activity: </label>
                     </div>
@@ -117,11 +117,11 @@
         </div>
 </b>
         <div class="row">
-            <div class="col-xs-12 col-lg-12 py-3 centered-row">
+            <div class="col-xs-12 col-lg-12 py-3">
             {% if pawn.notes %}
             <div class="row">
                 <label class="col-2"> Notes: </label>
-                <div class="col-8">{{ pawn.notes|linebreaks }}</div>
+                <div class="col-10">{{ pawn.notes|linebreaks }}</div>
             </div>
             {% endif %}
             </div>
