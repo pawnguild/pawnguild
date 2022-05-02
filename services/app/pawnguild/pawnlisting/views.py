@@ -1,3 +1,5 @@
+import logging
+
 from django.db.models import Q
 from django.shortcuts import render, reverse, redirect
 from django.views.generic import TemplateView, ListView, DetailView
@@ -155,9 +157,9 @@ def make_ListPawnMixin(Type, origin):
 
         def filter_pawns(self, pawns):
             conds = Q()
-            if min_level := self.request.GET['min-level']:
+            if min_level := self.request.GET.get('min-level'):
                 conds &= Q(level__gte=min_level)
-            if max_level := self.request.GET['max-level']:
+            if max_level := self.request.GET.get('max-level'):
                 conds &= Q(level__lte=max_level)
             return pawns.filter(conds)
 

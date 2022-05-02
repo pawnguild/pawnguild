@@ -2,12 +2,18 @@
 
 {% load static %}
 
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pawnlisting/css/pawn_list.css' %}">
+{{ block.super }}
+{% endblock stylesheets %}
+
 {% block content %}
 <div class="container">
 
-    <div class="search-tools-container">
-        <form action="{{ request.path }}" method="GET">
-            <div class="row mx-3 py-3">
+    <form ction="{{ request.path }}" method="GET">
+        <div class="search-tools-max-width-wrapper search-tools-container">
+            <div class="py-3">
                 <h2> Search for Pawns </h2>
             </div>
             
@@ -16,29 +22,19 @@
             Max Level
             <input type="number" min="1" max="200" id="max-level" name="max-level">
 
-            <div>
+            <div class="vocation-selector">
+                <label> Choose vocations: </label>
                 {% for vocation in vocations %}
                 <input class="hidden-vocation-checkbox" type="checkbox" id="{{ vocation }}" name="{{ vocation }}"checked>
-                <label class="vocation-checkbox-button btn" for="{{ vocation }}"> {{ vocation }} </label>
+                <label class="vocation-checkbox-button btn {{vocation}}" for="{{ vocation }}"> {{ vocation }} </label>
+                {% endfor %}
             </div>
 
-              {% endfor %}
-
-            <div class="row mx-3 py-3">
-                <select name="platform" id="platform-select">
-                    <option disabled selected value> -- select an option -- </option>
-                    <option value="Steam">Steam</option>
-                    <option value="Switch">Nintendo Switch</option>
-                    <option value="XboxOne">Xbox One</option>
-                    <option value="PS4">PS4</option>
-                    <option value="PS3">PS3</option>
-                </select>
-            </div>
             <div class="row mx-3 py-3">
                 <button class="btn btn-light" type="submit"> Filter </button>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
     {% if pawns %}
         {% block pawn_table %}
         {% endblock pawn_table %}
