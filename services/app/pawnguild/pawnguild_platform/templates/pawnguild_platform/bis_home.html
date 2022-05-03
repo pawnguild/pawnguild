@@ -1,0 +1,14 @@
+{% extends "pawnlisting/base.html" %}
+
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pawnguild_platform/css/bis_home.css' %}">
+{{ block.super }}
+{% endblock stylesheets%}
+
+{% block content %}
+<video autoplay muted loop class="video"">
+    <source src="{% static 'pawnguild_platform/riftstone.mp4' %}" type="video/mp4">
+  </video>
+{% endblock content %}x

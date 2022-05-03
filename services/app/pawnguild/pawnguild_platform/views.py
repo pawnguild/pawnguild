@@ -6,5 +6,5 @@ class Home(View):
     def get(self, request):
         context = {}
         return render(
-            request, "pawnguild_platform/home.html", context=context
+            request, "pawnguild_platform/bis_home.html", context=context
         )

@@ -1,0 +1,9 @@
+.video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: calc(100% - 80px);
+    padding: 0px;
+    z-index: -1 /* Video takes whole screen, put it underneath navbar */
+}
