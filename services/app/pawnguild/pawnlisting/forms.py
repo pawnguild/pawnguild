@@ -1,7 +1,7 @@
 from django import forms
-from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn, build_choices
 from urllib.parse import urlparse
 from django.core.exceptions import ValidationError
+from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn, build_choices
 from .utility import (
     steam_pawn_fields,
     switch_pawn_fields,

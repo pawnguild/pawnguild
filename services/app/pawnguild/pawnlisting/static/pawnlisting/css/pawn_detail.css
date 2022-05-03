@@ -1,3 +1,14 @@
+div.detail-wrapper {
+    background-color: #303136;
+}
+
+.pawn-header-wrapper {
+    display: flex;
+    justify-content: start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .picture {
     max-width: 100%;
     max-height: 960px;

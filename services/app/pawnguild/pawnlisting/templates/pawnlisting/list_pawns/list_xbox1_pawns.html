@@ -1,4 +1,4 @@
-{% extends "pawnlisting/base.html"%}
+{% extends "pawnlisting/list_pawns/list_pawns_base.html"%}
 
 {% block title %}
 <title> Xbox One Pawns </title>
@@ -9,6 +9,6 @@
 {% endblock meta%}
 
 
-{% block content %}
-{% include "pawnlisting/pawn_tables/list_pawns/xbox1_pawn_table.html" %}
-{% endblock content %}
+{% block pawn_table %}
+    {% include "pawnlisting/pawn_tables/list_pawns/xbox1_pawn_table.html" %}
+{% endblock pawn_table %}
