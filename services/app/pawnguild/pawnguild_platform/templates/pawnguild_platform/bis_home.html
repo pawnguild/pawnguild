@@ -8,7 +8,29 @@
 {% endblock stylesheets%}
 
 {% block content %}
-<video autoplay muted loop class="video"">
+<video autoplay muted loop class="video">
     <source src="{% static 'pawnguild_platform/riftstone.mp4' %}" type="video/mp4">
   </video>
+
+<div class="home-page-wrapper">
+    <div class="site-intro">
+        <h1>Welcome to Pawn Guild</h1>
+        <p class="site-description">A pawn sharing community to find friends and farm Rift Crystals</p>
+    </div>
+    <div class="faq-intro">
+        <h3>New to renting pawns? Checkout our <a href="#">FAQ</a></h3>
+    </div>
+    <div class="find-pawns">
+        <h3>Find pawns on your platform</h3>
+        <div>
+            <a class="scroll-button btn btn-outline-warning" href="{% url 'list-steam-pawns' %}">Steam</a>
+            <a class="scroll-button btn btn-outline-warning" href="{% url 'list-switch-pawns' %}">Switch</a>
+            <a class="scroll-button btn btn-outline-warning" href="{% url 'list-xbox1-pawns' %}">Xbox One</a>
+            <a class="scroll-button btn btn-outline-warning" href="{% url 'list-ps4-pawns' %}">PS4</a>
+            <a class="scroll-button btn btn-outline-warning" href="{% url 'list-ps3-pawns' %}">PS3</a>
+        </div>
+    </div>
+    <div class="red"></div>
+</div>
+
 {% endblock content %}x
