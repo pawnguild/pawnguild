@@ -1,4 +1,3 @@
-from pipes import Template
 from django.views.generic import TemplateView
 from django.views.generic.edit import View
 from django.shortcuts import render
