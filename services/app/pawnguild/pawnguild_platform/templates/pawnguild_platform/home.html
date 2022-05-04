@@ -1,0 +1,25 @@
+{% extends "pawnlisting/base.html" %}
+
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pawnguild_platform/css/home_page.css' %}">
+{{ block.super }}
+{% endblock stylesheets%}
+
+{% block content %}
+<div class="banner">
+    <h1 class="box">test</h1>
+</div>
+<div class="info-row">
+    <div class="info-box">
+        1
+    </div>
+    <div class="info-box">
+        2
+    </div>
+    <div class="info-box">
+        3
+    </div>
+</div>"
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends "pawnlisting/base.html" %}
+
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pawnguild_platform/css/faq.css' %}">
+{{ block.super }}
+{% endblock stylesheets%}
+
+{% block content %}
+<div class="container px-1" id="faq-container">
+    <h2 id="faq-header">FAQ</h2>
+    <ul class="pb-3">
+        <li>
+            <label>Why Pawn Guild?</label>
+            <p>Rift Crystals (RC) and community. RC is a valuable resource that can be hard to get,
+                 and the best way to get them is from having your pawn rented. By listing your pawn here,
+                  you expose your pawn to several communities, and can give back by hiring other pawns on Pawn Guild.</p>
+        </li>
+        <li>
+            <label>How do I find pawns listed on Pawn Guild in Dragon’s Dogma?</label>
+            <p>The most common way is to send a friend requests to the pawn’s owner. 
+                Friend’s pawns are easier to find, and also cost no rift crystals. 
+                The info on the pawn’s profile should be sufficient to find it as well,
+                 especially if the pawn has been updated recently.</p>
+        </li>
+        <li>
+            <label>What happens when a pawn I rented dies?</label>
+            <p>This is referred to as “body bagging”. 
+                The pawn is sent back to the owner with 3 star ratings and no gift,
+                 but they do still get Rift Crystals.</p>
+        </li>
+        <li>
+            <label>What should I do if I body bagged a pawn?</label>
+            <p>Don’t worry too much, it happens! However some players do care about ratings, so 
+                 rehiring the pawn so you can release it with proper ratings can be nice. 
+                 This would also allow you to release the pawn with a gift and ratings</p>
+        </li>
+        <li>
+            <label>Should I send a gift when I release pawns?</label>
+            <p>Only if you want to! You aren’t ever obligated to send gifts, but it’s a good way to show appreciation for a great pawn</p>
+        </li>
+        <li>
+            <label>What are some good gifts to give?</label>
+            - ?
+            - ?
+            - ?
+        </li>
+        <li>
+            <label>Should I hire someone's pawn if they hired mine?</label>
+            <p>Just like sending a gift, it can be a nice way to thank someone since hiring pawns gives the player rift crystals. You are not obligated to return pawn hires</p>
+        </li>
+    </ul>
+</div>
+{% endblock content %}
