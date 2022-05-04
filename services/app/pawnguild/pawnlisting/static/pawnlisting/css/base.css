@@ -10,6 +10,16 @@ body {
     background-color: #202125;
 }
 
+#root-div {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container-fluid {
+    height: 100%
+}
+
 /* 
 body > .container {
     padding: 15px;
