@@ -105,6 +105,10 @@
     </a>
     <div class="navbar-collapse collapse w-100 dual-collapse2">
         <ul class="navbar-nav ml-auto mr-5">
+            <li>
+                <a class="{{ request.path|add_is_active:"navbar-brand,/faq" }}"
+                href="{% url 'faq' %}"> FAQ </a>
+            </li>
             {% if user.is_authenticated %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -129,7 +133,7 @@
 
 {% endblock nav %}
 
-<div class="container-fluid">
+<div class="container-fluid px-0">
     {% block content%}
     {% endblock content %}
 </div>
