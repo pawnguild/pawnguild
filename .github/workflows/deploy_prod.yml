@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            if [ -d "pawnguild" ]; then
+            if [ ! -d "pawnguild" ]; then
               git clone https://github.com/pawnguild/pawnguild
             fi
             cd pawnguild
