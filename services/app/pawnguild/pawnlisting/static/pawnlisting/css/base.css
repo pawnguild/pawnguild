@@ -20,15 +20,6 @@ body {
     height: 100%
 }
 
-/* 
-body > .container {
-    padding: 15px;
-} */
-
-.very-tall-element {
-    height: 1000px;
-}
-
 .container {
     background-color: #202125;
 }
@@ -114,6 +105,10 @@ a.nav-link {
 
 .highlight {
     color: lightgreen;
+}
+
+.pawn-page-button:not(:last-child) {
+    margin-right: 5px;
 }
 
 

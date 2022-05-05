@@ -10,7 +10,7 @@
 {% block content %}
 <div class="home-page-wrapper hidden-md-down">
     <video autoplay muted loop class="video">
-        <source src="{% static 'pawnguild_platform/short_rift.mp4' %}" type="video/mp4">
+        <source src="{% static 'pawnguild_platform/riftstone.mp4' %}" type="video/mp4">
   </video>
     <div class="site-intro">
         <h1>Welcome to Pawn Guild</h1>
@@ -42,7 +42,7 @@
     </div>
     <div class="find-pawns">
         <h3>Find pawns on your platform</h3>
-        <div class="platform-button-wrapper">
+        <div>
             <a class="scroll-button btn btn-outline-warning" href="{% url 'list-steam-pawns' %}">Steam</a>
             <a class="scroll-button btn btn-outline-warning" href="{% url 'list-switch-pawns' %}">Switch</a>
             <a class="scroll-button btn btn-outline-warning" href="{% url 'list-xbox1-pawns' %}">Xbox One</a>
