@@ -1,15 +1,65 @@
+.home-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .banner {
-    background-color: darkblue;
-    height: 400px;
+    background-color: rgb(38, 38, 48);
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.left-banner {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.right-banner {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.site-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-intro p {
+    font-size: 1.25rem;
+    width: 70%;
+}
+
+.share-pawn p {
+    font-size: 1.25rem;
+}
+
+.platform-button-wrapper {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
 }
 
 .info-row {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
 }
 
 .info-box {
     height: 300px;
-    background-color: darkgrey;
+    background-color: rgb(38, 38, 48);
     flex-grow: 1;
+}
+
+.faq-intro {
+    font-size: 1.25rem;
 }

@@ -10,13 +10,14 @@ body {
     background-color: #202125;
 }
 
-/* 
-body > .container {
-    padding: 15px;
-} */
+#root-div {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
 
-.very-tall-element {
-    height: 1000px;
+.container-fluid {
+    height: 100%
 }
 
 .container {
@@ -104,6 +105,10 @@ a.nav-link {
 
 .highlight {
     color: lightgreen;
+}
+
+.pawn-page-button:not(:last-child) {
+    margin-right: 5px;
 }
 
 

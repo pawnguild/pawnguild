@@ -19,13 +19,13 @@
 {% block content %}
 <div class="container">
 
-    <div>
+    <div class="py-3">
         <h4> See pawns by platform </h4>
-        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-steam-pawns' %}">Steam</a>
-        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-switch-pawns' %}">Switch</a>
-        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-xbox1-pawns' %}">Xbox One</a>
-        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-ps4-pawns' %}">PS4</a>
-        <a class="scroll-button btn btn-outline-warning" href="{% url 'list-ps3-pawns' %}">PS3</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-steam-pawns' %}">Steam</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-switch-pawns' %}">Switch</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-xbox1-pawns' %}">Xbox One</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-ps4-pawns' %}">PS4</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-ps3-pawns' %}">PS3</a>
     </div>
     <div id="steam-list" class="very-tall-element">
         <h2> Steam Pawns </h2>
@@ -38,7 +38,7 @@
         <p> There aren't any active Steam pawns. You can create one <a href="{% url 'create-steam-pawn' %}">here</a></p>
     {% endif %}
     </div>
-    <div id="switch-list" class="very-tall-element">
+    <div id="switch-list">
     <h2> Switch Pawns </h2>
     {% if switch_pawns %}
         {% with pawns=switch_pawns %}
@@ -49,7 +49,7 @@
         <p> There aren't any active Nintendo Switch pawns. You can create one <a href="{% url 'create-switch-pawn' %}">here</a></p>
     {% endif %}
     </div>
-    <div id="xbox-one-list" class="very-tall-element">
+    <div id="xbox-one-list">
     <h2> Xbox One Pawns </h2>
     {% if xbox1_pawns %}
         {% with pawns=xbox1_pawns %}
@@ -60,7 +60,7 @@
         <p> There aren't any active XboxOne pawns. You can create one <a href="{% url 'create-xbox1-pawn' %}">here</a></p>
     {% endif %}
     </div>
-    <div id="ps4-list" class="very-tall-element">
+    <div id="ps4-list">
     <h2> PS4 Pawns </h2>
     {% if ps4_pawns %}
         {% with pawns=ps4_pawns %}
@@ -71,7 +71,7 @@
         <p> There aren't any active PS4 pawns. You can create one <a href="{% url 'create-ps4-pawn' %}">here</a></p>
     {% endif %}
     </div>
-    <div id="ps3-list" class="very-tall-element">
+    <div id="ps3-list">
     <h2> PS3 Pawns </h2>
     {% if ps3_pawns %}
         {% with pawns=ps3_pawns %}

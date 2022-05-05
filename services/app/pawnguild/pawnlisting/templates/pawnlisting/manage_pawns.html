@@ -1,5 +1,7 @@
 {% extends "pawnlisting/base.html" %}
 
+{% load static %}
+
 {% block title %}
 <title> Manage Pawns </title>
 {% endblock title %}
@@ -7,6 +9,11 @@
 {% block meta %}
 <meta name="description" content="Edit any of your pawns on PawnGuild here.">
 {% endblock meta%}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pawnlisting/css/manage_pawns.css' %}">
+{{ block.super }}
+{% endblock stylesheets %}
 
 {% block content %}
 <div class="container">
@@ -49,5 +56,17 @@
     {% endwith %}
     <br>
     {% endif %}
+
+    <div class="create-pawn-buttons-wrapper py-3">
+        <h4> Create your pawn (limit of 5) </h4>
+        <div>
+            <a class="pawn-page-button btn btn-outline-warning" href="{% url 'create-steam-pawn' %}">Steam</a>
+            <a class="pawn-page-button btn btn-outline-warning" href="{% url 'create-switch-pawn' %}">Switch</a>
+            <a class="pawn-page-button btn btn-outline-warning" href="{% url 'create-xbox1-pawn' %}">Xbox One</a>
+            <a class="pawn-page-button btn btn-outline-warning" href="{% url 'create-ps4-pawn' %}">PS4</a>
+            <a class="pawn-page-button btn btn-outline-warning" href="{% url 'create-ps3-pawn' %}">PS3</a>
+        </div>
+    </div>
 </div>
+
 {% endblock content %}
