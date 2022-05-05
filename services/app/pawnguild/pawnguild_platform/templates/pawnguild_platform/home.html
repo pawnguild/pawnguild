@@ -28,7 +28,11 @@
                 </div>
             </div>
             <div class="share-pawn">
-                <p>Or <a href="{% url 'login'%}"> login </a>to post your own pawn</p>
+                {% if user.is_authenticated %}
+                    <p> Or <a href="{% url 'manage_pawns' %}">manage</a> your pawns</p>
+                {% else %}
+                    <p>Or <a href="{% url 'login'%}"> login </a>to post your own pawn</p>
+                {% endif %}
             </div>
         </div>
     </div>
