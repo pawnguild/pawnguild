@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+import logging
 import random
 import string
 
@@ -15,6 +16,8 @@ from pawnguild.pawnlisting.models import (
 
 class UtilityTestCase(TestCase):
     def setUp(self):
+        logging.disable(logging.ERROR)
+
         self.test_args = {
             "test_user": "TestUser",
             "steam_pawn_name": "TestSteamPawn",
@@ -40,6 +43,10 @@ class UtilityTestCase(TestCase):
         self.ps3_pawn = PS3Pawn.objects.create(
             **self.generate_ps3_pawn_data(self.test_args["ps3_pawn_name"])
         )
+
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+        return super().tearDown()
 
     def generate_pawn_data(
         self,
