@@ -10,11 +10,13 @@ if [ "$RUN_CERTBOT" == "true" ]; then
     # check for undefined variables
     set -u 
     # Run certbot which should get certificates and modify your nginx config
-    if certbot certificates | grep -q 'No certificates found.'; then
-        echo "Did not find existing cert, installing new one"
-        certbot --nginx --domains ${CERTBOT_DOMAINS} --email ${CERTBOT_EMAIL} --agree-tos --redirect --reinstall --non-interactive;
-    else
-        echo "Found an existing cert, skipping install"
+
+    if [ ! -d "/etc/letsencrypt/live/pawntest.xyz" ];
+        then 
+            echo "Did not find existing cert, installing new one";
+            certbot --nginx --domains ${CERTBOT_DOMAINS} --email ${CERTBOT_EMAIL} --agree-tos --redirect --reinstall --non-interactive --test-cert;
+        else
+            echo "Found an existing cert, skipping install";
     fi
 else
     echo "Not requesting certificates through certbot, set RUN_CERTBOT=true to run."
