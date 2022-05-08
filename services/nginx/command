@@ -14,7 +14,7 @@ if [ "$RUN_CERTBOT" == "true" ]; then
     if [ ! -d "/etc/letsencrypt/live/pawntest.xyz" ];
         then 
             echo "Did not find existing cert, installing new one";
-            # certbot --nginx --domains ${CERTBOT_DOMAINS} --email ${CERTBOT_EMAIL} --agree-tos --redirect --reinstall --non-interactive --test-cert;
+            certbot --nginx --domains ${CERTBOT_DOMAINS} --email ${CERTBOT_EMAIL} --agree-tos --redirect --reinstall --non-interactive;
         else
             echo "Found an existing cert, skipping install";
     fi
