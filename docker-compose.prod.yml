@@ -11,8 +11,12 @@ services:
             - /home/pawnguild/secrets/.env/web.env
             - /home/pawnguild/secrets/.env/db.env
     nginx:
+        volumes:
+            - certs:/etc/letsencrypt
         environment:
             - RUN_CERTBOT=true
             - CERTBOT_DOMAINS=pawntest.xyz,www.pawntest.xyz
             - CERTBOT_EMAIL=davidjbrady97@gmail.com
         command: ['sh', '/opt/command']
+volumes:
+    certs:
