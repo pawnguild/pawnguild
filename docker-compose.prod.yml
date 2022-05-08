@@ -13,6 +13,7 @@ services:
     nginx:
         volumes:
             - certs:/etc/letsencrypt
+            - nginx_conf:/etc/nginx
         environment:
             - RUN_CERTBOT=true
             - CERTBOT_DOMAINS=pawntest.xyz,www.pawntest.xyz
@@ -20,3 +21,4 @@ services:
         command: ['sh', '/opt/command']
 volumes:
     certs:
+    nginx_conf: # Get's modified by the cert so we need to save it as well
