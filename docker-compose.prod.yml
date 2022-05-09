@@ -5,11 +5,11 @@ services:
         volumes:
             - static_files:/app/static
         env_file:
-            - /home/pawnguild/secrets/.env/web.env
+            - ${HOME}/secrets/.env/web.env
     db:
         env_file:
-            - /home/pawnguild/secrets/.env/web.env
-            - /home/pawnguild/secrets/.env/db.env
+            - ${HOME}/secrets/.env/web.env
+            - ${HOME}/secrets/.env/db.env
     nginx:
         volumes:
             - certs:/etc/letsencrypt
