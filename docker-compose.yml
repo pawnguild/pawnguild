@@ -26,6 +26,7 @@ services:
             - postgres_data:/var/lib/postgresql/data
             - ./services/db/:/docker-entrypoint-initdb.d/
         container_name: postgres
+        restart: always
     nginx:
         build: ./services/nginx
         ports:
@@ -36,6 +37,7 @@ services:
         depends_on:
             - web
         container_name: nginx
+        restart: always
 volumes:
     postgres_data:
     static_files:
