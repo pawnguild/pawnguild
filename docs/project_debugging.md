@@ -23,7 +23,27 @@
     - Use --test-cert first to get it working. You're limited to 5 real certs a week, make them count
 
 ## Database backup & recovery
-    - 
+Backup command:
+
+    docker exec -t postgres  pg_dumpall -c -U postgres | gzip > tmp/dump_`date +%d-%m-%Y"_"%H_%M_%S`.gz
+
+Extract a backup
+
+    gunzip -k tmp/dump_09-05-2022_09_59_01.gz 
+
+Put an extracted sql file into contaier
+
+    cat your_dump.gz | docker exec -i postgres psql -U postgres
+
+Reocovery Test
+
+1. `docker-compose down`
+2. Remove postgres volume: `docker volume rm pawnguild_postgres_data`
+3. Start containers: `pgup`, verify no existing data
+4. gunzip command, cat command
+5. refresh page, see data
+6. `docker-compose down`, `pgup`, data should persist with volume
+
 
 ## Migrating data
     - Grab the most recent db backup and migrate on it in local dev first.
