@@ -1,6 +1,7 @@
 from .base import *  # noqa: F401, F403
 
-# For 2.0, only have pawnguild here here
+
+DEBUG = False
 ALLOWED_HOSTS = ["pawntest.xyz", "www.pawntest.xyz"]
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
