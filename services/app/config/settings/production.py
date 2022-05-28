@@ -2,7 +2,7 @@ from .base import *  # noqa: F401, F403
 
 
 DEBUG = False
-ALLOWED_HOSTS = ["pawntest.xyz", "www.pawntest.xyz"]
+ALLOWED_HOSTS = ["pawnguild.xyz", "www.pawnguild.xyz"]
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_HSTS_SECONDS = 3600
@@ -13,6 +13,5 @@ SECURE_HSTS_PRELOAD = True
 
 
 EMAIL_USE_TLS = True
-# When releasing 2.0, we will go back to ALLOWED_HOSTS[0]
 # EMAIL_PAGE_DOMAIN = ALLOWED_HOSTS[0] + "/"
-EMAIL_PAGE_DOMAIN = "pawntest.xyz" + "/"
+EMAIL_PAGE_DOMAIN = "pawnguild.xyz" + "/"
