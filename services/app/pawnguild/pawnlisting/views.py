@@ -26,8 +26,11 @@ from .utility import (
     ps3_pawn_fields,
     ManagePawnCollection,
     ListPawnCollection,
-    sort_pawns,
-    keep_active_pawns,
+    ACTIVITY_CHOICES,
+    PAWNS_PER_PAGE,
+    normalize_activity,
+    filter_pawn_activity,
+    order_list_pawns,
 )
 
 
@@ -144,7 +147,9 @@ class CreatePS3Pawn(CreatePawnMixin):
 
 class ListAllPawns(View):
     def get(self, request):
-        context = ListPawnCollection().get_context()
+        context = ListPawnCollection(
+            request.GET.get("activity"), request.GET
+        ).get_context()
         return render(
             request, "pawnlisting/list_pawns/list_pawns.html", context=context
         )
@@ -152,6 +157,8 @@ class ListAllPawns(View):
 
 def make_ListPawnMixin(Type, origin):
     class ListPawnMixin(ListView):
+        paginate_by = PAWNS_PER_PAGE
+
         def filter_pawns(self, pawns):
             conds = Q()
             if min_level := self.request.GET.get("min-level"):
@@ -170,11 +177,27 @@ def make_ListPawnMixin(Type, origin):
 
         def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
-            context.update({"platform": origin, "vocations": vocations})
+            context.update(
+                {
+                    "platform": origin,
+                    "vocations": vocations,
+                    "activity": normalize_activity(self.request.GET.get("activity")),
+                    "activity_choices": ACTIVITY_CHOICES,
+                    "min_level": self.request.GET.get("min-level", ""),
+                    "max_level": self.request.GET.get("max-level", ""),
+                    "selected_vocations": self.request.GET.getlist("vocations")
+                    or vocations,
+                }
+            )
             return context
 
         def get_queryset(self):
-            return sort_pawns(keep_active_pawns(self.filter_pawns(Type.objects.all())))
+            return order_list_pawns(
+                filter_pawn_activity(
+                    self.filter_pawns(Type.objects.all()),
+                    self.request.GET.get("activity"),
+                )
+            )
 
     return ListPawnMixin
 

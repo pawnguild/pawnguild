@@ -1,0 +1,12 @@
+{% load pawnlisting_utils %}
+{% if page_obj.paginator.num_pages > 1 %}
+<nav class="py-2" aria-label="{{ page_label|default:'Pawn' }} pages">
+    {% if page_obj.has_previous %}
+    <a class="btn btn-outline-info btn-sm" href="?{% pawn_page_query page_param page_obj.previous_page_number %}{{ page_anchor }}">Previous</a>
+    {% endif %}
+    <span class="px-2">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} ({{ page_obj.paginator.count }} pawns)</span>
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-info btn-sm" href="?{% pawn_page_query page_param page_obj.next_page_number %}{{ page_anchor }}">Next</a>
+    {% endif %}
+</nav>
+{% endif %}

@@ -1,24 +1,55 @@
+# Standalone production file: do not combine with docker-compose.yml.
 version: '3.8'
-
 services:
-    web:
-        volumes:
-            - static_files:/app/static
-        env_file:
-            - ${HOME}/secrets/.env/web.env
-    db:
-        env_file:
-            - ${HOME}/secrets/.env/web.env
-            - ${HOME}/secrets/.env/db.env
-    nginx:
-        volumes:
-            - certs:/etc/letsencrypt
-            - nginx_conf:/etc/nginx
-        environment:
-            - RUN_CERTBOT=true
-            - CERTBOT_DOMAINS=pawnguild.xyz,www.pawnguild.xyz
-            - CERTBOT_EMAIL=davidjbrady97@gmail.com
-        command: ['sh', '/opt/command']
+  web:
+    image: ${PAWNGUILD_IMAGE:-pawnguild_web}
+    container_name: web
+    # Production deploys must not run start.sh's automatic database commands.
+    command: [gunicorn, 'config.wsgi:application', '--bind', '0.0.0.0:8000']
+    restart: always
+    stop_grace_period: 30s
+    env_file:
+      - ./.env/web.env
+      - /home/pawnguild/secrets/.env/web.env
+    volumes:
+      - ./services/app:/app
+      - static_files:/app/static
+      - media_files:/app/media
+    expose:
+      - '8000'
+    networks:
+      default:
+      frontend:
+        aliases:
+          - pawnguild-app
+  db:
+    image: postgres:14.2
+    container_name: postgres
+    restart: always
+    env_file:
+      - ./.env/db.env
+      - ./.env/web.env
+      - /home/pawnguild/secrets/.env/web.env
+      - /home/pawnguild/secrets/.env/db.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./services/db:/docker-entrypoint-initdb.d
+    networks:
+      - default
 volumes:
-    certs:
-    nginx_conf: # Get's modified by the cert so we need to save it as well
+  postgres_data:
+    external: true
+    name: pawnguild_postgres_data
+  static_files:
+    external: true
+    name: pawnguild_static_files
+  media_files:
+    external: true
+    name: pawnguild_media_files
+networks:
+  default:
+    external: true
+    name: pawnguild_default
+  frontend:
+    external: true
+    name: shared_web_frontend

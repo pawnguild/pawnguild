@@ -18,14 +18,18 @@
 
 {% block content %}
 <div class="container">
+    <form class="search-form py-3" action="{{ request.path }}" method="GET">
+        {% include "pawnlisting/list_pawns/activity_filter.html" %}
+        <button class="btn btn-light" type="submit">Filter Pawns</button>
+    </form>
 
     <div class="py-3">
         <h4> See pawns by platform </h4>
-        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-steam-pawns' %}">Steam</a>
-        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-switch-pawns' %}">Switch</a>
-        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-xbox1-pawns' %}">Xbox One</a>
-        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-ps4-pawns' %}">PS4</a>
-        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-ps3-pawns' %}">PS3</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-steam-pawns' %}?activity={{ activity }}">Steam</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-switch-pawns' %}?activity={{ activity }}">Switch</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-xbox1-pawns' %}?activity={{ activity }}">Xbox One</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-ps4-pawns' %}?activity={{ activity }}">PS4</a>
+        <a class="pawn-page-button btn btn-outline-warning" href="{% url 'list-ps3-pawns' %}?activity={{ activity }}">PS3</a>
     </div>
     <div id="steam-list" class="very-tall-element">
         <h2> Steam Pawns </h2>
@@ -33,9 +37,10 @@
             {% with pawns=steam_pawns %}
                     {% include "pawnlisting/pawn_tables/list_pawns/steam_pawn_table.html" %}
             {% endwith %}
+        {% include "pawnlisting/list_pawns/pagination.html" with page_obj=steam_pawns page_param="steam-page" page_label="steam" page_anchor="#steam-list" %}
         <br>
     {% else %}
-        <p> There aren't any active Steam pawns. You can create one <a href="{% url 'create-steam-pawn' %}">here</a></p>
+        <p> No Steam pawns match this activity filter. You can create one <a href="{% url 'create-steam-pawn' %}">here</a></p>
     {% endif %}
     </div>
     <div id="switch-list">
@@ -44,9 +49,10 @@
         {% with pawns=switch_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/switch_pawn_table.html" %}
         {% endwith %}
+        {% include "pawnlisting/list_pawns/pagination.html" with page_obj=switch_pawns page_param="switch-page" page_label="switch" page_anchor="#switch-list" %}
         <br>
     {% else %}
-        <p> There aren't any active Nintendo Switch pawns. You can create one <a href="{% url 'create-switch-pawn' %}">here</a></p>
+        <p> No Nintendo Switch pawns match this activity filter. You can create one <a href="{% url 'create-switch-pawn' %}">here</a></p>
     {% endif %}
     </div>
     <div id="xbox-one-list">
@@ -55,9 +61,10 @@
         {% with pawns=xbox1_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/xbox1_pawn_table.html" %}
         {% endwith %}
+        {% include "pawnlisting/list_pawns/pagination.html" with page_obj=xbox1_pawns page_param="xbox1-page" page_label="xbox1" page_anchor="#xbox-one-list" %}
         <br>
     {% else %}
-        <p> There aren't any active XboxOne pawns. You can create one <a href="{% url 'create-xbox1-pawn' %}">here</a></p>
+        <p> No Xbox One pawns match this activity filter. You can create one <a href="{% url 'create-xbox1-pawn' %}">here</a></p>
     {% endif %}
     </div>
     <div id="ps4-list">
@@ -66,9 +73,10 @@
         {% with pawns=ps4_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/ps4_pawn_table.html" %}
         {% endwith %}
+        {% include "pawnlisting/list_pawns/pagination.html" with page_obj=ps4_pawns page_param="ps4-page" page_label="ps4" page_anchor="#ps4-list" %}
         <br>
     {% else %}
-        <p> There aren't any active PS4 pawns. You can create one <a href="{% url 'create-ps4-pawn' %}">here</a></p>
+        <p> No PS4 pawns match this activity filter. You can create one <a href="{% url 'create-ps4-pawn' %}">here</a></p>
     {% endif %}
     </div>
     <div id="ps3-list">
@@ -77,9 +85,10 @@
         {% with pawns=ps3_pawns %}
             {% include "pawnlisting/pawn_tables/list_pawns/ps3_pawn_table.html" %}
         {% endwith %}
+        {% include "pawnlisting/list_pawns/pagination.html" with page_obj=ps3_pawns page_param="ps3-page" page_label="ps3" page_anchor="#ps3-list" %}
         <br>
     {% else %}
-        <p> There aren't any listed PS3 pawns. You can create one <a href="{% url 'create-ps3-pawn' %}">here</a></p>
+        <p> No PS3 pawns match this activity filter. You can create one <a href="{% url 'create-ps3-pawn' %}">here</a></p>
     {% endif %} 
     </div>
 </div>
