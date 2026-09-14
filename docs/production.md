@@ -29,8 +29,10 @@ do not push a change until it is ready for production.
 
 ## Pawn activity filter
 
-Public lists now offer Currently active (the existing default), Updated within the
-last year (365 days by last update), and All time. This changes reads/display only;
+Individual platform pages offer Currently active (the existing default), Updated
+within the last year (365 days by last update), and All time. The activity selector
+appears before the level fields in the same row, wrapping on smaller screens.
+The All Pawns page does not display the selector. This changes reads/display only;
 older pawns are neither modified nor deleted. Both the combined page and each
 platform page have bounded pagination (50 per platform) and preserve filter values.
 The API and account-management behavior are unchanged.

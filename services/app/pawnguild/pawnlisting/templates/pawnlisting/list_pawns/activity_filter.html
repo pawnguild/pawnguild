@@ -1,9 +1,8 @@
-<div class="py-2">
+<div class="activity-selector">
     <label for="activity">Pawn activity:</label>
-    <select id="activity" name="activity" class="form-control">
+    <select id="activity" name="activity" class="form-control" aria-describedby="activity-help">
         {% for value, label in activity_choices %}
         <option value="{{ value }}"{% if value == activity %} selected{% endif %}>{{ label }}</option>
         {% endfor %}
     </select>
-    <small class="form-text text-muted">Based on when the owner last updated their pawn. Last year means the past 365 days.</small>
 </div>

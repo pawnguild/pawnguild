@@ -17,15 +17,18 @@
                 <h2> Search for Pawns </h2>
             </div>
 
-            {% include "pawnlisting/list_pawns/activity_filter.html" %}
-
             <div class="level-selector">
-                <label for="min-level">Min Level: </label>
-                <input type="number" placeholder="1" min="1" max="200" id="min-level" name="min-level" value="{{ min_level }}">
-                <br />
-                <label for="max-level">Max Level: </label>
-                <input type="number" placeholder="200" min="1" max="200" id="max-level" name="max-level" value="{{ max_level }}">
+                {% include "pawnlisting/list_pawns/activity_filter.html" %}
+                <div class="level-field">
+                    <label for="min-level">Min Level: </label>
+                    <input type="number" placeholder="1" min="1" max="200" id="min-level" name="min-level" value="{{ min_level }}">
+                </div>
+                <div class="level-field">
+                    <label for="max-level">Max Level: </label>
+                    <input type="number" placeholder="200" min="1" max="200" id="max-level" name="max-level" value="{{ max_level }}">
+                </div>
             </div>
+            <small id="activity-help" class="form-text text-muted mt-0">Based on when the owner last updated their pawn. Last year means the past 365 days.</small>
 
             <div class="vocation-selector">
                 <label> Choose vocations: </label>
