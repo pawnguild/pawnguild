@@ -20,13 +20,32 @@
 
 .level-selector {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+}
+
+.activity-selector,
+.level-field {
+    display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.level-selector>label {
-    margin-bottom: 0px;
+.activity-selector {
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.activity-selector>label,
+.level-field>label {
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.activity-selector>select {
+    width: auto;
+    max-width: 100%;
 }
 
 .vocation-selector {
