@@ -21,7 +21,7 @@
 .level-selector {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-end;
     gap: 10px 20px;
 }
 
@@ -30,6 +30,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+/* Match the dropdown's height so wrapped activity labels do not lift the levels. */
+.level-field {
+    min-height: calc(2.25rem + 2px);
 }
 
 .activity-selector {
