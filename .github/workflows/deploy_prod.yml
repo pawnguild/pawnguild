@@ -2,24 +2,29 @@ name: Deploy to production - digital ocean
 
 on:
   push:
-    branches: [ production ]
+    branches: [production]
+
+concurrency:
+  group: pawnguild-production
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Pawnguild
+      - name: Deploy PawnGuild app only
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            if [ ! -d "pawnguild" ]; then
-              git clone https://github.com/pawnguild/pawnguild
+            set -eu
+            cd /home/pawnguild/pawnguild
+            git fetch origin production
+            if ! git diff --quiet HEAD origin/production -- services/app/Dockerfile services/app/requirements.txt; then
+              echo "Runtime dependencies changed. Prepare and validate a runtime image separately before deployment."
+              exit 1
             fi
-            cd pawnguild
-            git pull
-            docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
-            docker-compose down
-            docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+            git merge --ff-only origin/production
+            ./scripts/deploy-production.sh

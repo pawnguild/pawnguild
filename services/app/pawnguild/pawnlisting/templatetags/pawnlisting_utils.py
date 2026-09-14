@@ -17,3 +17,10 @@ def add_is_active(requestPath, args):
     if requestPath.startswith(uri):
         return classText + " active"
     return classText
+
+
+@register.simple_tag(takes_context=True)
+def pawn_page_query(context, parameter, page):
+    query = context["request"].GET.copy()
+    query[parameter] = page
+    return query.urlencode()
