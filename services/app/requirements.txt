@@ -6,7 +6,7 @@ charset-normalizer==2.0.12
 coreapi==2.3.3
 coreschema==0.0.4
 cryptography==3.4.8
-Django==3.2.13
+Django==3.2.18
 django-cleanup==5.1.0
 django-email-verification==0.1.0
 django-nose==1.4.6
