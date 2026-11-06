@@ -42,6 +42,24 @@ change. After an operator verifies the image and fast-forwards the production
 checkout, rerunning the workflow uses the usual app-only deployment script. This
 release needs no migrations, database restart, or changes to shared Nginx.
 
+## Django 5.2 LTS runtime (November 2026)
+
+This runtime uses Django 5.2.19 with compatible asgiref, sqlparse, and Django
+REST framework pins. The Python/Pillow image base is unchanged. Existing account,
+pawn, and media models have no changes; a synthetic Django 3.2 database was checked
+under 5.2, including existing sessions, password hashes, email-verification tokens,
+and pawn updates. Check the live migration plan read-only before release; do not
+run migrations automatically.
+
+The obsolete password-reset add-on is replaced with Django's built-in reset flow.
+Username-or-email recovery, the site's templates, and `/recover/` remain. Newly
+issued links are single-use and expire after 48 hours. Reset emails issued before
+this release need a fresh recovery request; existing accounts and passwords are
+unchanged. Logout uses a CSRF-protected POST as required by current Django.
+
+Use the same prepared-image, fresh-backup, rollback-tag, and app-only deployment
+procedure described above. No database or shared Nginx restart is required.
+
 ## Pawn activity filter
 
 Individual platform pages offer Currently active (the existing default), Updated

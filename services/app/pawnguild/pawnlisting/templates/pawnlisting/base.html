@@ -54,7 +54,10 @@
                                 Logged in as {{ user.username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'logout' %}"> Logout </a>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="dropdown-item"> Logout </button>
+                        </form>
                     </div>
                 {% else %}
                     <a class="nav-link" href="{% url 'login' %}"> Login </a>
@@ -118,7 +121,10 @@
                     Logged in as {{ user.username }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'logout' %}"> Logout </a>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="dropdown-item"> Logout </button>
+                    </form>
                 </div>
             </li>
             {% else %}

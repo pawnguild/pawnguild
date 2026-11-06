@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_nose",
     "django_email_verification",
-    "password_reset",
     "django_cleanup",
     "django_unused_media",
 ]
@@ -139,6 +138,8 @@ USE_L10N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = "registration.UserProfile"
+
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 48
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
