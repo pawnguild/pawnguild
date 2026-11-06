@@ -26,3 +26,4 @@ jobs:
           docker build -t pawnguild-runtime-test services/app
           docker run --rm --network none -e DJANGO_SETTINGS_MODULE=config.settings.test_sqlite pawnguild-runtime-test gunicorn --check-config config.wsgi:application
           docker run --rm --network none pawnguild-runtime-test python manage.py test --settings=config.settings.test_sqlite --no-input
+          docker run --rm --network none -v "$PWD/scripts/check-runtime-security.py:/checks/check-runtime-security.py:ro" pawnguild-runtime-test python /checks/check-runtime-security.py
