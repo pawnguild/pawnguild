@@ -19,7 +19,6 @@ from .forms import (
     PlatformForm,
 )
 from .utility import (
-    steam_pawn_fields,
     switch_pawn_fields,
     xbox1_pawn_fields,
     ps4_pawn_fields,
@@ -292,7 +291,7 @@ def make_UserOwnsPawnMixin(Type):
 
 class SteamPawnUpdate(make_UserOwnsPawnMixin(SteamPawn), UpdateView):
     model = SteamPawn
-    fields = steam_pawn_fields
+    form_class = SteamPawnForm
     template_name = "pawnlisting/pawn_forms/steam.html"
 
 

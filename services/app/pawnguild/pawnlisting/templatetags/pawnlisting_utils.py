@@ -1,6 +1,19 @@
 from django import template
+from django.core.exceptions import ValidationError
+
+from ..validators import validate_steam_url
 
 register = template.Library()
+
+
+@register.filter
+def steam_profile_url(value):
+    # Old listings may contain links that predate form validation.
+    try:
+        validate_steam_url(value)
+    except (ValidationError, ValueError, TypeError):
+        return ""
+    return value
 
 
 @register.filter("startswith")

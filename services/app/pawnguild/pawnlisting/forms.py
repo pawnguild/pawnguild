@@ -1,6 +1,5 @@
 from django import forms
-from urllib.parse import urlparse
-from django.core.exceptions import ValidationError
+from .validators import validate_steam_url
 from .models import SteamPawn, SwitchPawn, XboxOnePawn, PS4Pawn, PS3Pawn, build_choices
 from .utility import (
     steam_pawn_fields,
@@ -22,9 +21,7 @@ class SteamPawnForm(forms.ModelForm):
         fields = steam_pawn_fields
 
     def clean_steam_url(self):
-        parsed = urlparse(self.cleaned_data["steam_url"])
-        if parsed.netloc != "steamcommunity.com":
-            raise ValidationError("Steam URL must be a steamcommunity.com link")
+        validate_steam_url(self.cleaned_data["steam_url"])
         return self.cleaned_data["steam_url"]
 
 

@@ -17,3 +17,16 @@ class EmailBackendTests(UtilityTestCase):
     def test_login_with_email(self):
         self.client.login(username=self.user.email, password="12345")
         self.assertTrue(get_user(self.client).is_authenticated)
+
+    def test_inactive_user_cannot_log_in_with_email(self):
+        self.user.is_active = False
+        self.user.save()
+        self.assertFalse(
+            self.client.login(username=self.user.email, password="12345")
+        )
+
+    def test_disabling_user_ends_existing_email_session(self):
+        self.client.login(username=self.user.email, password="12345")
+        self.user.is_active = False
+        self.user.save()
+        self.assertFalse(get_user(self.client).is_authenticated)
