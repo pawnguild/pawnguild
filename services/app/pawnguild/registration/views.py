@@ -3,9 +3,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.shortcuts import render
 
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import (
+    LoginView,
+    PasswordResetView,
+    PasswordResetConfirmView,
+)
+from django.urls import reverse_lazy
 
-from .forms import UserProfileCreationForm
+from .forms import PasswordRecoveryForm, UserProfileCreationForm
 
 from django_email_verification import send_email
 
@@ -14,6 +19,23 @@ from django_email_verification import send_email
 
 class Login(LoginView):
     pass
+
+
+class PasswordRecover(PasswordResetView):
+    form_class = PasswordRecoveryForm
+    template_name = "password_reset/recovery_form.html"
+    email_template_name = "password_reset/recovery_email.txt"
+    subject_template_name = "password_reset/recovery_email_subject.txt"
+    success_url = reverse_lazy("password_reset_sent")
+
+
+class PasswordReset(PasswordResetConfirmView):
+    template_name = "password_reset/reset.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["username"] = self.user.get_username() if self.user else ""
+        return context
 
 
 class Register(View):

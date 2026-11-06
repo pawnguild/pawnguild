@@ -14,6 +14,6 @@
     </h2>
 </div>
 <div class="container">
-	<p>{% blocktrans with ago=timestamp|timesince %}An email was sent to <strong class="highlight">{{ email }}</strong> {{ ago }} ago. Use the link in it to set a new password.{% endblocktrans %}</p>
+	<p>{% trans "If an active account matches, an email with a password reset link has been sent. Use the link in it to set a new password." %}</p>
 </div>
 {% endblock content %}

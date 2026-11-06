@@ -6,31 +6,31 @@
 
 {% block content %}
 <div class="container">
-	{% if invalid %}{% url "password_reset_recover" as recovery_url %}
+	{% if not validlink %}{% url "password_reset_recover" as recovery_url %}
 		<p>{% blocktrans %}Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url }}">request a new one</a>.{% endblocktrans %}</p>
 	{% else %}
 		<h3 class="py-3">{% blocktrans %}Hi, <strong>{{ username }}</strong>. Please choose your new password.{% endblocktrans %}</h3>
-		<form method="post" action="{% url "password_reset_reset" token %}">
+		<form method="post">
 			{% csrf_token %}
 
-            {% if form.errors.password1 %}
+            {% if form.errors.new_password1 %}
                 <div class="row alert alert-warning">
-                    <strong>{{ form.errors.password1 |escape }}</strong>
+                    <strong>{{ form.errors.new_password1 |escape }}</strong>
                 </div>
             {% endif %}
             
-            {% if form.errors.password2 %}
+            {% if form.errors.new_password2 %}
                 <div class="row alert alert-warning">
-                    <strong>{{ form.errors.password2 |escape }}</strong>
+                    <strong>{{ form.errors.new_password2 |escape }}</strong>
                 </div>
             {% endif %}
             
             <div class='row'>
                 <div class='col-md-3 py-2'>
-                {{ form.password1.label_tag }}
+                {{ form.new_password1.label_tag }}
                 </div>
                 <div class='col-md-5 long'>
-                    {{ form.password1 }}
+                    {{ form.new_password1 }}
                 </div>
             </div>
             <div class='row py-2'>
@@ -38,7 +38,7 @@
                 <label>  Password confirmation: </label>
                 </div>
                 <div class='col-md-5 long'>
-                    {{ form.password2 }}
+                    {{ form.new_password2 }}
                 </div>
             </div>
 			<input class="my-3" type="submit" value="{% trans "Set new password" %}">

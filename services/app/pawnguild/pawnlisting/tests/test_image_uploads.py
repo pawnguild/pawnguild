@@ -1,4 +1,5 @@
 from io import BytesIO
+from pathlib import Path
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.shortcuts import reverse
@@ -57,3 +58,17 @@ class PawnImageUploadTests(UtilityTestCase):
         self.assertIn("picture", response.context["form"].errors)
         self.steam_pawn.refresh_from_db()
         self.assertEqual(self.steam_pawn.name, self.test_args["steam_pawn_name"])
+
+    def test_only_owner_can_delete_pawn_and_its_picture(self):
+        self.steam_pawn.picture.save("owner-only.png", self.image_upload("PNG"))
+        picture = Path(self.steam_pawn.picture.path)
+        url = reverse("delete-steam-pawn", kwargs={"pk": self.steam_pawn.pk})
+        self.create_user_log_in("other-owner")
+        self.assertEqual(self.client.post(url).status_code, 403)
+        self.assertTrue(picture.exists())
+        self.assertTrue(SteamPawn.objects.filter(pk=self.steam_pawn.pk).exists())
+        self.client.login(username=self.user.username, password="12345")
+        self.assertRedirects(self.client.post(url), reverse("manage_pawns"))
+        self.assertFalse(SteamPawn.objects.filter(pk=self.steam_pawn.pk).exists())
+        self.assertFalse(picture.exists())
+        self.assertEqual(self.user.switchpawn_set.count(), 1)
