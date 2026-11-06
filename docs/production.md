@@ -60,6 +60,21 @@ unchanged. Logout uses a CSRF-protected POST as required by current Django.
 Use the same prepared-image, fresh-backup, rollback-tag, and app-only deployment
 procedure described above. No database or shared Nginx restart is required.
 
+## Gunicorn and outbound TLS runtime (November 2026)
+
+The runtime uses Gunicorn 26.2.0, the current published PyPI release, and updated
+certifi, cryptography, pyOpenSSL, requests, urllib3, IDNA, and related support
+packages. Pillow, cryptography, and CFFI are installed from binary wheels so the
+validated native libraries are included. The unused legacy ndg-httpsclient,
+pyasn1, and chardet pins are removed; requests uses charset-normalizer.
+
+Gunicorn's optional management socket is disabled. Deployment still uses the
+existing sync WSGI worker and HUP reload. CI runs isolated loopback checks for
+normal requests, rejection of ambiguous HTTP framing, worker reload, and trusted
+versus untrusted TLS certificates using temporary test certificates only.
+Application code and database models are unchanged. Use the same prepared-image,
+fresh-backup, rollback-image, and app-only deployment procedure above.
+
 ## Pawn activity filter
 
 Individual platform pages offer Currently active (the existing default), Updated

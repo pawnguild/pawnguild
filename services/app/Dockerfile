@@ -9,6 +9,8 @@ WORKDIR /app
 
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
-RUN pip install --only-binary=Pillow -r requirements.txt
+RUN pip install --only-binary=Pillow,cryptography,cffi -r requirements.txt
+
+ENV GUNICORN_CMD_ARGS=--no-control-socket
 
 COPY . .
