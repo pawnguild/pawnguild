@@ -75,6 +75,21 @@ versus untrusted TLS certificates using temporary test certificates only.
 Application code and database models are unchanged. Use the same prepared-image,
 fresh-backup, rollback-image, and app-only deployment procedure above.
 
+## Unused Python dependencies and deployment actions (November 2026)
+
+The runtime removes the unused CoreAPI/coreschema/Jinja stack, nose test runner,
+unused-media management add-on, and their obsolete support packages. Django REST
+framework's current schema endpoint keeps its explicit uritemplate dependency.
+Setuptools is pinned to 84.2.1 to replace the older build tool inherited from the
+base image. No application behavior, templates, models, or schema changes are
+included. Browser libraries remain a separate update requiring visual validation.
+
+GitHub Actions use reviewed immutable commit pins and read-only repository-token
+permissions. The SSH action's helper version is explicit. Keep these pins under
+review when updating actions; the production dependency guard remains enabled.
+Use the prepared-image, verified-backup, rollback-image, and app-only deployment
+procedure above for this runtime change.
+
 ## Pawn activity filter
 
 Individual platform pages offer Currently active (the existing default), Updated

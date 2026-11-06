@@ -46,10 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "django_nose",
     "django_email_verification",
     "django_cleanup",
-    "django_unused_media",
 ]
 
 MIDDLEWARE = [
@@ -153,8 +151,6 @@ STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
-
-# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # Settings for django_email_verification and reset_password
 
