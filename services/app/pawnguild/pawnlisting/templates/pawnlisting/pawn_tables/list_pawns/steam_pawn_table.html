@@ -1,4 +1,5 @@
 {% extends "pawnlisting/pawn_tables/base_pawn_table.html"%}
+{% load pawnlisting_utils %}
 
 {% block pawn_table_cols %}
 <th class="hidden-sm-down" scope="col">Steam URL</th>
@@ -6,6 +7,10 @@
 {% endblock pawn_table_cols %}
 
 {% block pawn_table_rows %}
-<td class="hidden-sm-down"> <a href="{{ pawn.steam_url }}" target="_blank"> Friend link </a> </td>
+<td class="hidden-sm-down">
+    {% with steam_url=pawn.steam_url|steam_profile_url %}
+    {% if steam_url %}<a href="{{ steam_url }}" target="_blank" rel="noopener noreferrer"> Friend link </a>{% endif %}
+    {% endwith %}
+</td>
 {{ block.super }}
 {% endblock pawn_table_rows %}

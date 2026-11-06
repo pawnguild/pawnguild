@@ -1,8 +1,13 @@
 {% extends "pawnlisting/detail_pawn/pawn_detail.html" %}
+{% load pawnlisting_utils %}
 
 {% block platform_info %}
 <div class="row">
     <label class="col-4"> Steam Url: </label>
-    <div class="col-8" style="word-wrap: break-word;"><a href={{pawn.steam_url}} target="_blank">{{ pawn.steam_url }}</a></div>
+    <div class="col-8" style="word-wrap: break-word;">
+        {% with steam_url=pawn.steam_url|steam_profile_url %}
+        {% if steam_url %}<a href="{{ steam_url }}" target="_blank" rel="noopener noreferrer">{{ pawn.steam_url }}</a>{% else %}{{ pawn.steam_url }}{% endif %}
+        {% endwith %}
+    </div>
 </div>
 {% endblock %}
