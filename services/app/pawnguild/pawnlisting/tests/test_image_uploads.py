@@ -2,13 +2,18 @@ from io import BytesIO
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.shortcuts import reverse
-from PIL import Image
+from PIL import Image, features
 
 from pawnguild.pawnlisting.models import SteamPawn
 from pawnguild.pawnlisting.tests.utility import UtilityTestCase
 
 
 class PawnImageUploadTests(UtilityTestCase):
+    def test_webp_decoder_includes_the_security_fix(self):
+        version = features.version("webp")
+        self.assertIsNotNone(version)
+        self.assertGreaterEqual(tuple(map(int, version.split("."))), (1, 3, 2))
+
     def image_upload(self, format):
         contents = BytesIO()
         Image.new("RGB", (8, 8), "blue").save(contents, format=format)
