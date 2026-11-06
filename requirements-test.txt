@@ -1,14 +1,11 @@
 # Isolated synthetic tests; shared package pins match the production runtime.
 Django==5.2.19
 asgiref==3.13.0
-pytz==2020.1
 sqlparse==0.6.1
 django-cleanup==5.1.0
 django-email-verification==0.1.0
-django-nose==1.4.6
-django-unused-media==0.2.1
 djangorestframework==3.18.3
 Pillow==13.0.0
-coreapi==2.3.3
 inflection==0.5.1
 PyYAML==6.0.3
+uritemplate==3.0.1
