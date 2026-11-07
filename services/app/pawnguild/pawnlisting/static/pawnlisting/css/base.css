@@ -111,6 +111,26 @@ a.nav-link {
     margin-right: 5px;
 }
 
+/* Preserve the site's Bootstrap 4.0 colours and small-text sizing. */
+.small,
+small {
+    font-size: 80%;
+}
+
+.table-dark {
+    background-color: #212529;
+}
+
+.table-dark td,
+.table-dark th,
+.table-dark thead th {
+    border-color: #32383e;
+}
+
+.bi {
+    vertical-align: baseline;
+}
+
 
 /*\
  * Restore Bootstrap 3 "hidden" utility classes.

@@ -90,6 +90,21 @@ review when updating actions; the production dependency guard remains enabled.
 Use the prepared-image, verified-backup, rollback-image, and app-only deployment
 procedure above for this runtime change.
 
+## Browser-library security update (November 2026)
+
+The shared template pins jQuery 3.7.1 slim, Bootstrap 4.6.2 CSS/JavaScript, and
+Popper 1.16.1 with verified SHA-384 integrity hashes. These compatible updates
+remove the seven previously identified browser-library advisories. Bootstrap 4
+remains end-of-life; moving to a supported major version is a separate migration.
+Small CSS overrides retain the original table colours, small-text size, and
+activity-star alignment. The base stylesheet URL is versioned to refresh caches.
+
+Compare the original and updated templates using synthetic local data in Chromium
+and WebKit at desktop, tablet, and phone widths. Check navigation collapse and
+dropdowns, filters, pagination, and account/pawn forms alongside screenshots.
+This template/static-only release uses the existing runtime image and the usual
+app-only deployment script. It requires no database writes or migrations.
+
 ## Pawn activity filter
 
 Individual platform pages offer Currently active (the existing default), Updated
